@@ -18,7 +18,7 @@ Sitio: *(pon aquí el link de tu página)*
 - **Comunidad:** se pueden hacer publicaciones y comentar, con filtro de groserías.
 - **Cuentas:** registro e inicio de sesión con correo o con Google, y recuperación de contraseña.
 - **Contacto:** formulario para mandarnos dudas y una sección de preguntas frecuentes.
-- **Sin internet:** si se cae la conexión sale un juego para no aburrirse mientras vuelve.
+- **Sin internet:** las páginas se guardan en el celular y se pueden abrir sin conexión. Para entrar a la cuenta, publicar o mandar el formulario sí se necesita internet. Además hay un juego secreto que solo sale cuando se cae la red.
 - Tema claro y oscuro.
 
 ## Con qué está hecha
@@ -26,16 +26,19 @@ Sitio: *(pon aquí el link de tu página)*
 - HTML, CSS y JavaScript, sin frameworks
 - Firebase (Authentication, Firestore y Hosting)
 - Web3Forms para que el formulario de contacto llegue por correo
-- Service Worker y manifest para que funcione sin conexión y se pueda instalar como app
+- Service Worker y manifest para que se pueda instalar como app y abrir las páginas sin internet
 
 ## Cómo está organizada
 
 ```
 BioNyssa_WEB/
-├── index.html, menu.html, ...   las páginas
+├── index.html                   la página de inicio
+├── 404.html                     página de error
+├── paginas/                     todas las demás páginas (menú, guía, minijuegos, ...)
 ├── css/                         los estilos (el número del nombre es el orden en que cargan)
 ├── js/                          los scripts, uno por página más los que comparten todas
-├── assets/img/                  imágenes y logo
+├── assets/                      imágenes, iconos y sonidos
+├── manifest.webmanifest         datos para instalarla como app
 ├── firebase.json                configuración de Hosting
 └── firestore.rules              reglas de la base de datos
 ```
@@ -53,6 +56,8 @@ En `MAPA.md` está explicado archivo por archivo qué hace cada CSS y JS.
 
 Con Live Server todo funciona menos el modo sin conexión, porque ese necesita los encabezados de Firebase Hosting.
 
+Para instalarla como app, abre la página en Chrome (ya subida a internet) y toca "Instalar" o "Agregar a la pantalla de inicio".
+
 ## Cómo subirla
 
 ```bash
@@ -61,8 +66,3 @@ firebase deploy
 ```
 
 ## Equipo
-
-- *(tu nombre)*
-- *(nombres de tus compañeros)*
-
-*(Nombre de tu escuela y año)*
