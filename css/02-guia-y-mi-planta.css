@@ -40,7 +40,6 @@
   border-radius:50% 0 50% 0;
   background:var(--brote);
 }
-
 .nota-guia{
   margin-top:28px;
   padding:22px 22px 6px;
@@ -51,9 +50,8 @@
 .nota-guia p{ font-size:.98rem; color:var(--ink); }
 .nota-guia a{ color:var(--olive-deep); font-weight:600; }
 
-@media (min-width:860px){
-  .guia-cols{ display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:64px; align-items:start; }
-  .guia-lado{ position:sticky; top:96px; }
-  .nota-guia{ margin-top:24px; }
-  .acc-question{ font-size:1.2rem; }
+@media (min-width:860px){.guia-cols{ display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:64px; align-items:start; }
+.guia-lado{ position:sticky; top:96px; }
+.nota-guia{ margin-top:24px; }
+.acc-question{ font-size:1.2rem; }
 }

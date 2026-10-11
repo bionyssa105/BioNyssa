@@ -1,5 +1,5 @@
-const V = 'bio-sin-red-v13';
-const E = 'bio-estaticos-v15';
+const V = 'bio-sin-red-v15';
+const E = 'bio-estaticos-v17';
 const BASE = self.registration.scope;
 const LISTA = [
   'paginas/offline.html', 'js/almacen-por-cuenta.js', 'js/juego-sin-conexion.js', 'assets/img/favicon.ico', 'assets/img/mascota.webp', 'assets/img/Botella.webp',
@@ -9,7 +9,6 @@ const OFFLINE = LISTA[0];
 const PAGINAS = ['index', 'paginas/menu', 'paginas/guia', 'paginas/mi-planta', 'paginas/impacto', 'paginas/informacion', 'paginas/minijuegos', 'paginas/juego-trivia', 'paginas/juego-clasificar', 'paginas/juego-memorama', 'paginas/contacto', 'paginas/comunidad', 'paginas/login', 'paginas/registro', 'paginas/recuperar']
   .map((x) => new URL(x + '.html', BASE).href).concat(BASE);
 
-// baja las páginas y los css, js e imágenes que usan, para poder abrirlas sin internet
 async function guardarPaginas() {
   const cache = await caches.open(E);
   const archivos = new Set();

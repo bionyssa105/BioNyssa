@@ -1,5 +1,4 @@
 .historia{ display:flex; flex-direction:column; gap:18px; margin-top:24px; }
-
 .section-card{
   background:var(--card);
   border:1px solid var(--line);
@@ -9,10 +8,8 @@
 .section-title{ display:flex; align-items:center; gap:10px; margin-bottom:18px; }
 .section-title svg{ color:var(--olive); flex:none; }
 .section-title h2{ font-size:1.4rem; margin:0; }
-
 .origen p{ font-size:1.05rem; line-height:1.7; color:var(--ink-soft); max-width:62ch; }
 .origen p:last-child{ margin-bottom:0; }
-
 .steps{ display:flex; flex-direction:column; }
 .step{ display:flex; gap:16px; position:relative; padding-bottom:22px; }
 .step:last-child{ padding-bottom:0; }
@@ -36,7 +33,6 @@
 }
 .step-body strong{ display:block; font-size:1.02rem; color:var(--ink); margin-bottom:2px; }
 .step-body p{ font-size:.95rem; margin:0; }
-
 .tag-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .tag{
   padding:16px;
@@ -51,7 +47,6 @@
 .tag.t2{ background:var(--brote-soft); }
 .tag.t3{ background:var(--seed-soft); }
 .tag.t4{ background:var(--bone-2); }
-
 .badge-list{ display:flex; flex-direction:column; }
 .badge-row-item{
   display:flex; align-items:center; gap:12px;
@@ -62,7 +57,6 @@
 .badge-row-item:first-child{ padding-top:0; }
 .badge-row-item:last-child{ border-bottom:none; padding-bottom:0; }
 .badge-row-item svg{ color:var(--olive); flex:none; }
-
 .timeline-panel{
   background:var(--sage);
   border-radius:var(--r-card);
@@ -80,21 +74,20 @@
 .tl-body strong{ display:block; font-size:1.05rem; margin:1px 0 3px; color:var(--ink); }
 .tl-body p{ font-size:.95rem; color:var(--ink-soft); margin:0; }
 
-@media (min-width:860px){
-  .historia{
+@media (min-width:860px){.historia{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:20px;
     align-items:start;
     margin-top:32px;
   }
-  .historia .origen{ grid-column:1 / -1; padding:40px 44px; }
-  .historia .origen p{ font-size:1.15rem; }
-  .historia .procesos{ grid-row:span 2; }
-  .historia .timeline-panel{ grid-column:1 / -1; padding:32px 36px; }
-  .tl{ flex-direction:row; gap:36px; margin-top:18px; }
-  .tl-item{ flex:1; flex-direction:column; gap:12px; }
-  .tl-line{ flex-direction:row; align-items:center; padding-top:0; }
-  .tl-bar{ width:auto; height:1.5px; flex:1; margin:0 0 0 10px; }
-  .tl-body{ padding-bottom:0; }
+.historia .origen{ grid-column:1 / -1; padding:40px 44px; }
+.historia .origen p{ font-size:1.15rem; }
+.historia .procesos{ grid-row:span 2; }
+.historia .timeline-panel{ grid-column:1 / -1; padding:32px 36px; }
+.tl{ flex-direction:row; gap:36px; margin-top:18px; }
+.tl-item{ flex:1; flex-direction:column; gap:12px; }
+.tl-line{ flex-direction:row; align-items:center; padding-top:0; }
+.tl-bar{ width:auto; height:1.5px; flex:1; margin:0 0 0 10px; }
+.tl-body{ padding-bottom:0; }
 }

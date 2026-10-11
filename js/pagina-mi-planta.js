@@ -22,8 +22,6 @@
   ];
   const ESTADOS = ['Tiene sed', 'Ya le toca', 'Está bien', 'Bien regada'];
   const SEMANA = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
-  // Iconos de línea dibujados a mano (viewBox 24x24). Cada uno es el contenido interno de un <svg>.
-  // Usan "currentColor", así toman el color del texto que los rodea (CSS: color).
   const ICONOS = {
     gota: '<path d="M12 3.5c3.2 4 5.5 6.8 5.5 9.7a5.5 5.5 0 0 1-11 0c0-2.9 2.3-5.7 5.5-9.7Z"/>',
     lluvia: '<path d="M7 14a4 4 0 0 1-.5-7.97A5.5 5.5 0 0 1 17 7.5a3.3 3.3 0 0 1 0 6.5H7Z"/><path d="M8 17.5 7 20M12 17.5 11 20M16 17.5 15 20"/>',
@@ -43,7 +41,6 @@
     lupa: '<circle cx="11" cy="11" r="6"/><path d="m15.5 15.5 4.5 4.5"/>',
     hoja: '<path d="M5 19C5 10 10 5 19 5c0 9-5 14-14 14Z"/><path d="m5 19 9-9"/>'
   };
-  // Devuelve el <svg> completo de un icono; "tam" es el tamaño en píxeles.
   const ico = (nombre, tam) => '<svg width="' + (tam || 24) + '" height="' + (tam || 24) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONOS[nombre] + '</svg>';
 
   const INSIGNIAS = [
@@ -121,9 +118,6 @@
     return s + '</svg>';
   }
 
-  // ---------- Pestañas (botones) para no mostrar todo junto ----------
-  // Cada pestaña agrupa tarjetas por su posición: [0] principal, [1] cuidados, [2] camino, [3] calendario,
-  // [4] crecimiento, [5] diario, [6] recordatorios, [7] insignias.
   const PESTANAS = [['resumen', 'Resumen', [0]], ['cuidados', 'Cuidados', [1, 2]], ['calendario', 'Calendario', [3, 4]], ['diario', 'Diario', [5, 6]], ['insignias', 'Insignias', [7]]];
   let pestanaActiva = 'resumen'; // se recuerda mientras no recargues la página
 
@@ -132,7 +126,6 @@
     vista.querySelectorAll('.pl-panel').forEach((pn) => {
       const activo = pn.dataset.p === id;
       pn.classList.toggle('activo', activo);
-      // animaciones.js deja las tarjetas invisibles hasta verlas; las tarjetas de una pestaña oculta nunca "se ven", así que las mostramos aquí
       if (activo) pn.querySelectorAll('.rv').forEach((t) => t.classList.add('visto'));
     });
   }
