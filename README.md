@@ -64,5 +64,3 @@ Para instalarla como app, abre la página en Chrome (ya subida a internet) y toc
 firebase login
 firebase deploy
 ```
-
-## Equipo
