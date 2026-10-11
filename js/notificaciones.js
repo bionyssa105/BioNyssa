@@ -9,7 +9,7 @@ window.BioNotis = (function () {
   const activo = () => soporta() && Notification.permission === 'granted' && !!leer().on;
 
   async function mostrar(titulo, cuerpo, tag) {
-    const op = { body: cuerpo, icon: 'assets/img/logo-app.png', badge: 'assets/img/favicon.ico', tag: tag, data: { url: 'mi-planta.html' } };
+    const op = { body: cuerpo, icon: '/assets/img/logo-app.png', badge: '/assets/img/favicon.ico', tag: tag, data: { url: '/paginas/mi-planta.html' } };
     try {
       const r = navigator.serviceWorker && await navigator.serviceWorker.getRegistration();
       if (r) { await r.showNotification(titulo, op); return; }

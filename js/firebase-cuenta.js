@@ -47,7 +47,7 @@ window.BioFirebase = (function () {
     auth: soloAuth,
     enviarReset: function (correo) {
       return usar(function (a, f) {
-        return f.sendPasswordResetEmail(a, correo, { url: new URL('login.html', location.href).href });
+        return f.sendPasswordResetEmail(a, correo, { url: new URL('/paginas/login.html', location.href).href });
       });
     },
     verificarCodigo: function (codigo) { return usar(function (a, f) { return f.verifyPasswordResetCode(a, codigo); }); },

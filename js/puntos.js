@@ -56,7 +56,7 @@
     if (!fila || $('.home-header')) return;
     const c = document.createElement('a');
     c.className = 'puntos-chip';
-    c.href = 'menu.html';
+    c.href = '/paginas/menu.html';
     c.innerHTML = '<i></i><span></span>';
     const alInicio = fila.firstChild.classList && fila.classList.contains('head-cta');
     fila.insertBefore(c, alInicio ? fila.firstChild : $('.theme-toggle', fila));
@@ -96,7 +96,7 @@
         '<div class="pp-barra"><b style="width:' + pct + '%"></b></div>' +
         '<h4>Cómo ganar puntos</h4>' + listaGana() +
         '<p class="pp-niveles">' + NIVELES.map((n) => n[0] + ' ' + n[1]).join(' | ') + '</p>' +
-        (enMenu ? '' : '<a class="pp-link" href="menu.html">Ver mi nivel en el menú</a>');
+        (enMenu ? '' : '<a class="pp-link" href="/paginas/menu.html">Ver mi nivel en el menú</a>');
     }
     function colocar() {
       const r = c.getBoundingClientRect();

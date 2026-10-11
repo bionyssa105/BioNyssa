@@ -5,7 +5,7 @@
     main.outerHTML = '<div class="planta-bloqueo" style="max-width:440px;margin:24px auto;text-align:center;padding:36px 24px;border:1px solid var(--line);border-radius:16px;background:var(--card)">' +
       '<h2 style="margin:0 0 8px;font-size:1.3rem">Necesitas una cuenta</h2>' +
       '<p style="margin:0 0 22px;color:var(--ink-soft)">Mi planta guarda tu siembra, tus riegos y tu avance. Crea tu cuenta o inicia sesión para usarla.</p>' +
-      '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="registro.html" class="btn btn-primary" style="width:auto">Crear cuenta</a><a href="login.html" class="btn btn-outline" style="width:auto">Iniciar sesión</a></div></div>';
+      '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="/paginas/registro.html" class="btn btn-primary" style="width:auto">Crear cuenta</a><a href="/paginas/login.html" class="btn btn-outline" style="width:auto">Iniciar sesión</a></div></div>';
     return;
   }
 
@@ -253,7 +253,7 @@
     vista.innerHTML =
       '<div class="planta-card"><div class="pl-top">' + dibujo(idx) + '<div><span class="num">' + ETAPAS[idx][0] + '</span><div class="planta-dia">Día ' + (n + 1) + '</div><p>' + (d.nombre ? esc(d.nombre) + ' | ' : '') + 'sembrada el ' + d.siembra.split('-').reverse().join('/') + ' <button type="button" class="pl-editar" id="bNombre">' + (d.nombre ? 'Cambiar nombre' : 'Ponerle nombre') + '</button></p>' +
       '<form class="pl-nombre" id="fNombre" hidden><input id="pNom" maxlength="24" value="' + esc(d.nombre || '') + '" placeholder="Nombre de tu planta" aria-label="Nombre de tu planta"><button class="pl-mini" type="submit">Guardar</button></form></div></div>' +
-      '<div class="pl-bio"><img src="assets/img/bio-saluda.webp" alt="" width="40" height="84"><p><b>Bio</b>' + fraseBio + '</p></div>' +
+      '<div class="pl-bio"><img src="/assets/img/bio-saluda.webp" alt="" width="40" height="84"><p><b>Bio</b>' + fraseBio + '</p></div>' +
       '<div class="pl-meta"><span>' + (sig ? 'Para ' + sig[0] : 'Ya es planta') + '</span><div class="pl-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><i style="width:' + pct + '%"></i></div><b>' + pct + '%</b></div>' +
       '<div class="etapas" aria-hidden="true">' + ETAPAS.map((_, i) => '<i class="' + (i <= idx ? 'on' : '') + '"></i>').join('') + '</div><div class="etapas-nom" aria-hidden="true">' + ETAPAS.map((e) => '<span>' + e[0] + '</span>').join('') + '</div>' +
       '<div class="sed' + (nivel < 2 ? ' baja' : '') + '"><div class="gotas" aria-hidden="true">' + [1, 2, 3].map((g) => '<i class="' + (nivel >= g ? 'on' : '') + '"></i>').join('') + '</div><p><strong>' + estado + '</strong><br>' + texto + '</p></div>' +
@@ -400,7 +400,7 @@
     $('bShare').addEventListener('click', async () => {
       const txt = 'Mi planta' + (d.nombre ? ' «' + d.nombre + '»' : '') + ' va en el día ' + (n + 1) + ' (' + ETAPAS[idx][0] + ') con ' + d.riegos.length + ' riegos. Nació de una bolsa BioNyssa.';
       try {
-        if (navigator.share) await navigator.share({ text: txt, url: location.origin + '/comunidad.html' });
+        if (navigator.share) await navigator.share({ text: txt, url: location.origin + '/paginas/comunidad.html' });
         else { await navigator.clipboard.writeText(txt); aviso('Texto copiado, pégalo en la comunidad'); }
       } catch (err) {}
     });

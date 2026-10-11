@@ -147,7 +147,7 @@
   function juegoDelDia() {
     const lista = $('.game-list');
     if (!lista) return;
-    const JUEGOS = [['juego-trivia.html', 'Trivia: Salva al planeta'], ['juego-clasificar.html', 'Limpia el planeta'], ['juego-memorama.html', 'Memorama verde']];
+    const JUEGOS = [['/paginas/juego-trivia.html', 'Trivia: Salva al planeta'], ['/paginas/juego-clasificar.html', 'Limpia el planeta'], ['/paginas/juego-memorama.html', 'Memorama verde']];
     const j = JUEGOS[Math.floor(new Date() / 864e5) % 3];
     const caja = document.createElement('div');
     caja.className = 'reto';

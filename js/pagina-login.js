@@ -1,7 +1,7 @@
 document.getElementById('olvide').addEventListener('click', (e) => {
   e.preventDefault();
   const correo = document.getElementById('correo').value.trim();
-  location.href = 'recuperar.html' + (correo ? '?c=' + encodeURIComponent(correo) : '');
+  location.href = '/paginas/recuperar.html' + (correo ? '?c=' + encodeURIComponent(correo) : '');
 });
 
 document.getElementById('formLogin').addEventListener('submit', async (e) => {
@@ -22,5 +22,5 @@ document.getElementById('formLogin').addEventListener('submit', async (e) => {
     error.textContent = r.motivo;
     return;
   }
-  location.href = 'menu.html';
+  location.href = '/paginas/menu.html';
 });

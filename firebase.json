@@ -7,18 +7,47 @@
   },
   "hosting": {
     "public": ".",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "_headers", "MAPA.md", "README.md", "package*.json"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "_headers",
+      "MAPA.md",
+      "README.md",
+      "package*.json"
+    ],
     "headers": [
       {
         "source": "**",
         "headers": [
-          { "key": "Cache-Control", "value": "no-cache" },
-          { "key": "X-Content-Type-Options", "value": "nosniff" },
-          { "key": "X-Frame-Options", "value": "DENY" },
-          { "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" },
-          { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-          { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-          { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" },
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "DENY"
+          },
+          {
+            "key": "Cross-Origin-Opener-Policy",
+            "value": "same-origin-allow-popups"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          },
+          {
+            "key": "Permissions-Policy",
+            "value": "camera=(), microphone=(), geolocation=()"
+          },
+          {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=31536000; includeSubDomains"
+          },
           {
             "key": "Content-Security-Policy",
             "value": "default-src 'self'; script-src 'self' 'inline-speculation-rules' https://www.gstatic.com https://apis.google.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; connect-src 'self' https://*.googleapis.com https://*.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://api.web3forms.com; frame-src https://bionyssa-bc317.firebaseapp.com https://accounts.google.com https://apis.google.com; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
@@ -27,7 +56,84 @@
       },
       {
         "source": "/js/sw.js",
-        "headers": [{ "key": "Service-Worker-Allowed", "value": "/" }]
+        "headers": [
+          {
+            "key": "Service-Worker-Allowed",
+            "value": "/"
+          }
+        ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/menu.html",
+        "destination": "/paginas/menu.html",
+        "type": 301
+      },
+      {
+        "source": "/guia.html",
+        "destination": "/paginas/guia.html",
+        "type": 301
+      },
+      {
+        "source": "/informacion.html",
+        "destination": "/paginas/informacion.html",
+        "type": 301
+      },
+      {
+        "source": "/comunidad.html",
+        "destination": "/paginas/comunidad.html",
+        "type": 301
+      },
+      {
+        "source": "/minijuegos.html",
+        "destination": "/paginas/minijuegos.html",
+        "type": 301
+      },
+      {
+        "source": "/mi-planta.html",
+        "destination": "/paginas/mi-planta.html",
+        "type": 301
+      },
+      {
+        "source": "/impacto.html",
+        "destination": "/paginas/impacto.html",
+        "type": 301
+      },
+      {
+        "source": "/contacto.html",
+        "destination": "/paginas/contacto.html",
+        "type": 301
+      },
+      {
+        "source": "/login.html",
+        "destination": "/paginas/login.html",
+        "type": 301
+      },
+      {
+        "source": "/registro.html",
+        "destination": "/paginas/registro.html",
+        "type": 301
+      },
+      {
+        "source": "/recuperar.html",
+        "destination": "/paginas/recuperar.html",
+        "type": 301
+      },
+      {
+        "source": "/juego-trivia.html",
+        "destination": "/paginas/juego-trivia.html",
+        "type": 301
+      },
+      {
+        "source": "/juego-clasificar.html",
+        "destination": "/paginas/juego-clasificar.html",
+        "type": 301
+      },
+      {
+        "source": "/juego-memorama.html",
+        "destination": "/paginas/juego-memorama.html",
+        "type": 301
       }
     ]
   }

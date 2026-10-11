@@ -15,8 +15,8 @@
     e.preventDefault();
     if (window.BioNube) { try { await BioNube.salir(); } catch (x) {} }
     BioSesion.cerrar();
-    location.href = 'index.html';
+    location.href = '/index.html';
   });
 
-  $('botonBannerInvitado').addEventListener('click', () => { location.href = 'registro.html'; });
+  $('botonBannerInvitado').addEventListener('click', () => { location.href = '/paginas/registro.html'; });
 })();

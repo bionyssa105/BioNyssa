@@ -53,11 +53,11 @@
         cancelar: 'Cerrar',
         tipo: 'info'
       });
-      if (ir) location.href = 'registro.html';
+      if (ir) location.href = '/paginas/registro.html';
       return;
     }
     await BioCuentas.conGoogle(datos);
-    location.href = 'menu.html';
+    location.href = '/paginas/menu.html';
   }
 
   function porRedireccion(m) {

@@ -7,10 +7,40 @@
   "background_color": "#fbfaf8",
   "theme_color": "#2f4419",
   "lang": "es-MX",
-  "categories": ["education", "lifestyle"],
-  "icons": [{ "src": "assets/img/logo-app.png", "sizes": "512x505", "type": "image/png", "purpose": "any" }],
+  "categories": [
+    "education",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "assets/img/icono-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/icono-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/icono-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
   "shortcuts": [
-    { "name": "Mi planta", "url": "/mi-planta.html" },
-    { "name": "Minijuegos", "url": "/minijuegos.html" }
-  ]
+    {
+      "name": "Mi planta",
+      "url": "/paginas/mi-planta.html"
+    },
+    {
+      "name": "Minijuegos",
+      "url": "/paginas/minijuegos.html"
+    }
+  ],
+  "id": "/",
+  "scope": "/"
 }

@@ -6,9 +6,9 @@ window.BioTutorial = (function () {
     ['bad', 'Si llega a 100%, el planeta se destruye y pierdes.']
   ];
   const POSES = {
-    saluda: ['assets/img/bio-saluda.webp', 63, 132],
-    lupa: ['assets/img/bio-lupa.webp', 55, 132],
-    brazos: ['assets/img/bio-brazos.webp', 88, 132]
+    saluda: ['/assets/img/bio-saluda.webp', 63, 132],
+    lupa: ['/assets/img/bio-lupa.webp', 55, 132],
+    brazos: ['/assets/img/bio-brazos.webp', 88, 132]
   };
   const FRASES = {
     bienvenida: '¡Hola! Soy Bio. Te explico en un momentito cómo se juega.',
@@ -449,15 +449,15 @@ window.BioJuego = (function () {
   }
 
   const RESIDUOS = [
-    { img: 'assets/img/Botella.webp', nombre: 'Botella de plástico', reciclable: true,
+    { img: '/assets/img/Botella.webp', nombre: 'Botella de plástico', reciclable: true,
       dato: 'El PET se recicla y puede volver como un envase nuevo o como fibra para ropa.' },
-    { img: 'assets/img/Pila.webp', nombre: 'Pila', reciclable: false,
+    { img: '/assets/img/Pila.webp', nombre: 'Pila', reciclable: false,
       dato: 'No es reciclable en el contenedor común. Sus metales contaminan suelo y agua: llévala a un punto de acopio.' },
-    { img: 'assets/img/Carton.webp', nombre: 'Caja de cartón', reciclable: true,
+    { img: '/assets/img/Carton.webp', nombre: 'Caja de cartón', reciclable: true,
       dato: 'Se recicla si está limpia y seca. Aplástala para que ocupe menos lugar.' },
-    { img: 'assets/img/Lata.webp', nombre: 'Lata de aluminio', reciclable: true,
+    { img: '/assets/img/Lata.webp', nombre: 'Lata de aluminio', reciclable: true,
       dato: 'El aluminio se puede reciclar muchas veces sin perder calidad.' },
-    { img: 'assets/img/Bolsa.webp', nombre: 'Bolsa de plástico', reciclable: false,
+    { img: '/assets/img/Bolsa.webp', nombre: 'Bolsa de plástico', reciclable: false,
       dato: 'Casi nunca se acepta en el reciclaje común. Reutilízala o cámbiala por una bolsa de tela.' }
   ];
 

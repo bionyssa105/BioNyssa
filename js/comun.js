@@ -94,14 +94,14 @@ window.BioComun = (function () {
 
   function inyectarNavEscritorio() {
     const enlaces = [
-      ['menu.html', 'Menú'],
-      ['guia.html', 'Guía de uso'],
-      ['informacion.html', 'Información'],
-      ['comunidad.html', 'Comunidad'],
-      ['minijuegos.html', 'Minijuegos'],
-      ['mi-planta.html', 'Mi planta'],
-      ['impacto.html', 'Impacto'],
-      ['contacto.html', 'Contacto']
+      ['/paginas/menu.html', 'Menú'],
+      ['/paginas/guia.html', 'Guía de uso'],
+      ['/paginas/informacion.html', 'Información'],
+      ['/paginas/comunidad.html', 'Comunidad'],
+      ['/paginas/minijuegos.html', 'Minijuegos'],
+      ['/paginas/mi-planta.html', 'Mi planta'],
+      ['/paginas/impacto.html', 'Impacto'],
+      ['/paginas/contacto.html', 'Contacto']
     ];
     const limpio = (x) => String(x || '').split(/[?#]/)[0].split('/').pop().replace(/\.html?$/i, '').toLowerCase() || 'index';
     const paginaActual = limpio(location.pathname);
@@ -113,7 +113,7 @@ window.BioComun = (function () {
         const a = document.createElement('a');
         a.href = href;
         a.textContent = texto;
-        if (limpio(href) === paginaActual || (href === 'minijuegos.html' && paginaActual.indexOf('juego-') === 0)) {
+        if (limpio(href) === paginaActual || (href === '/paginas/minijuegos.html' && paginaActual.indexOf('juego-') === 0)) {
           a.className = 'actual';
           a.setAttribute('aria-current', 'page');
         }
@@ -148,19 +148,19 @@ window.BioComun = (function () {
     };
 
     const principales = [
-      ['menu.html', 'Menú', 'menu'],
-      ['guia.html', 'Guía', 'guia'],
-      ['comunidad.html', 'Comunidad', 'comunidad'],
-      ['minijuegos.html', 'Juegos', 'juegos'],
-      ['mi-planta.html', 'Mi planta', 'planta']
+      ['/paginas/menu.html', 'Menú', 'menu'],
+      ['/paginas/guia.html', 'Guía', 'guia'],
+      ['/paginas/comunidad.html', 'Comunidad', 'comunidad'],
+      ['/paginas/minijuegos.html', 'Juegos', 'juegos'],
+      ['/paginas/mi-planta.html', 'Mi planta', 'planta']
     ];
     const extra = [
-      ['informacion.html', 'Historia', 'historia'],
-      ['impacto.html', 'Nuestro impacto', 'impacto'],
-      ['contacto.html', 'Contacto', 'contacto'],
-      ['index.html', 'Pantalla de inicio', 'inicio']
+      ['/paginas/informacion.html', 'Historia', 'historia'],
+      ['/paginas/impacto.html', 'Nuestro impacto', 'impacto'],
+      ['/paginas/contacto.html', 'Contacto', 'contacto'],
+      ['/index.html', 'Pantalla de inicio', 'inicio']
     ];
-    const esActual = (href) => limpio(href) === actual || (href === 'minijuegos.html' && actual.indexOf('juego-') === 0);
+    const esActual = (href) => limpio(href) === actual || (href === '/paginas/minijuegos.html' && actual.indexOf('juego-') === 0);
     const enMas = extra.some((e) => esActual(e[0]));
 
     const nav = document.createElement('nav');
@@ -202,7 +202,7 @@ window.BioComun = (function () {
     NOMBRES_SONIDO.forEach((nombre) => {
       if (sonidos[nombre]) return;
       try {
-        const a = new Audio('assets/sonidos/' + nombre + '.mp3');
+        const a = new Audio('/assets/sonidos/' + nombre + '.mp3');
         a.preload = 'auto';
         a.volume = 0.75;
         sonidos[nombre] = a;
@@ -267,8 +267,8 @@ window.BioComun = (function () {
         '<h3>Crear mi cuenta</h3>' +
         '<p id="modalAuthMsg">Crea tu cuenta o inicia sesión para dar like, comentar y publicar en la comunidad.</p>' +
         '<div class="modal-actions">' +
-          '<a href="registro.html" class="btn btn-primary">Crear cuenta</a>' +
-          '<a href="login.html" class="btn btn-outline">Iniciar sesión</a>' +
+          '<a href="/paginas/registro.html" class="btn btn-primary">Crear cuenta</a>' +
+          '<a href="/paginas/login.html" class="btn btn-outline">Iniciar sesión</a>' +
         '</div>' +
         '<button type="button" class="modal-dismiss">Seguir explorando</button>' +
       '</div>';

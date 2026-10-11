@@ -1,7 +1,7 @@
 (() => {
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     addEventListener('load', () => {
-      navigator.serviceWorker.register('js/sw.js', { scope: './', updateViaCache: 'none' })
+      navigator.serviceWorker.register('/js/sw.js', { scope: '/', updateViaCache: 'none' })
         .then((registro) => registro.update())
         .catch(() => {});
     });
@@ -12,7 +12,7 @@
 
   async function sinRedReal() {
     try {
-      await fetch('manifest.webmanifest?_=' + Date.now(), { method: 'HEAD', cache: 'no-store', signal: AbortSignal.timeout(4000) });
+      await fetch('/manifest.webmanifest?_=' + Date.now(), { method: 'HEAD', cache: 'no-store', signal: AbortSignal.timeout(4000) });
       return false;
     } catch (e) { return true; }
   }
@@ -28,7 +28,7 @@
     preguntando = false;
     if (!jugar) return;
     try { sessionStorage.setItem('bio_volver', location.href); } catch (e) {}
-    location.href = 'offline.html';
+    location.href = '/paginas/offline.html';
   }
 
   addEventListener('offline', () => {

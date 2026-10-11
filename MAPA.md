@@ -1,5 +1,13 @@
 # Mapa de archivos
 
+## Carpetas
+
+- La raíz solo tiene index.html (inicio), 404.html y los archivos de configuración (firebase.json, manifest, sitemap, robots, reglas de Firestore)
+- paginas: todas las demás páginas HTML (menu, guia, minijuegos, juegos, mi-planta, etc.) y offline.html
+- css, js y assets: estilos, scripts, imágenes y sonidos
+
+Rutas: los HTML de paginas usan ../css, ../js y ../assets. Los archivos JS usan rutas desde la raíz (/paginas/menu.html, /assets/img/...), porque un mismo script se carga desde index.html y desde paginas. Si agregas una página nueva, ponla en paginas, agrégala a PAGINAS en js/sw.js y a las redirecciones y al sitemap si la quieres ahí.
+
 ## CSS (carpeta css)
 
 Los CSS llevan número al inicio, que es el orden en que se cargan. Si dos reglas chocan, gana la del número más alto.
@@ -16,7 +24,7 @@ De una sola página (empiezan con 02 y cargan justo después del 01):
 - 02-impacto.css: impacto.html
 - 02-historia.css: informacion.html
 - 02-minijuegos-y-juegos.css: minijuegos.html y los 3 juegos
-- 09-ajustes-juegos-y-planta.css: además trae las portadas animadas de Minijuegos, el cursor de Bio en "Cómo se juega" y los extras de Mi planta (Bio, progreso, cuidados, camino e insignias)
+- 09-ajustes-juegos-y-planta.css: además trae el cursor de Bio en "Cómo se juega" y los extras de Mi planta (Bio, progreso, cuidados, camino e insignias)
 - 07-comunidad-red-social.css: comunidad.html (publicaciones, comentarios y caja de publicar con estilo de red social; carga al final)
 - 02-comunidad.css: comunidad.html
 - 04-comunidad-columnas-laterales.css: comunidad.html (columnas de los lados)
@@ -33,7 +41,7 @@ En todas las páginas:
 
 En varias páginas:
 - sin-conexion.js: registra sw.js y avisa cuando se cae el internet (todas menos offline.html)
-- sw.js: el Service Worker. Muestra offline.html cuando no hay internet
+- sw.js: el Service Worker. Al instalarse guarda las páginas con sus css, js e imágenes para abrirlas sin internet. Si una página no está guardada, muestra offline.html
 - moderacion-de-contenido.js: filtro de groserías e imágenes (comunidad, login y registro)
 - juegos-base.js: tutorial, puntos y progreso (minijuegos y los 3 juegos)
 - cuentas.js: registro y entrada con correo (login y registro)
@@ -53,8 +61,8 @@ De una sola página:
 
 ## Raíz
 
-- recuperar.html: "¿Olvidaste tu contraseña?". También es a donde llega el enlace del correo
-- offline.html: el juego que solo sale sin internet. No está en Minijuegos a propósito
+- paginas/recuperar.html: "¿Olvidaste tu contraseña?". También es a donde llega el enlace del correo
+- paginas/offline.html: el juego que solo sale sin internet. No está en Minijuegos a propósito
 - firebase.json: la configuración de hosting. Ahí está el encabezado que deja a js/sw.js controlar todo el sitio
 
 ## Service Worker
@@ -67,7 +75,7 @@ Al abrir offline.html (o al refrescar una página que mostró el aviso), si ya h
 
 ## Caché (sin poner ?v=2 ni Ctrl+Shift+R)
 
-firebase.json (Firebase) y _headers (Netlify) mandan Cache-Control: no-cache. El navegador pregunta si el archivo cambió y, si no cambió, usa el que ya tiene (respuesta 304, casi instantánea). Así los cambios se ven al recargar normal y no hay que versionar nada. sw.js hace lo mismo con CSS, JS e imágenes y solo usa su copia guardada cuando no hay internet. El modo sin conexión (offline.html) solo sale si la página no carga y un reintento también falla. El aviso de "Se fue el internet" además comprueba con una petición real (HEAD a manifest.webmanifest) que de verdad no hay red.
+firebase.json (Firebase) y _headers (Netlify) mandan Cache-Control: no-cache. El navegador pregunta si el archivo cambió y, si no cambió, usa el que ya tiene (respuesta 304, casi instantánea). Así los cambios se ven al recargar normal y no hay que versionar nada. sw.js hace lo mismo con CSS, JS e imágenes y solo usa su copia guardada cuando no hay internet. Sin internet abre la copia guardada de la página; offline.html (el juego) solo sale si esa página no está guardada. Si agregas una página nueva, ponla en la lista PAGINAS de sw.js. El aviso de "Se fue el internet" además comprueba con una petición real (HEAD a manifest.webmanifest) que de verdad no hay red.
 
 ## Firestore (firestore.rules)
 

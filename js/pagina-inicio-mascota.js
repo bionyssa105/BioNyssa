@@ -10,9 +10,9 @@
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const POSES = [
-    ['assets/img/bio-saluda.webp', 63],
-    ['assets/img/bio-lupa.webp', 55],
-    ['assets/img/bio-brazos.webp', 88]
+    ['/assets/img/bio-saluda.webp', 63],
+    ['/assets/img/bio-lupa.webp', 55],
+    ['/assets/img/bio-brazos.webp', 88]
   ];
   const DATOS = [
     '¡Hola! Soy Bio. ¿Sabías que una bolsa sembrada puede dar una planta?',

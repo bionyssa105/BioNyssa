@@ -55,7 +55,7 @@
   BioFirebase.nucleo().then(function (n) {
     return n.auth.authStateReady().then(function () {
       var u = n.auth.currentUser;
-      if (!u) { msg('Inicia sesión con la cuenta de administrador para ver esto. <a href="login.html">Iniciar sesión</a>'); return; }
+      if (!u) { msg('Inicia sesión con la cuenta de administrador para ver esto. <a href="/paginas/login.html">Iniciar sesión</a>'); return; }
       var correo = String(u.email || '').toLowerCase();
       if (ADMIN_CORREOS.indexOf(correo) < 0 || !u.emailVerified) { msg('Esta cuenta (' + correo + ') no tiene permiso para ver esta página.'); return; }
       return n.ff.getDocs(n.ff.collection(n.db, 'accesos')).then(function (q) {

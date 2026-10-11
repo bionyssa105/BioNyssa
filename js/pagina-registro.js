@@ -19,5 +19,5 @@ document.getElementById('formRegistro').addEventListener('submit', async (e) => 
   const r = await BioCuentas.registrar({ nombre, correo, clave });
   boton.disabled = false;
   if (!r.ok) return fallo(r.motivo);
-  location.href = 'menu.html';
+  location.href = '/paginas/menu.html';
 });

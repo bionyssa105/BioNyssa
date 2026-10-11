@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /offline.html
-Disallow: /admin.html
+Disallow: /paginas/offline.html
+Disallow: /paginas/admin.html
 Sitemap: https://bionyssa.netlify.app/sitemap.xml

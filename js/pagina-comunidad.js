@@ -423,7 +423,7 @@ window.BioHilo = (function () {
     bannerInvitado.style.display = 'flex';
     const botonBanner = document.getElementById('botonBannerInvitadoComunidad');
     if (botonBanner) {
-      botonBanner.addEventListener('click', () => { window.location.href = 'registro.html'; });
+      botonBanner.addEventListener('click', () => { window.location.href = '/paginas/registro.html'; });
     }
   }
 

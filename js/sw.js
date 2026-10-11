@@ -1,14 +1,32 @@
 const V = 'bio-sin-red-v13';
-const E = 'bio-estaticos-v14';
+const E = 'bio-estaticos-v15';
 const BASE = self.registration.scope;
 const LISTA = [
-  'offline.html', 'js/almacen-por-cuenta.js', 'js/juego-sin-conexion.js', 'assets/img/favicon.ico', 'assets/img/mascota.webp', 'assets/img/Botella.webp',
+  'paginas/offline.html', 'js/almacen-por-cuenta.js', 'js/juego-sin-conexion.js', 'assets/img/favicon.ico', 'assets/img/mascota.webp', 'assets/img/Botella.webp',
   'assets/img/Lata.webp', 'assets/img/Carton.webp', 'assets/img/Bolsa.webp', 'assets/img/Pila.webp'
 ].map((x) => new URL(x, BASE).href);
 const OFFLINE = LISTA[0];
+const PAGINAS = ['index', 'paginas/menu', 'paginas/guia', 'paginas/mi-planta', 'paginas/impacto', 'paginas/informacion', 'paginas/minijuegos', 'paginas/juego-trivia', 'paginas/juego-clasificar', 'paginas/juego-memorama', 'paginas/contacto', 'paginas/comunidad', 'paginas/login', 'paginas/registro', 'paginas/recuperar']
+  .map((x) => new URL(x + '.html', BASE).href).concat(BASE);
+
+// baja las páginas y los css, js e imágenes que usan, para poder abrirlas sin internet
+async function guardarPaginas() {
+  const cache = await caches.open(E);
+  const archivos = new Set();
+  for (const url of PAGINAS) {
+    try {
+      const r = await fetch(url);
+      if (!r.ok) continue;
+      cache.put(url, r.clone());
+      const html = await r.text();
+      for (const m of html.matchAll(/(?:href|src)="((?:\.\.\/|)(?:css|js|assets)\/[^"]+)"/g)) archivos.add(new URL(m[1], url).href);
+    } catch (err) {}
+  }
+  await Promise.all([...archivos].map((a) => cache.add(a).catch(() => {})));
+}
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(V).then((c) => c.addAll(LISTA)).then(() => self.skipWaiting()));
+  e.waitUntil(Promise.all([caches.open(V).then((c) => c.addAll(LISTA)), guardarPaginas()]).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (e) => {
@@ -29,18 +47,16 @@ self.addEventListener('fetch', (e) => {
   const req = e.request;
 
   if (req.mode === 'navigate') {
-    e.respondWith(
-      (async () => {
-        try {
-          const pre = await e.preloadResponse;
-          return pre || await fetch(req);
-        } catch (err) {
-          await new Promise((ok) => setTimeout(ok, 600));
-          try { return await fetch(req); } catch (err2) {}
-          return caches.match(OFFLINE);
-        }
-      })()
-    );
+    e.respondWith((async () => {
+      const cache = await caches.open(E);
+      try {
+        const r = (await e.preloadResponse) || await fetch(req);
+        if (r && r.ok) cache.put(req, r.clone());
+        return r;
+      } catch (err) {
+        return (await cache.match(req, { ignoreSearch: true })) || caches.match(OFFLINE);
+      }
+    })());
     return;
   }
 
@@ -65,7 +81,7 @@ self.addEventListener('fetch', (e) => {
 
 self.addEventListener('notificationclick', (e) => {
   e.notification.close();
-  const url = new URL((e.notification.data && e.notification.data.url) || 'mi-planta.html', BASE).href;
+  const url = new URL((e.notification.data && e.notification.data.url) || 'paginas/mi-planta.html', BASE).href;
   e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((cs) => {
     const c = cs.find((x) => x.url === url) || cs[0];
     return c ? c.focus().then(() => c.navigate && c.url !== url ? c.navigate(url) : c) : self.clients.openWindow(url);

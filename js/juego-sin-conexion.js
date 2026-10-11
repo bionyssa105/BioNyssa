@@ -2,7 +2,7 @@
   var $ = function (i) { return document.getElementById(i); };
   var cv = $('c'), g = cv.getContext('2d'), W = 360, H = 520;
   var BUENOS = ['Botella', 'Lata', 'Carton', 'Bolsa'], IM = {};
-  BUENOS.concat(['Pila', 'mascota']).forEach(function (n) { var i = new Image(); i.src = 'assets/img/' + n + '.webp'; IM[n] = i; });
+  BUENOS.concat(['Pila', 'mascota']).forEach(function (n) { var i = new Image(); i.src = '/assets/img/' + n + '.webp'; IM[n] = i; });
   var K = 'bionyssa_sin_red_record', est = 'inicio', px = W / 2, pts = 0, vidas = 5, cosas = [], cuadro = 0, tecla = 0;
   var mejor = 0;
   try { mejor = +localStorage.getItem(K) || 0; } catch (e) {}
@@ -78,7 +78,7 @@
   function conRedReal() {
     var ctl = window.AbortController ? new AbortController() : null;
     var t = setTimeout(function () { if (ctl) ctl.abort(); }, 4000);
-    return fetch('manifest.webmanifest?_=' + Date.now(), { method: 'HEAD', cache: 'no-store', signal: ctl ? ctl.signal : undefined })
+    return fetch('/manifest.webmanifest?_=' + Date.now(), { method: 'HEAD', cache: 'no-store', signal: ctl ? ctl.signal : undefined })
       .then(function (r) { clearTimeout(t); return r.ok; }, function () { clearTimeout(t); return false; });
   }
   function salir() {
@@ -90,7 +90,7 @@
     } catch (e) {}
     if (Date.now() - ultimo < 15000) return;
     if (!/offline\.html$/.test(location.pathname)) location.reload();
-    else location.replace(v && !/offline\.html/.test(v) ? v : 'menu.html');
+    else location.replace(v && !/offline\.html/.test(v) ? v : '/paginas/menu.html');
   }
   if (navigator.onLine) conRedReal().then(function (ok) { if (ok) salir(); });
   if (navigator.onLine) { $('avisoTxt').textContent = 'Parece que hay conexión.'; aviso.hidden = false; $('volver').textContent = 'Reintentar'; }
@@ -98,7 +98,7 @@
     var v = null;
     try { v = sessionStorage.getItem('bio_volver'); } catch (e) {}
     if (!/offline\.html$/.test(location.pathname)) location.reload();
-    else location.href = v || 'menu.html';
+    else location.href = v || '/paginas/menu.html';
   });
 
   hud(); bucle();
