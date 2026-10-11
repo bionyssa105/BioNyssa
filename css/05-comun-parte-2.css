@@ -231,7 +231,7 @@ body::before{ display:none; }
   --btn-hover-sombra:0 8px 16px -8px rgba(62,88,22,.6);
 }
 [data-theme="dark"]{
-  --hover-bg:#2f4220;
+  --hover-bg:#2a3312;
   --hover-tinte:#2a3b1c;
   --btn-hover-suave:#d6ec96;
   --btn-hover-sombra:0 8px 16px -8px rgba(0,0,0,.6);
@@ -342,14 +342,14 @@ body{ animation:vida-entra .4s var(--calma) backwards; }
 .v-suelo{ fill:none; stroke:var(--olive); stroke-width:2.2; stroke-linecap:round; opacity:.5; }
 .v-ruta{ fill:none; stroke:var(--olive); stroke-width:2; stroke-linecap:round; stroke-dasharray:2 7; opacity:.7; }
 .v-tierra{ fill:var(--brote); stroke:var(--olive); stroke-width:2; stroke-linejoin:round; }
-.v-mar{ fill:#8fb5ab; stroke:var(--olive); stroke-width:2.2; }
+.v-mar{ fill:#aab58f; stroke:var(--olive); stroke-width:2.2; }
 .v-ocre{ fill:var(--seed); stroke:var(--olive); stroke-width:2; stroke-linejoin:round; }
 .v-tinta{ fill:var(--olive-deep); }
 .v-hoja{ fill:var(--brote); stroke:var(--olive); stroke-width:1.8; stroke-linejoin:round; }
 .v-basura{ fill:#8a7a62; stroke:var(--olive-deep); stroke-width:2.2; stroke-linejoin:round; }
 .v-trazo{ fill:none; stroke:var(--olive-deep); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
 .v-claro{ fill:none; stroke:var(--btn-ink); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
-[data-theme="dark"] .v-mar{ fill:#456f66; }
+[data-theme="dark"] .v-mar{ fill:#626f45; }
 [data-theme="dark"] .v-basura{ fill:#5c5243; }
 [data-theme="dark"] .game-art .game-num{ color:var(--ink); }
 
@@ -429,27 +429,27 @@ body{ animation:vida-entra .4s var(--calma) backwards; }
 }
 
 :root{
-  --bone:#f1ede3; --bone-2:#e8e2d1; --card:#f8f5ee;
-  --line:#ddd5c0; --line-strong:#c4bb9f;
-  --ink:#2b2820; --ink-soft:#5a5446; --ink-faint:#857e69;
-  --olive:#8d8b4c; --olive-deep:#5f5d2c; --link:#5f5d2c;
-  --sage:#e2dcb0; --sage-2:#cfc78a; --brote:#aaa45a; --brote-soft:#eeead0;
-  --seed:#c48a1c; --seed-soft:#f2e3bb; --brick:#cb6f57; --brick-soft:#f4e1da;
-  --btn-bg:#3b372c; --btn-bg-hover:#2d2a21; --btn-ink:#f7f3ea;
-  --tile-deep-bg:#2a2818; --tile-deep-ink:#f3eee1; --tile-soft-bg:#e2dcb0; --tile-soft-ink:#1c1a15;
+  --bone:#ffffff; --bone-2:#f1f0e1; --card:#fbfaf0;
+  --line:#d6d3b0; --line-strong:#85824f;
+  --ink:#12120c; --ink-soft:#3a3a28; --ink-faint:#64624a;
+  --olive:#4d5c1c; --olive-deep:#2e3910; --link:#41501a;
+  --sage:#e4eac3; --sage-2:#d0d99b; --brote:#7a9022; --brote-soft:#e2ebb6;
+  --seed:#b8921c; --seed-soft:#f3e8b4; --brick:#e0701c; --brick-soft:#fbdcc0;
+  --btn-bg:#1c2109; --btn-bg-hover:#0e1105; --btn-ink:#fffff2;
+  --tile-deep-bg:#2e3910; --tile-deep-ink:#fffffd; --tile-soft-bg:#e4eac3; --tile-soft-ink:#12120c;
   --r-card:6px; --r-ctl:4px;
   --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
   --font-body:'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ease:cubic-bezier(.16,1,.3,1);
 }
 :root[data-theme="dark"]{
-  --bone:#181713; --bone-2:#211f19; --card:#1e1d17; --line:#34312a; --line-strong:#4a4531;
-  --ink:#e4ddcc; --ink-soft:#b7af99; --ink-faint:#857d68;
-  --olive:#bdb978; --olive-deep:#d3cf8e; --link:#d3cf8e;
-  --sage:#25241a; --sage-2:#322f1b; --brote:#bdb865; --brote-soft:#2a2812;
-  --seed:#d9a43c; --seed-soft:#2d2512; --brick:#e48b70; --brick-soft:#3b2018;
-  --btn-bg:#ddd6c4; --btn-bg-hover:#eae4d4; --btn-ink:#1c1b16;
-  --tile-deep-bg:#2b2917; --tile-deep-ink:#f3eee1; --tile-soft-bg:#1d1b15; --tile-soft-ink:#ece6d6;
+  --bone:#0d0d08; --bone-2:#16160e; --card:#13140c; --line:#2c2d1a; --line-strong:#4a4c28;
+  --ink:#f4f2e2; --ink-soft:#c7c5a8; --ink-faint:#8f8d70;
+  --olive:#aab94a; --olive-deep:#cbd670; --link:#c4d15a;
+  --sage:#1a1d0d; --sage-2:#252a11; --brote:#9db43a; --brote-soft:#242a0e;
+  --seed:#d6b231; --seed-soft:#2c2710; --brick:#f08a35; --brick-soft:#3a2210;
+  --btn-bg:#b8c645; --btn-bg-hover:#cad85c; --btn-ink:#10120a;
+  --tile-deep-bg:#252b10; --tile-deep-ink:#f4f2e2; --tile-soft-bg:#181a0c; --tile-soft-ink:#f4f2e2;
 }
 body{ font-size:1rem; line-height:1.55; }
 h1,h2,h3,.display{ font-optical-sizing:auto; font-weight:600; letter-spacing:-.02em; }

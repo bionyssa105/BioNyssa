@@ -82,20 +82,20 @@
     max-width:600px;
     min-width:420px;
     padding:38px 56px 32px;
-    color:#f5efdd;
+    color:#f9f7f1;
     background:#2a3119;
     position:sticky; top:0;
     height:100vh;
     overflow:hidden;
   }
   .auth-visual-top{ display:flex; align-items:center; gap:14px; }
-  .auth-visual .back-btn,.auth-visual .theme-toggle{ color:#f5efdd; border-color:rgba(245,239,221,.35); }
-  @media (hover:hover){.auth-visual .back-btn:hover, .auth-visual .theme-toggle:hover{ background:rgba(245,239,221,.1); border-color:#f5efdd; }}
+  .auth-visual .back-btn,.auth-visual .theme-toggle{ color:#f9f7f1; border-color:rgba(245,239,221,.35); }
+  @media (hover:hover){.auth-visual .back-btn:hover, .auth-visual .theme-toggle:hover{ background:rgba(245,239,221,.1); border-color:#f9f7f1; }}
   .auth-visual .mark-icon{ background:#a7bb5c; }
-  .auth-visual .mark-word{ color:#f5efdd; }
+  .auth-visual .mark-word{ color:#f9f7f1; }
 
   .auth-visual-body{ margin:auto 0; max-width:400px; }
-  .auth-visual-body h1{ color:#f5efdd; font-size:3rem; margin-bottom:.35em; }
+  .auth-visual-body h1{ color:#f9f7f1; font-size:3rem; margin-bottom:.35em; }
   .auth-visual-body p{ color:#d3d0b0; font-size:1.05rem; margin-bottom:28px; }
   .auth-features{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
   .auth-features li{ display:flex; align-items:center; gap:12px; font-size:.98rem; color:#e6e4c9; }

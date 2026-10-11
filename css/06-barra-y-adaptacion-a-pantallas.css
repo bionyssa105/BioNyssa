@@ -195,25 +195,26 @@ body .nav-escritorio a.actual{ background:var(--btn-bg); color:var(--btn-ink); }
 }
 
 .menu-grid .menu-card.menu-card{ --o:4px; background:color-mix(in srgb, var(--k) 12%, var(--card)); color:var(--ink); border:5px double var(--k); border-radius:16px; box-shadow:calc(var(--o) * -1) var(--o) 0 var(--k); transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease; }
-.menu-grid .menu-card.c1{ --k:#5fae4a; }
-.menu-grid .menu-card.c2{ --k:#e5a823; }
-.menu-grid .menu-card.c3{ --k:#b565a7; }
-.menu-grid .menu-card.c4{ --k:#e5704c; }
-.menu-grid .menu-card.c5{ --k:#26a58c; }
-.menu-grid .menu-card.c6{ --k:#3f90c9; }
-.menu-grid .menu-card.c7{ --k:#d68f3e; }
+.menu-grid .menu-card.c1{ --k:#a3b83a; }
+.menu-grid .menu-card.c2{ --k:#e0cb62; }
+.menu-grid .menu-card.c3{ --k:#c9cfa0; }
+.menu-grid .menu-card.c4{ --k:#f08a35; }
+.menu-grid .menu-card.c5{ --k:#7f9a2a; }
+.menu-grid .menu-card.c6{ --k:#cfa536; }
+.menu-grid .menu-card.c7{ --k:#f4f2e2; }
 .menu-grid .menu-card > svg{ color:var(--k); }
 .menu-grid .menu-card strong, .menu-grid .menu-card span{ color:var(--ink); }
 @media (hover:hover){
   .menu-grid .menu-card.menu-card:hover{ --o:7px; transform:translate(2px,-2px); background:color-mix(in srgb, var(--k) 22%, var(--card)); border-color:var(--k); }
 }
-:root:not([data-theme="dark"]) .menu-grid .menu-card.menu-card{ --o:5px; background:color-mix(in srgb, var(--k) 30%, #fffdf4); }
-:root:not([data-theme="dark"]) .menu-grid .menu-card.c1{ --k:#4a9a35; }
-:root:not([data-theme="dark"]) .menu-grid .menu-card.c2{ --k:#d9960f; }
-:root:not([data-theme="dark"]) .menu-grid .menu-card.c3{ --k:#a24c96; }
-:root:not([data-theme="dark"]) .menu-grid .menu-card.c4{ --k:#dc5a33; }
-:root:not([data-theme="dark"]) .menu-grid .menu-card.c5{ --k:#12917a; }
-:root:not([data-theme="dark"]) .menu-grid .menu-card.c6{ --k:#2a7dbb; }
-:root:not([data-theme="dark"]) .menu-grid .menu-card.c7{ --k:#c97a22; }
-@media (hover:hover){ :root:not([data-theme="dark"]) .menu-grid .menu-card.menu-card:hover{ --o:8px; background:color-mix(in srgb, var(--k) 42%, #fffdf4); } }
+:root:not([data-theme="dark"]) .menu-grid .menu-card.menu-card{ --o:5px; background:color-mix(in srgb, var(--k) 30%, #fefefb); }
+:root:not([data-theme="dark"]) .menu-grid .menu-card.c1{ --k:#6f8a1c; }
+:root:not([data-theme="dark"]) .menu-grid .menu-card.c2{ --k:#cdb23c; }
+:root:not([data-theme="dark"]) .menu-grid .menu-card.c3{ --k:#4a5a1a; }
+:root:not([data-theme="dark"]) .menu-grid .menu-card.c4{ --k:#e0701c; }
+:root:not([data-theme="dark"]) .menu-grid .menu-card.c5{ --k:#8aa31f; }
+:root:not([data-theme="dark"]) .menu-grid .menu-card.c6{ --k:#b8891a; }
+:root:not([data-theme="dark"]) .menu-grid .menu-card.c7{ --k:#17170f; }
+@media (hover:hover){ :root:not([data-theme="dark"]) .menu-grid .menu-card.menu-card:hover{ --o:8px; background:color-mix(in srgb, var(--k) 42%, #fefefb); } }
 @media (prefers-reduced-motion:reduce){ .menu-grid .menu-card{ transition:none; } .menu-grid .menu-card:hover{ transform:none; } }
+:root:not([data-theme="dark"]) .menu-grid .menu-card.c7.c7{ background:color-mix(in srgb, var(--k) 10%, #fffff6); }

@@ -165,7 +165,7 @@
 .action-btn.liked{ color:var(--brick); }
 .action-btn.liked svg{ fill:var(--brick); }
 @media (hover:hover){.action-btn.liked:hover{ color:var(--brick); }}
-@media (hover:hover){.action-btn.danger:hover{ background:rgba(184,80,63,.1); color:var(--brick); }}
+@media (hover:hover){.action-btn.danger:hover{ background:rgba(224,112,28,.1); color:var(--brick); }}
 
 .comments{ margin:0 0 10px; display:none; flex-direction:column; gap:8px; }
 .comments.show{ display:flex; }
@@ -284,12 +284,12 @@
 .edit-nota{ font-size:.76rem; margin:0; color:var(--ink-soft); }
 .edit-error{ font-size:.8rem; font-weight:600; color:var(--brick); margin:0; min-height:1em; }
 
-.post-avatar{ background:var(--olive); color:#faf6ea; font-family:var(--font-body); }
+.post-avatar{ background:var(--olive); color:#fcfbf6; font-family:var(--font-body); }
 .post-avatar.av-1{ background:#5b6439; }
-.post-avatar.av-2{ background:#3f6b66; }
+.post-avatar.av-2{ background:#5e6b3f; }
 .post-avatar.av-3{ background:#a77a24; }
-.post-avatar.av-4{ background:#9a4a3c; }
-.post-avatar.av-5{ background:#56707d; }
+.post-avatar.av-4{ background:#a66530; }
+.post-avatar.av-5{ background:#717d56; }
 .post-avatar.av-6{ background:#7d5a3c; }
 
 .tabbar{

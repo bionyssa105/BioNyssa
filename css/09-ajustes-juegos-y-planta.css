@@ -243,7 +243,7 @@ body .dato-dia{ margin-top:26px; padding:16px 18px; }
 /* Animaciones de la planta (solo si no pidieron menos movimiento) */
 .pl-gota{
   position:absolute; top:-6px; left:var(--x,50%); width:9px; height:13px; pointer-events:none; opacity:0;
-  border-radius:50% 50% 55% 55% / 70% 70% 40% 40%; background:#5aa6d6;
+  border-radius:50% 50% 55% 55% / 70% 70% 40% 40%; background:#a9c36d;
 }
 @keyframes pl-cae{
   0%{ transform:translateY(0); opacity:0; }

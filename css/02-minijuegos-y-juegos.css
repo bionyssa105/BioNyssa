@@ -69,7 +69,7 @@
   border-radius:5px;
   transform:rotate(-4deg);
   font-family:var(--font-mano); font-size:1.25rem; font-weight:600; line-height:1.2;
-  background:var(--seed); color:#fff8e6;
+  background:var(--seed); color:#fefbf5;
 }
 
 .game-body{ display:flex; flex-direction:column; flex:1; padding:20px 22px 24px; }
@@ -120,7 +120,7 @@
 @media (hover:hover){.dato-otro:hover{ background:var(--bone-2); border-color:var(--olive); }}
 
 .a-halo{ fill:color-mix(in srgb, var(--card) 55%, transparent); }
-.a-mar{ fill:#8fb5ab; }
+.a-mar{ fill:#aab58f; }
 .a-tierra{ fill:var(--brote); }
 .a-borde{ fill:none; stroke:var(--olive); stroke-width:2.4; }
 .a-tallo{ fill:none; stroke:var(--olive); stroke-width:2.6; stroke-linecap:round; }
@@ -136,12 +136,12 @@
 .a-tapa.verde{ fill:var(--olive-deep); }
 .a-linea{ fill:none; stroke:var(--line-strong); stroke-width:2.4; stroke-linecap:round; }
 .a-marca{ fill:none; stroke:var(--btn-ink); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
-.a-botella{ fill:#8fb5ab; stroke:var(--olive); stroke-width:2.2; stroke-linejoin:round; }
+.a-botella{ fill:#aab58f; stroke:var(--olive); stroke-width:2.2; stroke-linejoin:round; }
 .a-dorso{ fill:var(--btn-bg); stroke:var(--olive-deep); stroke-width:2; }
 .a-frente{ fill:var(--card); stroke:var(--olive); stroke-width:2.4; }
 .a-lata{ fill:var(--sage-2); stroke:var(--olive); stroke-width:2.2; stroke-linejoin:round; }
 .a-banda{ fill:var(--brote); }
-[data-theme="dark"] .a-mar,[data-theme="dark"] .a-botella{ fill:#456f66; }
+[data-theme="dark"] .a-mar,[data-theme="dark"] .a-botella{ fill:#626f45; }
 
 .a-flota{ transform-box:fill-box; transform-origin:center; animation:bio-flotar 5s ease-in-out infinite; }
 .a-burbuja{ transform-box:fill-box; transform-origin:center; animation:a-burbuja 3.4s ease-in-out infinite; }
@@ -354,8 +354,8 @@
   100%{ box-shadow:0 0 0 16px rgba(125,148,64,0); }
 }
 @keyframes bio-flash-mal{
-  0%{ box-shadow:0 0 0 0 rgba(180,87,58,.5); border-color:#b4573a; }
-  100%{ box-shadow:0 0 0 16px rgba(180,87,58,0); }
+  0%{ box-shadow:0 0 0 0 rgba(224,112,28,.5); border-color:#b87036; }
+  100%{ box-shadow:0 0 0 16px rgba(224,112,28,0); }
 }
 
 .quiz-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
@@ -379,11 +379,11 @@
   --smog:.4;
   animation:bio-flotar 5s ease-in-out infinite;
 }
-.pl-mar{ fill:#8fb5ab; }
+.pl-mar{ fill:#aab58f; }
 .pl-tierra{ fill:var(--brote); }
 .pl-smog{ fill:#6b5d4a; opacity:var(--smog); transition:opacity .6s ease; }
 .pl-borde{ fill:none; stroke:var(--olive); stroke-width:2.4; }
-[data-theme="dark"] .pl-mar{ fill:#456f66; }
+[data-theme="dark"] .pl-mar{ fill:#626f45; }
 
 .quiz-card{ padding:6px 0 2px; }
 .quiz-card.entra{ animation:bio-subir .3s var(--mov-suave); }

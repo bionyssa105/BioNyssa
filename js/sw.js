@@ -1,4 +1,4 @@
-const V = 'bio-sin-red-v12';
+const V = 'bio-sin-red-v13';
 const E = 'bio-estaticos-v14';
 const BASE = self.registration.scope;
 const LISTA = [

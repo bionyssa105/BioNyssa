@@ -50,7 +50,7 @@
       g.setAttribute('class', 'flor-hero');
       let petalos = '';
       for (let k = 0; k < 6; k++) petalos += `<ellipse cx="232" cy="118" rx="7" ry="13" fill="#e9a23b" transform="rotate(${k * 60} 232 128)"/>`;
-      g.innerHTML = petalos + '<circle cx="232" cy="128" r="7" fill="#b4573a"/>';
+      g.innerHTML = petalos + '<circle cx="232" cy="128" r="7" fill="#b87036"/>';
       svg.appendChild(g);
       const b = svg.getBoundingClientRect();
       hojas(b.left + b.width / 2, b.top, 16);

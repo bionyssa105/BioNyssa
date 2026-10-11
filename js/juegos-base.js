@@ -18,10 +18,10 @@ window.BioTutorial = (function () {
   };
   const PINTA_POSE = { bienvenida: 'saluda', reglas: 'lupa', practica: 'brazos', ayuda: 'saluda' };
   const reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const ICONO_CURSOR = '<svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2l15 9.2-6.6 1.6 3.9 6.8-2.8 1.6-3.9-6.8L5.2 19Z" fill="#fff" stroke="#2b2419" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+  const ICONO_CURSOR = '<svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2l15 9.2-6.6 1.6 3.9 6.8-2.8 1.6-3.9-6.8L5.2 19Z" fill="#fff" stroke="#222214" stroke-width="1.6" stroke-linejoin="round"/></svg>';
   const MINI_HOJA = '<svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 29V15"/><path d="M16 16.5C15.6 11.8 12 9 6.4 9.2c.2 5 3.6 8 9.6 7.3Z"/><path d="M16.4 14.6C17 10 20.4 7.2 25.6 7.4c.1 4.8-3.1 7.6-9.2 7.2Z"/></svg>';
   const MINI_LATA = '<svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="5" width="14" height="22" rx="4"/><path d="M9 11h14M9 21h14"/></svg>';
-  const MINI_DORSO = '<svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#faf6ea" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" opacity=".7"><path d="M16 29V15"/><path d="M16 16.5C15.6 11.8 12 9 6.4 9.2c.2 5 3.6 8 9.6 7.3Z"/><path d="M16.4 14.6C17 10 20.4 7.2 25.6 7.4c.1 4.8-3.1 7.6-9.2 7.2Z"/></svg>';
+  const MINI_DORSO = '<svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#fcfbf6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" opacity=".7"><path d="M16 29V15"/><path d="M16 16.5C15.6 11.8 12 9 6.4 9.2c.2 5 3.6 8 9.6 7.3Z"/><path d="M16.4 14.6C17 10 20.4 7.2 25.6 7.4c.1 4.8-3.1 7.6-9.2 7.2Z"/></svg>';
   const ICONO_SONIDO = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M17 9a4 4 0 0 1 0 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
 
   function iniciar(cfg) {
@@ -410,7 +410,7 @@ window.BioJuego = (function () {
 
   function confeti() {
     if (REDUCIR) return;
-    const colores = ['#93a84a', '#5b6439', '#b07a22', '#b4573a', '#e0d6b8', '#7d9440'];
+    const colores = ['#93a84a', '#5b6439', '#b07a22', '#b87036', '#e0d6b8', '#7d9440'];
     const caja = document.createElement('div');
     caja.className = 'confeti';
     caja.setAttribute('aria-hidden', 'true');
@@ -502,7 +502,7 @@ window.BioJuego = (function () {
       el.barra.style.width = contaminacion + '%';
       el.valor.textContent = contaminacion + '%';
       const nivel = contaminacion <= 40 ? 'bajo' : contaminacion <= 59 ? 'medio' : 'alto';
-      el.barra.style.background = { bajo: '#7d9440', medio: '#c08a2a', alto: '#b4573a' }[nivel];
+      el.barra.style.background = { bajo: '#7d9440', medio: '#c08a2a', alto: '#b87036' }[nivel];
       if (el.estado) el.estado.textContent = { bajo: 'Bajo control', medio: 'Nivel medio', alto: 'Peligro' }[nivel];
       el.barra.parentElement.classList.toggle('peligro', contaminacion >= 80);
       if (el.planeta) el.planeta.style.setProperty('--smog', (contaminacion / 100 * 0.65).toFixed(2));

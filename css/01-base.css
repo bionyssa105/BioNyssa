@@ -1,35 +1,35 @@
 :root{
-  --bone:#f3eee1;
-  --bone-2:#e9e2d0;
-  --card:#fffdf4;
-  --line:#b5a984;
-  --line-strong:#857a55;
+  --bone:#ffffff;
+  --bone-2:#f1f0e1;
+  --card:#fbfaf0;
+  --line:#d6d3b0;
+  --line-strong:#85824f;
 
-  --ink:#1d1810;
-  --ink-soft:#463e2e;
-  --ink-faint:#625843;
+  --ink:#12120c;
+  --ink-soft:#3a3a28;
+  --ink-faint:#64624a;
 
-  --olive:#4a5726;
-  --olive-deep:#2f3a14;
-  --link:#3d4a1c;
+  --olive:#4d5c1c;
+  --olive-deep:#2e3910;
+  --link:#41501a;
 
-  --sage:#d3e0ab;
-  --sage-2:#bdd187;
-  --brote:#6b9a2a;
-  --brote-soft:#d8e9a5;
-  --seed:#b9700c;
-  --seed-soft:#f7daa0;
-  --brick:#c24a28;
-  --brick-soft:#f6ccb6;
+  --sage:#e4eac3;
+  --sage-2:#d0d99b;
+  --brote:#7a9022;
+  --brote-soft:#e2ebb6;
+  --seed:#b8921c;
+  --seed-soft:#f3e8b4;
+  --brick:#e0701c;
+  --brick-soft:#fbdcc0;
 
-  --btn-bg:#2f3a14;
-  --btn-bg-hover:#222b0d;
-  --btn-ink:#faf6ea;
+  --btn-bg:#1c2109;
+  --btn-bg-hover:#0e1105;
+  --btn-ink:#fffff2;
 
-  --tile-deep-bg:#2f3a14;
-  --tile-deep-ink:#f5efdd;
-  --tile-soft-bg:#d3e0ab;
-  --tile-soft-ink:#2b2419;
+  --tile-deep-bg:#2e3910;
+  --tile-deep-ink:#fbfaf0;
+  --tile-soft-bg:#e4eac3;
+  --tile-soft-ink:#12120c;
 
   --r-card:14px;
   --r-ctl:9px;

@@ -292,10 +292,10 @@ window.BioModera = (function () {
       const st = document.createElement('style');
       st.textContent =
         '.bio-toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);max-width:min(92vw,420px);' +
-        'background:#3d4726;color:#faf6ea;padding:12px 18px;border-radius:12px;font:600 .9rem/1.4 Karla,system-ui,sans-serif;' +
+        'background:#3d4726;color:#fcfbf6;padding:12px 18px;border-radius:12px;font:600 .9rem/1.4 Karla,system-ui,sans-serif;' +
         'box-shadow:0 12px 30px -10px rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:all .2s ease;z-index:1200;text-align:center}' +
         '.bio-toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}' +
-        '.bio-toast.error{background:#b4573a}';
+        '.bio-toast.error{background:#b87036}';
       document.head.appendChild(st);
       toast = document.createElement('div');
       toast.className = 'bio-toast';

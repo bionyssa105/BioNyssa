@@ -4,7 +4,7 @@
   "description": "La bolsa que se planta y se vuelve planta.",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#f6f5ee",
+  "background_color": "#fbfaf8",
   "theme_color": "#2f4419",
   "lang": "es-MX",
   "categories": ["education", "lifestyle"],
