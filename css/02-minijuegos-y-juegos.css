@@ -119,55 +119,6 @@
 }
 @media (hover:hover){.dato-otro:hover{ background:var(--bone-2); border-color:var(--olive); }}
 
-.a-halo{ fill:color-mix(in srgb, var(--card) 55%, transparent); }
-.a-mar{ fill:#aab58f; }
-.a-tierra{ fill:var(--brote); }
-.a-borde{ fill:none; stroke:var(--olive); stroke-width:2.4; }
-.a-tallo{ fill:none; stroke:var(--olive); stroke-width:2.6; stroke-linecap:round; }
-.a-hoja{ fill:var(--brote); stroke:var(--olive); stroke-width:2; stroke-linejoin:round; }
-.a-globo{ fill:var(--card); stroke:var(--olive); stroke-width:2; }
-.a-globo.verde{ fill:var(--brote-soft); }
-.a-signo{ font:400 22px var(--font-display); fill:var(--olive-deep); }
-.a-check{ fill:none; stroke:var(--olive-deep); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
-.a-sombra{ fill:var(--ink); opacity:.08; }
-.a-bote{ fill:var(--card); stroke:var(--olive); stroke-width:2.4; stroke-linejoin:round; }
-.a-bote.verde{ fill:var(--olive); }
-.a-tapa{ fill:var(--card); stroke:var(--olive); stroke-width:2.4; }
-.a-tapa.verde{ fill:var(--olive-deep); }
-.a-linea{ fill:none; stroke:var(--line-strong); stroke-width:2.4; stroke-linecap:round; }
-.a-marca{ fill:none; stroke:var(--btn-ink); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
-.a-botella{ fill:#aab58f; stroke:var(--olive); stroke-width:2.2; stroke-linejoin:round; }
-.a-dorso{ fill:var(--btn-bg); stroke:var(--olive-deep); stroke-width:2; }
-.a-frente{ fill:var(--card); stroke:var(--olive); stroke-width:2.4; }
-.a-lata{ fill:var(--sage-2); stroke:var(--olive); stroke-width:2.2; stroke-linejoin:round; }
-.a-banda{ fill:var(--brote); }
-[data-theme="dark"] .a-mar,[data-theme="dark"] .a-botella{ fill:#626f45; }
-
-.a-flota{ transform-box:fill-box; transform-origin:center; animation:bio-flotar 5s ease-in-out infinite; }
-.a-burbuja{ transform-box:fill-box; transform-origin:center; animation:a-burbuja 3.4s ease-in-out infinite; }
-.a-burbuja.b2{ animation-delay:1.3s; }
-.a-cae{ animation:a-cae 2.8s cubic-bezier(.55,0,.75,.45) infinite; }
-.a-carta{ transform-box:fill-box; transform-origin:center bottom; animation:a-abanico 4.6s ease-in-out infinite; }
-.a-carta.izq{ animation-delay:.4s; }
-.a-carta.der{ animation-delay:.8s; }
-@keyframes a-burbuja{ 0%,100%{ transform:translateY(0) scale(1); } 50%{ transform:translateY(-6px) scale(1.08); } }
-@keyframes a-cae{
-  0%{ transform:translateY(0) rotate(0); opacity:0; }
-  12%{ opacity:1; }
-  70%{ transform:translateY(44px) rotate(14deg); opacity:1; }
-  85%,100%{ transform:translateY(58px) rotate(18deg); opacity:0; }
-}
-@keyframes a-abanico{ 0%,100%{ transform:rotate(0) translateY(0); } 50%{ transform:rotate(3deg) translateY(-6px); } }
-@media (hover:hover){
-  .game-card:hover .a-flota{ animation-duration:2.6s; }
-  .game-card:hover .a-cae{ animation-duration:1.6s; }
-  .game-card:hover .a-carta{ animation-duration:2.4s; }
-}
-@media (prefers-reduced-motion: reduce){
-  .a-flota,.a-burbuja,.a-cae,.a-carta{ animation:none !important; }
-  .a-cae{ opacity:1; }
-}
-
 .game-hero{
   display:flex;
   align-items:center;

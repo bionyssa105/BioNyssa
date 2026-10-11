@@ -268,70 +268,26 @@ body .dato-dia{ margin-top:26px; padding:16px 18px; }
   .pl-cuidados button{ padding:12px 4px; font-size:.74rem; }
 }
 
-/* ---------- Portadas de los minijuegos (animadas) ---------- */
+/* ---------- Portadas de los minijuegos: una animación suave por tarjeta ---------- */
 .v-lata-f{ fill:var(--sage-2); stroke:var(--olive); stroke-width:2.2; }
-.v-si-c{ fill:var(--brote); stroke:var(--olive); stroke-width:2; }
-.v-no-c{ fill:var(--brick); stroke:var(--olive-deep); stroke-width:2; }
-.v-chispa-f{ fill:var(--seed); }
-.v-chispa, .v-pulsa, .v-mece, .v-sello, .v-golpe, .v-brota, .v-par, .v-voltea-a, .v-voltea-b{ transform-box:fill-box; transform-origin:center; }
-.v-golpe{ transform-origin:50% 100%; }
-.v-brota{ transform-origin:0% 100%; }
-.v-no, .v-brota, .v-voltea-b{ opacity:0; }
+.v-voltea-a, .v-voltea-b{ transform-box:fill-box; transform-origin:center; }
+.v-voltea-b{ opacity:0; }
 
-@keyframes v-entra{ from{ opacity:0; transform:scale(1.06); } }
-@keyframes v-pulsa{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.15); } }
-@keyframes v-mece{ 0%,100%{ transform:translate(0,0) rotate(0); } 50%{ transform:translate(7px,-9px) rotate(16deg); } }
-@keyframes v-chispa{ 0%,100%{ opacity:0; transform:scale(.3) rotate(0); } 50%{ opacity:1; transform:scale(1) rotate(45deg); } }
-@keyframes v-sello-si{
-  0%,22%{ opacity:0; transform:scale(.3); } 30%{ opacity:1; transform:scale(1.22); } 36%{ transform:scale(1); }
-  52%{ opacity:1; transform:scale(1); } 58%,100%{ opacity:0; transform:scale(.6); }
-}
-@keyframes v-sello-no{
-  0%,64%{ opacity:0; transform:scale(.3); } 72%{ opacity:1; transform:scale(1.22); } 78%{ transform:scale(1); }
-  92%{ opacity:1; transform:scale(1); } 98%,100%{ opacity:0; transform:scale(.6); }
-}
-@keyframes v-sello-par{
-  0%,52%{ opacity:0; transform:scale(.3); } 60%{ opacity:1; transform:scale(1.25); } 66%{ transform:scale(1); }
-  88%{ opacity:1; transform:scale(1); } 96%,100%{ opacity:0; transform:scale(.6); }
-}
-@keyframes v-golpe{
-  0%,66%,100%{ transform:translateY(0) scale(1); } 72%{ transform:translateY(3px) scale(1.03,.95); }
-  82%{ transform:translateY(-2px) scale(.99,1.02); } 90%{ transform:translateY(0) scale(1); }
-}
-@keyframes v-brota{
-  0%,70%{ opacity:0; transform:scale(0); } 82%{ opacity:1; transform:scale(1.2) rotate(-6deg); }
-  90%{ opacity:1; transform:scale(1) rotate(0); } 97%{ opacity:1; } 100%{ opacity:0; transform:scale(1); }
+@keyframes v-cae{
+  0%{ transform:translateY(0); opacity:0; }
+  15%{ opacity:1; }
+  75%{ transform:translateY(52px); opacity:1; }
+  100%{ transform:translateY(52px); opacity:0; }
 }
 @keyframes v-volteaA{ 0%,14%{ transform:scaleX(1); } 22%,66%{ transform:scaleX(0); } 78%,100%{ transform:scaleX(1); } }
 @keyframes v-volteaB{ 0%,18%{ opacity:1; transform:scaleX(0); } 30%,58%{ opacity:1; transform:scaleX(1); } 66%,100%{ opacity:1; transform:scaleX(0); } }
-@keyframes v-par{ 0%,50%,100%{ transform:scale(1); } 58%{ transform:scale(1.09); } 66%{ transform:scale(1.03); } 74%{ transform:scale(1.07); } 84%{ transform:scale(1); } }
 
 @media (prefers-reduced-motion:no-preference){
-  .game-art svg{ animation:v-entra .7s ease both; transition:transform .5s ease; }
-  .v-pulsa{ animation:v-pulsa 2.4s ease-in-out infinite; }
-  .v-mece{ animation:v-mece 4.4s ease-in-out infinite; }
-  .v-mece.b{ animation-delay:-2.2s; animation-duration:5.2s; }
-  .v-chispa{ opacity:0; animation:v-chispa 2.8s ease-in-out infinite; }
-  .v-chispa.b{ animation-delay:-.9s; }
-  .v-chispa.c{ animation-delay:-1.8s; }
-  .v-sello{ opacity:0; }
-  .v-si{ animation:v-sello-si 6s ease-out infinite; }
-  .v-no{ animation:v-sello-no 6s ease-out infinite; }
-  .v-si.b{ animation:v-sello-par 6s ease-out infinite; }
-  .v-golpe{ animation:v-golpe 3.6s ease-out infinite; }
-  .v-golpe.b{ animation-delay:-1.8s; }
-  .v-cae.seg{ animation-delay:-1.8s; }
-  .v-brota{ animation:v-brota 3.6s ease-out infinite; }
+  .v-cae{ animation:v-cae 3.6s ease-in infinite; }
   .v-voltea-a{ animation:v-volteaA 6s ease-in-out infinite; }
   .v-voltea-b{ animation:v-volteaB 6s ease-in-out infinite; }
-  .v-par{ animation:v-par 6s ease-in-out infinite; }
-  @media (hover:hover){
-    .game-card:hover .game-art svg{ transform:scale(1.04); }
-    .game-card:hover .v-flota{ animation-duration:2.8s; }
-    .game-card:hover .v-mece{ animation-duration:2.2s; }
-    .game-card:hover .v-chispa{ animation-duration:1.6s; }
-  }
 }
+@media (prefers-reduced-motion:reduce){ .v-flota{ animation:none; } }
 
 /* ---------- Tutorial "Cómo se juega": Bio y el cursor que muestra qué tocar ---------- */
 .tuto-card{ position:relative; }
@@ -382,7 +338,6 @@ body .dato-dia{ margin-top:26px; padding:16px 18px; }
 @media (max-width:380px){ .tuto-card.modo-ayuda .tuto-dialogo{ min-height:7.6em; } }
 
 
-.v-chispa{ display:none; } /* sin estrellitas */
 
 /* ================= Mi planta: iconos de línea (sin emojis) ================= */
 .pl-cuidados button span{ display:block; filter:none; opacity:1; color:var(--ink-faint); transition:color .2s; }
