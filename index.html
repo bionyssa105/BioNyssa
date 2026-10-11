@@ -1,0 +1,133 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3eee1">
+<meta name="description" content="BioNyssa es la bolsa orgánica y biodegradable que se planta y se convierte en una planta. Aprende, juega y forma parte de la comunidad.">
+<title>BioNyssa. Un desecho que nace</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BioNyssa">
+<meta property="og:locale" content="es_MX">
+<meta property="og:title" content="BioNyssa. Un desecho que nace">
+<meta property="og:description" content="La bolsa que no termina en la basura: la plantas y se vuelve planta.">
+<meta property="og:image" content="https://bionyssa.netlify.app/assets/img/logo-app.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="icon" type="image/png" href="assets/img/logo-app.png">
+<link rel="apple-touch-icon" href="assets/img/logo-app.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="css/01-base.css">
+<link rel="stylesheet" href="css/02-inicio-y-menu.css">
+<link rel="stylesheet" href="css/03-comun-parte-1.css">
+<link rel="stylesheet" href="css/05-comun-parte-2.css">
+<script src="js/tema-inicial.js"></script>
+<script src="js/ir-al-menu.js"></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="screen home-screen">
+
+  <header class="home-header">
+    <div class="wrap-wide">
+      <div class="head-cta"><button type="button" class="theme-toggle" aria-label="Cambiar tema"></button></div>
+    </div>
+  </header>
+
+  <main id="contenido" class="home-main">
+    <div class="wrap-wide home-hero">
+      <div class="home-copy">
+        <div class="home-titulo">
+          <span class="home-logo">
+            <img loading="lazy" decoding="async" class="logo-oscuro" src="assets/img/logo.png" width="132" height="130" alt="BioNyssa, futuro">
+            <img loading="lazy" decoding="async" class="logo-claro" src="assets/img/logo-claro.png" width="132" height="130" alt="BioNyssa, futuro">
+          </span>
+          <h1 class="home-title">Un desecho<br>que nace.</h1>
+        </div>
+        <p class="home-tagline">Una bolsa que no termina en la basura: la plantas y se vuelve planta.</p>
+        <div class="home-actions">
+          <a href="login.html" class="btn btn-primary">Iniciar sesión</a>
+          <a href="registro.html" class="btn btn-outline">Crear cuenta</a>
+        </div>
+        <p class="guest-line"><a href="menu.html" id="entrarInvitado">Explorar como invitado</a></p>
+      </div>
+      <button type="button" class="mascota" id="mascota" aria-label="Hablar con Bio, la mascota de BioNyssa">
+        <span class="mascota-globo" id="mascotaGlobo" role="status" aria-live="polite">
+        <span class="g-nombre" aria-hidden="true">Bio</span>
+        <span class="g-texto">
+        <span class="g-tipeo" aria-hidden="true"></span>
+        <span class="g-fantasma" aria-hidden="true">¡Hola! Soy Bio. ¿Sabías que una bolsa sembrada puede dar una planta?</span>
+        <span class="g-lector">¡Hola! Soy Bio. ¿Sabías que una bolsa sembrada puede dar una planta?</span>
+        </span>
+        </span>
+        <img loading="lazy" decoding="async" src="assets/img/bio-saluda.webp" alt="" width="63" height="132" id="mascotaImg">
+      </button>
+      <figure class="home-figure">
+        <svg viewBox="0 0 520 540" role="img" aria-labelledby="ilTitulo ilDesc">
+          <title id="ilTitulo">Bolsa BioNyssa sembrada en la tierra</title>
+          <desc id="ilDesc">Corte de la tierra: una bolsa enterrada de la que salen raíces hacia abajo y un brote con hojas hacia arriba.</desc>
+          <circle class="il-halo" cx="232" cy="214" r="156"/>
+          <g class="il-lluvia">
+            <g transform="translate(118 96)"><path class="il-gota g1" d="M0-8C4-2 6 3 0 7-6 3-4-2 0-8Z"/></g>
+            <g transform="translate(336 84)"><path class="il-gota g2" d="M0-8C4-2 6 3 0 7-6 3-4-2 0-8Z"/></g>
+            <g transform="translate(372 150)"><path class="il-gota g3" d="M0-8C4-2 6 3 0 7-6 3-4-2 0-8Z"/></g>
+            <g transform="translate(96 168)"><path class="il-gota g4" d="M0-8C4-2 6 3 0 7-6 3-4-2 0-8Z"/></g>
+          </g>
+          <path class="il-suelo" d="M0 306C70 296 130 312 210 304 290 296 350 312 430 302 470 298 500 302 520 306V540H0Z"/>
+          <g class="il-grano">
+            <circle cx="58" cy="352" r="3.5"/><circle cx="112" cy="418" r="4"/><circle cx="66" cy="486" r="3"/>
+            <circle cx="120" cy="374" r="2.5"/><circle cx="388" cy="352" r="3.5"/><circle cx="452" cy="424" r="4"/>
+            <circle cx="404" cy="496" r="3"/><circle cx="478" cy="486" r="2.5"/><circle cx="352" cy="452" r="3"/>
+            <ellipse cx="96" cy="452" rx="9" ry="5"/><ellipse cx="430" cy="378" rx="8" ry="4.5"/>
+          </g>
+          <path class="il-bolsa" d="M156 346Q156 340 162 340H298Q304 340 304 346V446Q304 456 294 456H166Q156 456 156 446Z"/>
+          <path class="il-linea" d="M156 360H304" style="stroke-width:1.8"/>
+          <g class="il-fibra"><path d="M172 378H288"/><path d="M172 396H288"/><path d="M172 414H288"/><path d="M172 432H288"/></g>
+          <g>
+            <path class="il-linea il-raiz" pathLength="1" style="stroke-width:2.2" d="M200 456C198 476 184 488 168 504"/>
+            <path class="il-linea il-raiz" pathLength="1" style="stroke-width:2.2" d="M230 456C230 480 226 498 230 522"/>
+            <path class="il-linea il-raiz" pathLength="1" style="stroke-width:2.2" d="M258 456C262 474 278 486 296 500"/>
+          </g>
+          <g class="il-linea" style="stroke-width:2">
+            <path d="M206 306l-3-14"/><path d="M216 305l0-10"/><path d="M250 305l2-11"/><path d="M262 306l5-13"/>
+          </g>
+          <g class="il-planta">
+          <path class="il-linea il-tallo" pathLength="1" style="stroke-width:3.2" d="M230 342C228 320 238 300 232 270 227 244 236 224 232 196"/>
+          <g class="il-brote b1"><path class="il-hoja" d="M232 214C200 216 176 198 170 170 204 166 230 184 232 214Z"/><path class="il-nervio" d="M231 212C210 204 190 190 178 174"/></g>
+          <g class="il-brote b2"><path class="il-hoja" d="M233 236C266 238 292 220 300 192 266 188 238 206 233 236Z"/><path class="il-nervio" d="M234 234C256 226 280 212 294 198"/></g>
+          <g class="il-brote b3"><path class="il-hoja" d="M232 198C222 176 226 154 240 138 250 156 246 180 232 198Z"/><path class="il-nervio" d="M234 192C233 176 235 158 239 146"/></g>
+          </g>
+          <g class="il-anota">
+            <path class="il-guia" d="M300 192L350 168"/><circle class="il-punto" cx="300" cy="192" r="2.5"/>
+            <text class="il-etiqueta" x="358" y="172">Brote</text>
+            <path class="il-guia" d="M304 400H350"/><circle class="il-punto" cx="304" cy="400" r="2.5"/>
+            <text class="il-etiqueta" x="358" y="405">Bolsa orgánica</text>
+            <path class="il-guia" d="M296 500L328 512"/><circle class="il-punto" cx="296" cy="500" r="2.5"/>
+            <text class="il-etiqueta" x="336" y="516">Raíces</text>
+            <text class="il-etiqueta" x="22" y="334">Suelo</text>
+          </g>
+        </svg>
+      </figure>
+    </div>
+</main>
+</div>
+<script src="js/almacen-por-cuenta.js"></script>
+<script src="js/comun.js"></script>
+<script src="js/avisos.js"></script>
+<script src="js/efectos.js"></script>
+<script src="js/puntos.js"></script>
+<script src="js/retos.js"></script>
+<script src="js/sesion.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-cuenta.js"></script>
+<script src="js/nube-firestore.js"></script>
+<script src="js/sin-conexion.js"></script>
+<script src="js/transiciones-de-pagina.js"></script>
+<script src="js/pagina-inicio-mascota.js"></script>
+<script src="js/pagina-inicio-acceso.js"></script>
+<script src="js/analiticas.js" defer></script>
+<script src="js/animaciones.js"></script>
+</body>
+</html>

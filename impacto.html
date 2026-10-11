@@ -1,0 +1,175 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3eee1">
+<meta name="description" content="Qué cambia cuando una bolsa se siembra en vez de tirarse.">
+<title>Nuestro impacto · BioNyssa</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BioNyssa">
+<meta property="og:locale" content="es_MX">
+<meta property="og:title" content="Nuestro impacto · BioNyssa">
+<meta property="og:description" content="La bolsa que no termina en la basura: la plantas y se vuelve planta.">
+<meta property="og:image" content="https://bionyssa.netlify.app/assets/img/logo-app.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="icon" type="image/png" href="assets/img/logo-app.png">
+<link rel="apple-touch-icon" href="assets/img/logo-app.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="css/01-base.css">
+<link rel="stylesheet" href="css/02-impacto.css">
+<link rel="stylesheet" href="css/03-comun-parte-1.css">
+<link rel="stylesheet" href="css/05-comun-parte-2.css">
+<link rel="stylesheet" href="css/06-barra-y-adaptacion-a-pantallas.css">
+<script src="js/tema-inicial.js"></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="screen">
+
+  <div class="topbar">
+    <div class="wrap-wide">
+      <div class="topbar-row">
+        <a href="menu.html" class="back-btn" aria-label="Volver al menú">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15.8 4.9c-2.9 2.3-5.2 4.6-6.9 7.2 1.9 2.7 4.3 4.9 7 6.9"/></g></svg>
+        </a>
+        <a href="index.html" class="mark" aria-label="BioNyssa, ir al inicio"><span class="mark-icon" aria-hidden="true"></span><span class="mark-word">BioNyssa</span></a>
+      </div>
+    </div>
+  </div>
+
+  <main id="contenido" class="page-main">
+    <div class="wrap-wide">
+      <header class="page-head">
+        <h1>Nuestro impacto</h1>
+        <p>Lo que cambia cuando una bolsa se siembra en vez de tirarse.</p>
+      </header>
+
+      <div class="imp">
+
+        <section class="imp-calc" aria-labelledby="impTitulo">
+          <div class="imp-calc-datos">
+            <h2 id="impTitulo">Haz la cuenta</h2>
+            <label for="impBolsas">Bolsas que usas al mes</label>
+            <p class="imp-mes"><output id="impMes" for="impBolsas">12</output></p>
+            <input type="range" id="impBolsas" min="1" max="60" value="12">
+            <div class="imp-escala" aria-hidden="true"><span>1</span><span>30</span><span>60</span></div>
+            <div class="imp-plazo" role="group" aria-label="Plazo">
+              <span>Si lo cambias durante</span>
+              <button type="button" data-a="1">1 año</button><button type="button" data-a="5">5 años</button><button type="button" data-a="10">10 años</button>
+            </div>
+          </div>
+          <div class="imp-cifras" aria-live="polite">
+            <p class="imp-cifra"><b id="impAnio">144</b><span id="impTxtBolsas">bolsas al año que no acaban en la basura</span></p>
+            <p class="imp-cifra"><b id="impPlantas">144</b><span>plantas posibles, una por bolsa sembrada</span></p>
+            <p class="imp-cifra"><b id="impPeso">864 g</b><span>de plástico que no se queda en el ambiente</span></p>
+            <p class="imp-frase" id="impFrase"></p>
+          </div>
+          <p class="imp-nota">Cuenta hecha con una bolsa común de unos 6 g. Es una estimación para darte una idea, no una medición exacta.</p>
+        </section>
+
+        <section class="imp-rasgos-bloque" aria-labelledby="impDistinta">
+          <h2 id="impDistinta">Por qué es distinta</h2>
+          <ul class="imp-rasgos">
+            <li>
+              <span class="imp-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.2 18.8C4.6 11 9.6 5.2 19 4.8c.4 9.2-5 14.3-12.6 14.1z"/><path d="M5 19.2 13 11"/></g></svg></span>
+              <div><h3>Orgánica</h3><p>Hecha con fibras naturales.</p></div>
+            </li>
+            <li>
+              <span class="imp-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12.1 3.5c-2.7 4-5.9 7.3-6 11.2-.1 3.4 2.6 5.8 6 5.8 3.5 0 6-2.5 5.9-5.9-.1-3.8-3.3-7.2-5.9-11.1z"/><path d="M9.5 15.2c.4 1.300 1.300 2.100 2.700 2.400"/></g></svg></span>
+              <div><h3>Biodegradable</h3><p>Se descompone en semanas.</p></div>
+            </li>
+            <li>
+              <span class="imp-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9"/><path d="M12 13C12 8.5 9 6 4.5 6c0 4.5 3 7 7.5 7Z"/><path d="M12 11c0-4 2.6-6.4 7-6.4 0 4-2.6 6.4-7 6.4Z"/></g></svg></span>
+              <div><h3>Doble impacto</h3><p>Un desecho que se vuelve planta.</p></div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="imp-bloque imp-cuenta" aria-labelledby="impCuenta">
+          <h2 id="impCuenta">Tu cuenta</h2>
+          <p class="imp-total"><strong id="impSembradas">0</strong><span>bolsas sembradas por ti</span></p>
+          <div class="imp-meta">
+            <div class="imp-meta-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Avance hacia la siguiente meta"><i id="impMetaRelleno"></i></div>
+            <p id="impMetaTxt"></p>
+          </div>
+          <ul class="imp-metas" id="impMetas" aria-label="Metas de siembra"></ul>
+          <div class="imp-acciones">
+            <button type="button" class="btn btn-primary" id="impSumar">Sembré una</button>
+            <button type="button" class="btn btn-outline" id="impCero">Empezar de cero</button>
+          </div>
+          <p class="imp-msg" id="impMsg" aria-live="polite"></p>
+        </section>
+
+        <section class="imp-bloque imp-global" aria-labelledby="impGlobal">
+          <h2 id="impGlobal">Entre todos</h2>
+          <p class="imp-total"><strong id="impGlobalNum">0</strong><span>bolsas sembradas por quienes usan BioNyssa</span></p>
+          <p class="imp-msg" id="impGlobalMsg" aria-live="polite">Cada vez que alguien con sesión iniciada anota una siembra, este número sube.</p>
+        </section>
+
+        <section class="imp-bloque imp-camino" aria-labelledby="impCamino">
+          <h2 id="impCamino">El camino de tu bolsa</h2>
+          <ol class="imp-ciclo">
+            <li><b class="imp-n">1</b><h3>La usas</h3><p>Carga lo que llevas, como cualquier bolsa.</p></li>
+            <li><b class="imp-n">2</b><h3>La siembras</h3><p>En vez de tirarla, la entierras en una maceta o en el jardín.</p></li>
+            <li><b class="imp-n">3</b><h3>Se descompone</h3><p>La tierra se la come en semanas y la vuelve abono.</p></li>
+            <li><b class="imp-n">4</b><h3>Brota</h3><p>La semilla que lleva dentro se convierte en planta.</p></li>
+          </ol>
+        </section>
+
+        <section class="imp-versus-bloque" aria-labelledby="impVs">
+          <h2 id="impVs">Bolsa común contra BioNyssa</h2>
+          <div class="imp-versus">
+            <article class="imp-lado">
+              <h3>Bolsa común</h3>
+              <dl>
+                <div><dt>Material</dt><dd>Plástico</dd></div>
+                <div><dt>Al terminar</dt><dd>Basura</dd></div>
+                <div><dt>Qué deja</dt><dd>Residuo y microplásticos</dd></div>
+              </dl>
+            </article>
+            <article class="imp-lado imp-nuestra">
+              <h3>BioNyssa</h3>
+              <dl>
+                <div><dt>Material</dt><dd>Fibras orgánicas</dd></div>
+                <div><dt>Al terminar</dt><dd>Se siembra</dd></div>
+                <div><dt>Qué deja</dt><dd>Abono y una planta</dd></div>
+              </dl>
+            </article>
+          </div>
+        </section>
+
+        <section class="imp-ahora" aria-labelledby="impAhora">
+          <h2 id="impAhora">Qué puedes hacer ahora</h2>
+          <a href="guia.html" class="imp-paso"><b>Aprende a sembrar</b><span>La guía te lleva de la tierra a la planta.</span></a>
+          <a href="minijuegos.html" class="imp-paso"><b>Juega un rato</b><span>Practica a separar la basura y juntar puntos.</span></a>
+          <a href="comunidad.html" class="imp-paso"><b>Cuenta cómo te va</b><span>Sube una foto de tu planta y mira las de los demás.</span></a>
+        </section>
+
+        
+
+      </div>
+    </div>
+  </main>
+
+</div>
+<script src="js/almacen-por-cuenta.js"></script>
+<script src="js/comun.js"></script>
+<script src="js/avisos.js"></script>
+<script src="js/efectos.js"></script>
+<script src="js/puntos.js"></script>
+<script src="js/retos.js"></script>
+<script src="js/sesion.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-cuenta.js"></script>
+<script src="js/nube-firestore.js"></script>
+<script src="js/sin-conexion.js"></script>
+<script src="js/pagina-impacto-calculadora.js"></script>
+<script src="js/transiciones-de-pagina.js"></script>
+<script src="js/analiticas.js" defer></script>
+<script src="js/animaciones.js"></script>
+</body>
+</html>

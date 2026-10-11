@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f3eee1">
+<title>Administración | BioNyssa</title>
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="css/01-base.css">
+<link rel="stylesheet" href="css/03-comun-parte-1.css">
+<link rel="stylesheet" href="css/05-comun-parte-2.css">
+<script src="js/tema-inicial.js"></script>
+<style>
+.adm{max-width:960px;margin:0 auto;padding:20px 16px 48px}
+.adm h1{font-family:var(--font-display);font-size:1.5rem;margin:0 0 4px;color:var(--ink)}
+.adm .sub{margin:0 0 18px;color:var(--ink-soft);font-size:.92rem}
+.adm-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.adm-top a{color:var(--link);font-weight:600;font-size:.9rem}
+.adm-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:0 0 16px}
+.adm-num{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card,14px);padding:12px 14px}
+.adm-num b{display:block;font-family:var(--font-display);font-size:1.6rem;color:var(--olive-deep)}
+.adm-num span{font-size:.8rem;color:var(--ink-soft)}
+.adm-buscar{width:100%;box-sizing:border-box;padding:11px 14px;margin:0 0 12px;border:1px solid var(--line-strong);border-radius:var(--r-ctl,10px);background:var(--card);color:var(--ink);font:inherit}
+.adm-lista{display:flex;flex-direction:column;gap:8px}
+.adm-fila{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r-card,14px);padding:10px 12px}
+.adm-av{width:40px;height:40px;border-radius:50%;background:var(--brote-soft);color:var(--olive-deep);display:flex;align-items:center;justify-content:center;font-weight:700}
+.adm-n{font-weight:700;color:var(--ink);overflow-wrap:anywhere}
+.adm-c{font-size:.84rem;color:var(--ink-soft);overflow-wrap:anywhere}
+.adm-d{text-align:right;font-size:.8rem;color:var(--ink-soft);white-space:nowrap}
+.adm-d b{display:block;color:var(--ink);font-size:.86rem}
+.adm-msg{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card,14px);padding:18px;color:var(--ink)}
+.adm-msg a{color:var(--link);font-weight:600}
+@media (max-width:520px){.adm-fila{grid-template-columns:40px 1fr}.adm-d{grid-column:2;text-align:left}}
+</style>
+</head>
+<body>
+<main class="adm" id="contenido">
+  <div class="adm-top">
+    <h1>Personas que entran</h1>
+    <span><a href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">Ver visitas en Google Analytics ↗</a> &nbsp;·&nbsp; <a href="menu.html">← Volver</a></span>
+  </div>
+  <p class="sub" id="admSub">Solo visible para el administrador.</p>
+  <div id="admCuerpo"><div class="adm-msg">Cargando…</div></div>
+</main>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-cuenta.js"></script>
+<script src="js/pagina-admin.js"></script>
+<script src="js/animaciones.js"></script>
+</body>
+</html>

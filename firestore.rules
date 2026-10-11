@@ -1,0 +1,142 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function entro() {
+      return request.auth != null;
+    }
+    function esDueno(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+    function esAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in ['roelrico20@gmail.com'];
+    }
+    function dePublicacion(id) {
+      return get(/databases/$(database)/documents/publicaciones/$(id)).data;
+    }
+
+    match /usuarios/{uid} {
+      allow read: if esDueno(uid);
+      allow create, update: if esDueno(uid)
+        && request.resource.data.keys().hasOnly(['uid', 'nombre', 'correo', 'creado', 'actualizado', 'datos'])
+        && request.resource.data.uid == uid
+        && (!('nombre' in request.resource.data) || (request.resource.data.nombre is string && request.resource.data.nombre.size() <= 80))
+        && (!('correo' in request.resource.data) || (request.resource.data.correo is string && request.resource.data.correo.size() <= 120))
+        && (!('datos' in request.resource.data) || (request.resource.data.datos is map && request.resource.data.datos.size() <= 60));
+      allow delete: if false;
+    }
+
+    match /perfiles/{uid} {
+      allow read: if true;
+      allow create, update: if esDueno(uid)
+        && request.resource.data.keys().hasOnly(['uid', 'clave', 'nombre', 'nombreCom', 'usuarioCom', 'bio', 'foto', 'creado', 'actualizado'])
+        && request.resource.data.uid == uid
+        && request.resource.data.clave is string && request.resource.data.clave.size() <= 40
+        && request.resource.data.nombre is string && request.resource.data.nombre.size() <= 80
+        && (!('nombreCom' in request.resource.data) || (request.resource.data.nombreCom is string && request.resource.data.nombreCom.size() <= 60))
+        && (!('usuarioCom' in request.resource.data) || (request.resource.data.usuarioCom is string && request.resource.data.usuarioCom.size() <= 40))
+        && (!('bio' in request.resource.data) || (request.resource.data.bio is string && request.resource.data.bio.size() <= 160))
+        && (!('foto' in request.resource.data) || (request.resource.data.foto is string && request.resource.data.foto.size() <= 150000
+            && request.resource.data.foto.matches('^data:image/[a-z]+;base64,.*')));
+      allow delete: if esDueno(uid);
+    }
+
+    match /accesos/{uid} {
+      allow read: if esAdmin();
+      allow create, update: if esDueno(uid)
+        && request.resource.data.keys().hasOnly(['uid', 'nombre', 'correo', 'creado', 'ultimoAcceso', 'accesos'])
+        && request.resource.data.uid == uid
+        && (!('nombre' in request.resource.data) || (request.resource.data.nombre is string && request.resource.data.nombre.size() <= 80))
+        && (!('correo' in request.resource.data) || (request.resource.data.correo is string && request.resource.data.correo.size() <= 120))
+        && request.resource.data.ultimoAcceso is number
+        && request.resource.data.accesos is number
+        && (!('creado' in request.resource.data) || request.resource.data.creado is number);
+      allow delete: if false;
+    }
+
+    match /usuarios_unicos/{handle} {
+      allow read: if true;
+      allow create: if entro()
+        && handle.matches('^h_[a-z0-9._]{1,40}$')
+        && request.resource.data.keys().hasOnly(['uid'])
+        && request.resource.data.uid == request.auth.uid;
+      allow update: if false;
+      allow delete: if entro() && resource.data.uid == request.auth.uid;
+    }
+
+    match /publicaciones/{id} {
+      allow read: if true;
+      allow create: if entro()
+        && request.resource.data.keys().hasOnly(['uid', 'usuario', 'nombre', 'texto', 'foto', 'creado'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.usuario is string && request.resource.data.usuario.size() <= 40
+        && request.resource.data.nombre is string && request.resource.data.nombre.size() <= 80
+        && request.resource.data.texto is string && request.resource.data.texto.size() <= 1000
+        && (request.resource.data.get('foto', null) == null
+            || (request.resource.data.foto is string && request.resource.data.foto.size() <= 750000
+                && request.resource.data.foto.matches('^data:image/[a-z]+;base64,.*')))
+        && (request.resource.data.texto.size() > 0 || request.resource.data.get('foto', null) != null)
+        && request.resource.data.creado is number
+        && request.resource.data.creado <= request.time.toMillis() + 86400000;
+      allow update: if false;
+      allow delete: if entro() && resource.data.uid == request.auth.uid;
+
+      match /likes/{uid} {
+        allow read: if true;
+        allow create: if esDueno(uid)
+          && request.resource.data.keys().hasOnly(['uid', 'creado'])
+          && request.resource.data.uid == uid;
+        allow update: if false;
+        allow delete: if esDueno(uid) || (entro() && dePublicacion(id).uid == request.auth.uid);
+      }
+
+      match /comentarios/{cid} {
+        allow read: if true;
+        allow create: if entro()
+          && request.resource.data.keys().hasOnly(['uid', 'usuario', 'nombre', 'texto', 'creado'])
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.usuario is string && request.resource.data.usuario.size() <= 40
+          && request.resource.data.nombre is string && request.resource.data.nombre.size() <= 80
+          && request.resource.data.texto is string
+          && request.resource.data.texto.size() > 0 && request.resource.data.texto.size() <= 300
+          && request.resource.data.creado is number;
+        allow update: if false;
+        allow delete: if entro()
+          && (resource.data.uid == request.auth.uid || dePublicacion(id).uid == request.auth.uid);
+      }
+    }
+
+    match /mensajes/{id} {
+      allow read: if esAdmin();
+      allow create: if request.resource.data.keys().hasOnly(['nombre', 'correo', 'mensaje', 'creado'])
+        && request.resource.data.nombre is string && request.resource.data.nombre.size() >= 2 && request.resource.data.nombre.size() <= 80
+        && request.resource.data.correo is string && request.resource.data.correo.size() <= 120 && request.resource.data.correo.matches('^[^@ ]+@[^@ ]+\\.[^@ ]{2,}$')
+        && request.resource.data.mensaje is string && request.resource.data.mensaje.size() >= 10 && request.resource.data.mensaje.size() <= 500
+        && request.resource.data.creado is number
+        && request.resource.data.creado <= request.time.toMillis() + 86400000;
+      allow update, delete: if false;
+    }
+
+    match /global/{doc} {
+      allow read: if true;
+      allow create: if doc == 'impacto' && entro()
+        && request.resource.data.keys().hasOnly(['sembradas'])
+        && request.resource.data.sembradas == 1;
+      allow update: if doc == 'impacto' && entro()
+        && request.resource.data.keys().hasOnly(['sembradas'])
+        && request.resource.data.sembradas == resource.data.sembradas + 1;
+      allow delete: if false;
+    }
+
+    match /{path=**}/likes/{uid} {
+      allow read: if true;
+    }
+    match /{path=**}/comentarios/{cid} {
+      allow read: if true;
+    }
+
+  }
+}

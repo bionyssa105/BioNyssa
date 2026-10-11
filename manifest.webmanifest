@@ -1,0 +1,16 @@
+{
+  "name": "BioNyssa",
+  "short_name": "BioNyssa",
+  "description": "La bolsa que se planta y se vuelve planta.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f6f5ee",
+  "theme_color": "#2f4419",
+  "lang": "es-MX",
+  "categories": ["education", "lifestyle"],
+  "icons": [{ "src": "assets/img/logo-app.png", "sizes": "512x505", "type": "image/png", "purpose": "any" }],
+  "shortcuts": [
+    { "name": "Mi planta", "url": "/mi-planta.html" },
+    { "name": "Minijuegos", "url": "/minijuegos.html" }
+  ]
+}

@@ -1,0 +1,117 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3eee1">
+<meta name="description" content="BioNyssa: un desecho que nace. Aprende, juega y forma parte de la comunidad.">
+<title>BioNyssa</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BioNyssa">
+<meta property="og:locale" content="es_MX">
+<meta property="og:title" content="BioNyssa">
+<meta property="og:description" content="La bolsa que no termina en la basura: la plantas y se vuelve planta.">
+<meta property="og:image" content="https://bionyssa.netlify.app/assets/img/logo-app.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="icon" type="image/png" href="assets/img/logo-app.png">
+<link rel="apple-touch-icon" href="assets/img/logo-app.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="css/01-base.css">
+<link rel="stylesheet" href="css/02-inicio-y-menu.css">
+<link rel="stylesheet" href="css/03-comun-parte-1.css">
+<link rel="stylesheet" href="css/05-comun-parte-2.css">
+<link rel="stylesheet" href="css/06-barra-y-adaptacion-a-pantallas.css">
+<script src="js/tema-inicial.js"></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="screen">
+
+  <div class="topbar">
+    <div class="wrap">
+      <div class="topbar-row">
+        <a href="index.html?inicio=1" class="mark" aria-label="BioNyssa, inicio"><span class="mark-icon" aria-hidden="true"></span><span class="mark-word">BioNyssa</span></a>
+        <a href="#" id="cerrarSesion" class="topbar-session" style="display:none;">Cerrar sesión</a>
+        <a href="registro.html" id="registrarseTopbar" class="topbar-session" style="display:none;">Regístrate</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="contenido" class="page-main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <h1 id="saludo">¡Bienvenido!</h1>
+        <p>Aquí aprendes a usar tu bolsa, ves cómo la hicimos y cuentas cómo te va.</p>
+      </header>
+
+      <div class="guest-banner mt-24" id="bannerInvitado" style="display:none;">
+        <span class="guest-banner-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><g stroke="#2f2208" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12.2 19.9C7.5 16.3 4.2 13.4 4.1 9.8c-.1-2.4 1.6-4.3 4-4.3 1.6 0 3 .9 3.9 2.5.9-1.6 2.4-2.6 4.1-2.5 2.3.1 3.9 2 3.8 4.4-.2 3.5-3.5 6.4-7.7 10z"/></g></svg>
+        </span>
+        <span class="guest-banner-text">
+          <strong>Andas de invitado</strong>
+          <span>Crea tu cuenta para publicar, comentar y dar like. Si te registras, conservas los puntos que llevas.</span>
+        </span>
+        <button type="button" class="guest-banner-btn" id="botonBannerInvitado">Crear mi cuenta</button>
+      </div>
+
+      <div class="menu-grid mt-24">
+        <a href="guia.html" class="menu-card c1">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.9 5.6c2.6-.9 5.5-.8 8.1.6 2.6-1.4 5.5-1.5 8.1-.6.4 4.4.4 8.6 0 12.8-2.6-.7-5.4-.6-8.1.7-2.7-1.3-5.5-1.4-8.1-.7-.4-4.2-.4-8.4 0-12.8z"/><path d="M12 6.3c.1 4.1.1 8.2 0 12.7"/></g></svg>
+          <span><strong>Guía de uso</strong><span>Aprende a usarla</span></span>
+        </a>
+        <a href="informacion.html" class="menu-card c2">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12.1 3.5c-2.7 4-5.9 7.3-6 11.2-.1 3.4 2.6 5.8 6 5.8 3.5 0 6-2.5 5.9-5.9-.1-3.8-3.3-7.2-5.9-11.1z"/></g></svg>
+          <span><strong>Información</strong><span>Cómo la hicimos</span></span>
+        </a>
+        <a href="comunidad.html" class="menu-card c3">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 5.5c1.6-.1 2.9 1.2 2.8 2.8-.1 1.6-1.3 2.9-3 2.8-1.4-.1-2.6-1.3-2.6-2.8 0-1.4 1.2-2.7 2.8-2.8z"/><path d="M3.3 19.4c.7-3.2 2.9-4.8 5.7-4.8 2.8.1 4.9 1.6 5.6 4.9"/><path d="M16.5 6.3c1.3 0 2.4 1 2.4 2.3 0 1.3-1 2.3-2.3 2.3"/><path d="M17.1 14.3c2 .3 3.3 1.8 3.7 4.2"/></g></svg>
+          <span><strong>Comunidad</strong><span>Cuenta cómo te va</span></span>
+        </a>
+        <a href="minijuegos.html" class="menu-card c4">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.4 8.2c3.8-.4 7.5-.4 11.3 0 2.2.2 3.4 2.6 3 5.4-.4 2.7-2 3.9-3.6 3.3-1.2-.5-2-1.6-2.9-2.7-1.2-.1-2.4-.1-3.6 0-.9 1.1-1.7 2.2-2.9 2.7-1.6.6-3.2-.6-3.6-3.3-.4-2.8.8-5.2 3.3-5.4z"/><path d="M7.8 11.2v3M6.3 12.7h3M15.8 11.6h.1M17.8 13.4h.1"/></g></svg>
+          <span><strong>Minijuegos</strong><span>Juega y aprende</span></span>
+        </a>
+        <a href="mi-planta.html" class="menu-card c5">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9"/><path d="M12 13C12 8.5 9 6 4.5 6c0 4.5 3 7 7.5 7Z"/><path d="M12 11c0-4 2.6-6.4 7-6.4 0 4-2.6 6.4-7 6.4Z"/></g></svg>
+          <span><strong>Mi planta</strong><span>Lleva su seguimiento</span></span>
+        </a>
+        <a href="impacto.html" class="menu-card c6">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7 20v-6M12 20V8M17 20v-9"/></g></svg>
+          <span><strong>Nuestro impacto</strong><span>Lo que cambia una bolsa</span></span>
+        </a>
+        <a href="contacto.html" class="menu-card c7">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.1 6.4c5.3-.5 10.4-.4 15.8 0 .3 3.7.3 7.4 0 11.2-5.3.4-10.5.4-15.8 0-.3-3.7-.3-7.5 0-11.2z"/><path d="M4.6 7.6c2.7 2.1 5.2 3.9 7.5 5.4 2.5-1.5 5-3.2 7.5-5.4"/></g></svg>
+          <span><strong>Contacto</strong><span>Dudas y mensajes</span></span>
+        </a>
+      </div>
+
+      
+
+    </div>
+  </main>
+
+</div>
+
+<script src="js/almacen-por-cuenta.js"></script>
+<script src="js/comun.js"></script>
+<script src="js/avisos.js"></script>
+<script src="js/efectos.js"></script>
+<script src="js/puntos.js"></script>
+<script src="js/retos.js"></script>
+<script src="js/sesion.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-cuenta.js"></script>
+<script src="js/nube-firestore.js"></script>
+<script src="js/sin-conexion.js"></script>
+<script src="js/notificaciones.js"></script>
+<script src="js/pagina-menu-saludo.js"></script>
+<script src="js/transiciones-de-pagina.js"></script>
+<script src="js/analiticas.js" defer></script>
+<script src="js/animaciones.js"></script>
+</body>
+</html>
