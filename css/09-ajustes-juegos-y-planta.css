@@ -268,27 +268,6 @@ body .dato-dia{ margin-top:26px; padding:16px 18px; }
   .pl-cuidados button{ padding:12px 4px; font-size:.74rem; }
 }
 
-/* ---------- Portadas de los minijuegos: una animación suave por tarjeta ---------- */
-.v-lata-f{ fill:var(--sage-2); stroke:var(--olive); stroke-width:2.2; }
-.v-voltea-a, .v-voltea-b{ transform-box:fill-box; transform-origin:center; }
-.v-voltea-b{ opacity:0; }
-
-@keyframes v-cae{
-  0%{ transform:translateY(0); opacity:0; }
-  15%{ opacity:1; }
-  75%{ transform:translateY(52px); opacity:1; }
-  100%{ transform:translateY(52px); opacity:0; }
-}
-@keyframes v-volteaA{ 0%,14%{ transform:scaleX(1); } 22%,66%{ transform:scaleX(0); } 78%,100%{ transform:scaleX(1); } }
-@keyframes v-volteaB{ 0%,18%{ opacity:1; transform:scaleX(0); } 30%,58%{ opacity:1; transform:scaleX(1); } 66%,100%{ opacity:1; transform:scaleX(0); } }
-
-@media (prefers-reduced-motion:no-preference){
-  .v-cae{ animation:v-cae 3.6s ease-in infinite; }
-  .v-voltea-a{ animation:v-volteaA 6s ease-in-out infinite; }
-  .v-voltea-b{ animation:v-volteaB 6s ease-in-out infinite; }
-}
-@media (prefers-reduced-motion:reduce){ .v-flota{ animation:none; } }
-
 /* ---------- Tutorial "Cómo se juega": Bio y el cursor que muestra qué tocar ---------- */
 .tuto-card{ position:relative; }
 .tuto-cursor{
