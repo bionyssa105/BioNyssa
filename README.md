@@ -4,7 +4,7 @@
 
 BioNyssa es una página web sobre una bolsa orgánica y biodegradable que en lugar de tirarse a la basura se siembra y se convierte en planta. La hicimos para que la gente conozca el producto, aprenda a cuidar el medio ambiente y se divierta en el proceso.
 
-Sitio: *(https://bionyssa-bc317.web.app/)*
+Sitio: https://bionyssa-bc317.web.app/
 
 ## Qué tiene la página
 
@@ -43,14 +43,14 @@ BioNyssa_WEB/
 └── firestore.rules              reglas de la base de datos
 ```
 
-En `MAPA.md` está explicado archivo por archivo qué hace cada CSS y JS.
+En `GUIA.md` está explicado archivo por archivo qué hace cada CSS y JS.
 
 ## Cómo probarla en tu computadora
 
 1. Descarga o clona el repositorio:
-   ```bash
+```bash
    git clone https://github.com/bionyssa105/BioNyssa.git
-   ```
+```
 2. Abre la carpeta en VS Code.
 3. Abre `index.html` con la extensión **Live Server**.
 
