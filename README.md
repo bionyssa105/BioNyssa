@@ -96,3 +96,10 @@ firebase deploy --only firestore:rules  # solo si cambiaste las reglas
 ## Contacto
 
 Para dudas o sugerencias, usa el formulario de la sección Contacto del sitio.
+
+## Documentación técnica y seguridad
+
+- `GUIA_DETALLADA.md`: inventario por página, JavaScript, CSS y configuración.
+- `SEGURIDAD.md`: controles observados, riesgos y pruebas recomendadas.
+
+La revisión es estática y no sustituye las pruebas de reglas con Firebase Emulator.

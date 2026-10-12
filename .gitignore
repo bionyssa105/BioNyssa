@@ -74,3 +74,17 @@ node_modules/
 *.key
 serviceAccount*.json
 *-firebase-adminsdk-*.json
+# Entornos locales y artefactos de despliegue
+.firebase/
+node_modules/
+.DS_Store
+Thumbs.db
+.vscode/
+# Secretos y credenciales
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+serviceAccount*.json
+*-firebase-adminsdk-*.json
