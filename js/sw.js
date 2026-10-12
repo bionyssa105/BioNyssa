@@ -1,5 +1,5 @@
 const V = 'bio-sin-red-v15';
-const E = 'bio-estaticos-v17';
+const E = 'bio-estaticos-v18';
 const BASE = self.registration.scope;
 const LISTA = [
   'paginas/offline.html', 'js/almacen-por-cuenta.js', 'js/juego-sin-conexion.js', 'assets/img/favicon.ico', 'assets/img/mascota.webp', 'assets/img/Botella.webp',
