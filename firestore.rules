@@ -9,13 +9,20 @@ service cloud.firestore {
     function esDueno(uid) {
       return request.auth != null && request.auth.uid == uid;
     }
+    // El administrador ya no está escrito aquí: es el documento admins/{uid} que se crea a mano
+    // en la consola de Firebase (nadie puede escribirlo desde la página).
     function esAdmin() {
       return request.auth != null
         && request.auth.token.email_verified == true
-        && request.auth.token.email in ['roelrico20@gmail.com'];
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
     function dePublicacion(id) {
       return get(/databases/$(database)/documents/publicaciones/$(id)).data;
+    }
+
+    match /admins/{uid} {
+      allow read: if esDueno(uid);
+      allow write: if false;
     }
 
     match /usuarios/{uid} {

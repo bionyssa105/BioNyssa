@@ -13,6 +13,9 @@
       "**/node_modules/**",
       "_headers",
       "MAPA.md",
+      "**/*.md",
+      "firestore.rules",
+      "firestore.indexes.json",
       "README.md",
       "package*.json"
     ],

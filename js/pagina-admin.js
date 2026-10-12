@@ -1,5 +1,4 @@
 (function () {
-  var ADMIN_CORREOS = ['roelrico20@gmail.com'];
   var cuerpo = document.getElementById('admCuerpo'), sub = document.getElementById('admSub');
 
   function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
@@ -56,14 +55,17 @@
     return n.auth.authStateReady().then(function () {
       var u = n.auth.currentUser;
       if (!u) { msg('Inicia sesión con la cuenta de administrador para ver esto. <a href="/paginas/login.html">Iniciar sesión</a>'); return; }
-      var correo = String(u.email || '').toLowerCase();
-      if (ADMIN_CORREOS.indexOf(correo) < 0 || !u.emailVerified) { msg('Esta cuenta (' + correo + ') no tiene permiso para ver esta página.'); return; }
-      return n.ff.getDocs(n.ff.collection(n.db, 'accesos')).then(function (q) {
+      var sinPermiso = 'Esta cuenta no tiene permiso para ver esta página.';
+      if (!u.emailVerified) { msg(sinPermiso); return; }
+      return n.ff.getDoc(n.ff.doc(n.db, 'admins', u.uid)).then(function (adm) {
+        if (!adm.exists()) { msg(sinPermiso); return; }
+        return n.ff.getDocs(n.ff.collection(n.db, 'accesos')).then(function (q) {
         var lista = [];
         q.forEach(function (d) { var x = d.data(); x.ultimoAcceso = Number(x.ultimoAcceso) || 0; lista.push(x); });
         lista.sort(function (a, b) { return b.ultimoAcceso - a.ultimoAcceso; });
         if (!lista.length) { msg('Todavía no hay accesos registrados. Aparecerán aquí cuando las personas vuelvan a entrar a la página.'); return; }
         pintar(lista);
+        });
       });
     });
   }).catch(function (e) {
