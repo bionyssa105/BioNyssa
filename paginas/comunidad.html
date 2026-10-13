@@ -1,4 +1,4 @@
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,8 +17,7 @@
 <link rel="apple-touch-icon" href="../assets/img/logo-app.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="../css/01-base.css">
 <link rel="stylesheet" href="../css/02-comunidad.css">
 <link rel="stylesheet" href="../css/03-comun-parte-1.css">
@@ -31,7 +30,6 @@
 <body>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <div class="screen screen-wide">
-
   <div class="topbar">
     <div class="wrap-wide">
       <div class="topbar-row">
@@ -42,14 +40,12 @@
       </div>
     </div>
   </div>
-
   <div class="wrap-wide">
     <header class="page-head">
         <h1>Comunidad</h1>
         <p>Cuenta cómo va tu bolsita y mira cómo les va a los demás.</p>
       </header>
   </div>
-
   <nav class="tabbar wrap-wide" role="tablist" aria-label="Secciones de la comunidad">
     <button type="button" class="tab-btn active" data-tab="publicaciones" role="tab" aria-selected="true">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.4 6.5c4.8-.5 10-.3 15.3.1"/><path d="M4 12.2c5.5.3 9.8.2 16.3-.2"/><path d="M4.7 17.9c3.2.2 5.3.2 9.3-.1"/></g></svg>
@@ -68,12 +64,9 @@
       <span class="tab-label">Perfil</span>
     </button>
   </nav>
-
   <main id="contenido" class="page-main">
     <div class="wrap-wide">
-
       <section class="tab-panel" data-panel="publicaciones">
-
         <div class="guest-banner" id="bannerInvitadoComunidad" style="display:none;">
           <span class="guest-banner-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><g stroke="#1d1e0e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12.2 19.9C7.5 16.3 4.2 13.4 4.1 9.8c-.1-2.4 1.6-4.3 4-4.3 1.6 0 3 .9 3.9 2.5.9-1.6 2.4-2.6 4.1-2.5 2.3.1 3.9 2 3.8 4.4-.2 3.5-3.5 6.4-7.7 10z"/></g></svg>
@@ -84,10 +77,8 @@
           </span>
           <button type="button" class="guest-banner-btn" id="botonBannerInvitadoComunidad">Crear mi cuenta</button>
         </div>
-
         <div class="social-layout mt-24">
           <div class="social-main">
-
             <div class="feed-barra" id="feedBarra" hidden>
               <div class="recientes" id="recientes" aria-label="Quién publicó hace poco"></div>
               <div class="feed-filtros" role="group" aria-label="Ordenar publicaciones">
@@ -97,17 +88,13 @@
               </div>
               <p class="filtro-aviso" id="filtroAviso" hidden></p>
             </div>
-
             <div class="feed" id="feed"></div>
-
             <div class="empty-state" id="vacio" style="display:none;">
               <svg width="46" height="46" viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 5.5c1.6-.1 2.9 1.2 2.8 2.8-.1 1.6-1.3 2.9-3 2.8-1.4-.1-2.6-1.3-2.6-2.8 0-1.4 1.2-2.7 2.8-2.8z"/><path d="M3.3 19.4c.7-3.2 2.9-4.8 5.7-4.8 2.8.1 4.9 1.6 5.6 4.9"/><path d="M16.5 6.3c1.3 0 2.4 1 2.4 2.3 0 1.3-1 2.3-2.3 2.3"/><path d="M17.1 14.3c2 .3 3.3 1.8 3.7 4.2"/></g></svg>
               <p>Aquí todavía no ha publicado nadie. Anímate y estrena el muro.</p>
               <button type="button" class="btn btn-primary" id="irCrear">Crear publicación</button>
             </div>
-
           </div>
-
           <aside class="social-side">
             <div class="side-card mini-perfil">
               <div class="mini-perfil-banda"></div>
@@ -132,9 +119,7 @@
             </div>
           </aside>
         </div>
-
       </section>
-
       <section class="tab-panel mt-24" data-panel="crear" hidden>
         <div class="composer crear-card">
           <h2 class="crear-titulo">Crear publicación</h2>
@@ -159,25 +144,19 @@
           <button type="button" class="btn btn-primary crear-publicar" id="btnPublicar">Publicar</button>
         </div>
       </section>
-
       <section class="tab-panel mt-24" data-panel="buscar" hidden>
         <div class="search-box">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.6 4.5c3.4-.2 6.1 2.4 6 5.7-.1 3.3-2.7 5.8-6 5.7-3.3-.1-5.7-2.6-5.6-5.8.1-3 2.2-5.5 5.6-5.6z"/><path d="M15.3 15.1c1.7 1.6 3.3 3.3 5.1 5"/></g></svg>
           <input type="text" id="inputBuscar" placeholder="Busca publicaciones, nombres o usuarios..." autocomplete="off">
         </div>
-
         <div class="people-row" id="personasBuscar"></div>
-
         <div class="search-results" id="resultadosBuscar"></div>
-
         <div class="empty-state search-empty" id="buscarVacio">
           <svg width="46" height="46" viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.6 4.5c3.4-.2 6.1 2.4 6 5.7-.1 3.3-2.7 5.8-6 5.7-3.3-.1-5.7-2.6-5.6-5.8.1-3 2.2-5.5 5.6-5.6z"/><path d="M15.3 15.1c1.7 1.6 3.3 3.3 5.1 5"/></g></svg>
           <p>Escribe algo para buscar: un texto, un nombre o un usuario.</p>
         </div>
       </section>
-
       <section class="tab-panel mt-24" data-panel="perfil" hidden>
-
         <div class="profile-locked" id="perfilBloqueado" style="display:none;">
           <svg width="46" height="46" viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.3 4c1.9-.1 3.4 1.4 3.3 3.5-.1 2-1.5 3.6-3.5 3.5-1.9-.1-3.2-1.6-3.2-3.6 0-1.9 1.4-3.3 3.4-3.4z"/><path d="M4.5 20c.9-3.6 3.6-5.6 7.5-5.7 3.9 0 6.7 2.1 7.6 5.8"/></g></svg>
           <p>Inicia sesión para ver y personalizar tu perfil.</p>
@@ -186,7 +165,6 @@
             <a href="login.html" class="btn btn-outline">Iniciar sesión</a>
           </div>
         </div>
-
         <div id="perfilContenido" style="display:none;">
           <div class="profile-header">
             <div class="profile-header-top">
@@ -196,13 +174,11 @@
                 <div class="profile-header-handle" id="perfilUsuario">@usuario</div>
               </div>
             </div>
-
             <div class="profile-stats">
               <div class="profile-stat"><b id="statPublicaciones">0</b><span>publicaciones</span></div>
               <div class="profile-stat"><b id="statMeGusta">0</b><span>me gusta recibidos</span></div>
               <div class="profile-stat"><b id="statComentarios">0</b><span>comentarios recibidos</span></div>
             </div>
-
             <div class="profile-bio">
               <div class="profile-bio-view" id="perfilBioView">
                 <p id="perfilBioTexto">-</p>
@@ -232,7 +208,6 @@
               </div>
             </div>
           </div>
-
           <p class="profile-posts-title">Tus publicaciones</p>
           <div class="profile-posts" id="perfilPosts"></div>
           <div class="empty-state" id="perfilPostsVacio" style="display:none;">
@@ -240,14 +215,10 @@
             <p>Aún no has publicado nada. Ve a la pestaña Publicaciones para compartir algo.</p>
           </div>
         </div>
-
       </section>
-
     </div>
   </main>
-
 </div>
-
 <script src="../js/almacen-por-cuenta.js"></script>
 <script src="../js/nucleo.js"></script>
 <script src="../js/firebase-base.js"></script>

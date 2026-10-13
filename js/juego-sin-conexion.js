@@ -7,7 +7,6 @@
   var mejor = 0;
   try { mejor = +localStorage.getItem(K) || 0; } catch (e) {}
   $('rec').textContent = mejor;
-
   function hud() { $('pts').textContent = pts; $('vid').textContent = vidas > 0 ? new Array(vidas + 1).join('♥') : '-'; }
   function nueva() {
     var mala = Math.random() < 0.22;
@@ -54,7 +53,6 @@
     if (IM.mascota.complete) g.drawImage(IM.mascota, px - 38, H - 104, 76, 76);
   }
   function bucle() { if (est === 'jugando') paso(); dibujar(); requestAnimationFrame(bucle); }
-
   function mover(e) { var r = cv.getBoundingClientRect(); px = Math.max(36, Math.min(W - 36, (e.clientX - r.left) * W / r.width)); }
   cv.addEventListener('pointermove', mover);
   cv.addEventListener('pointerdown', mover);
@@ -67,7 +65,6 @@
     if (['ArrowLeft', 'a', 'ArrowRight', 'd'].indexOf(e.key) > -1) tecla = 0;
   });
   $('jugar').addEventListener('click', empezar);
-
   var aviso = $('aviso');
   function hayRed() {
     aviso.hidden = false;
@@ -100,6 +97,5 @@
     if (!/offline\.html$/.test(location.pathname)) location.reload();
     else location.href = v || '/paginas/menu.html';
   });
-
   hud(); bucle();
 })();

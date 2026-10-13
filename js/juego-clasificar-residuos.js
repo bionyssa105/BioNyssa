@@ -2,13 +2,10 @@
   const objetos = BioJuego.residuos.map((r) => ({
     img: r.img, nombre: r.nombre, correcta: r.reciclable, dato: r.dato
   }));
-
   objetos.forEach((o) => { const i = new Image(); i.src = o.img; });
-
   const etapa = document.getElementById('etapaJuego');
   const imagen = document.getElementById('imgObjeto');
   const nombre = document.getElementById('nombreObjeto');
-
   BioTutorial.iniciar({
     clave: 'bionyssa_tuto_clasificar_v2',
     subtitulo: 'Limpia el planeta: clasificación de residuos',
@@ -22,7 +19,6 @@
     alBloquear: () => { etapa.classList.add('juego-bloqueado'); etapa.inert = true; },
     alLiberar: () => { etapa.classList.remove('juego-bloqueado'); etapa.inert = false; }
   });
-
   BioJuego.quiz({
     id: 'clasificar',
     items: objetos,

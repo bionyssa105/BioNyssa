@@ -3,14 +3,12 @@ document.getElementById('olvide').addEventListener('click', (e) => {
   const correo = document.getElementById('correo').value.trim();
   location.href = '/paginas/recuperar.html' + (correo ? '?c=' + encodeURIComponent(correo) : '');
 });
-
 document.getElementById('formLogin').addEventListener('submit', async (e) => {
   e.preventDefault();
   const correo = document.getElementById('correo').value.trim();
   const clave = document.getElementById('clave').value;
   const error = document.getElementById('error');
   const boton = e.target.querySelector('[type="submit"]');
-
   if (!correo || !clave) {
     error.textContent = 'Completa tu correo y tu contraseña.';
     return;

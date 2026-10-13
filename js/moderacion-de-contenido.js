@@ -1,6 +1,5 @@
 window.BioModera = (function () {
   const L = (s) => s.trim().split(/\s+/);
-
   const PALABRAS = L(`
     puta putas puto putos putita putito putazo putear puteada puteria putisima putamadre
     pendejo pendeja pendejos pendejas pendejada pendejadas pendejete
@@ -40,17 +39,13 @@ window.BioModera = (function () {
     putangina tangina
     sharmouta sharmuta kosomak
   `);
-
   const AMBIGUAS = new Set(L('dick dicks cock cocks ass fag tits arse'));
-
   const INOCENTES_PALABRA = new Set(L('putto penne mammon mammoth'));
-
   const SEPARABLES = new Set(L(`
     pendejo pendeja pendejos pendejas chingada chingado chingar chingadera cabron cabrona culero culera
     hijueputa hijodeputa hijadeputa hijoeputa gilipollas motherfucker motherfucking asshole bullshit
     cocksucker faggot nigger bastard
   `));
-
   const FUERTES = L(`
     pendej chingad chingar chingon chingatumadre mierd cabron hijueput hijoeput hijodeput hijadeput hijoput putamadre
     maricon gilipoll malparid culiao
@@ -60,16 +55,13 @@ window.BioModera = (function () {
   `);
   const INICIO = L('puta puto culo verga porn slut cunt whore pussy tetas');
   const FIN = L('puta puto verga porn slut cunt whore pussy');
-
   const INOCENTES_DENTRO = L(`
     shiitake shitake snigger vergara scunthorpe computa computo disputa disputo reputa reputo imputa imputo
   `);
-
   const FRASES = [
     ' matate ', ' suicidate ', ' muerete ', ' kill yourself ', ' kill your self ', ' go kill yourself ',
     ' te voy a matar ', ' i will kill you ', ' vete a la verga ', ' hijo de tu puta madre '
   ];
-
   const OTROS_ALFABETOS = [
     'сука', 'суки', 'сучка', 'блядь', 'бляд', 'блять', 'хуй', 'хуе', 'хуя', 'хуё', 'пизд', 'ебат', 'ебан', 'ебал', 'ебуч',
     'пидор', 'пидар', 'педик', 'мудак', 'мудил', 'залуп', 'гондон', 'гандон', 'шлюх', 'дерьмо', 'говно', 'ублюд', 'выеб', 'нахуй', 'курва',
@@ -82,10 +74,8 @@ window.BioModera = (function () {
     'เหี้ย', 'ไอ้เหี้ย', 'ควย', 'địt', 'đéo',
     '🖕'
   ];
-
   const INVISIBLES = /[\u00ad\u034f\u061c\u115f\u1160\u17b4\u17b5\u180e\u200b-\u200f\u202a-\u202e\u2060-\u206f\u3164\ufe00-\ufe0f\ufeff\uffa0]/g;
   const MARCAS = /[\u0300-\u036f\u1ab0-\u1aff\u1dc0-\u1dff\u20d0-\u20ff\ufe20-\ufe2f]/g;
-
   const PARECIDAS = {
     'а': 'a', 'е': 'e', 'о': 'o', 'р': 'p', 'с': 'c', 'у': 'y', 'х': 'x', 'і': 'i', 'ј': 'j', 'ѕ': 's',
     'к': 'k', 'т': 't', 'н': 'h', 'м': 'm', 'в': 'b', 'ӏ': 'l', 'ɑ': 'a', 'α': 'a', 'ο': 'o', 'ρ': 'p',
@@ -93,7 +83,6 @@ window.BioModera = (function () {
     'ı': 'i', 'ł': 'l', 'ø': 'o', 'đ': 'd', 'ħ': 'h', 'ß': 'ss', 'æ': 'ae', 'œ': 'oe'
   };
   const NUMEROS = { '0': 'o', '1': 'i', '3': 'e', '4': 'a', '5': 's', '6': 'g', '7': 't', '8': 'b', '9': 'g' };
-
   function base(texto) {
     return String(texto || '')
       .replace(INVISIBLES, '')
@@ -103,7 +92,6 @@ window.BioModera = (function () {
       .normalize('NFD').replace(MARCAS, '')
       .replace(/[^\x00-\x7f]/g, (c) => PARECIDAS[c] || c);
   }
-
   function vistas(texto) {
     const b = base(texto);
     const simbolos = b.replace(/@/g, 'a').replace(/\$/g, 's').replace(/€/g, 'e');
@@ -113,7 +101,6 @@ window.BioModera = (function () {
     const raros = numeros.replace(/v/g, 'u').replace(/k/g, 'c');
     return [b, simbolos, numeros, numerosL, raros];
   }
-
   function corridas(s) {
     const letras = [], largos = [];
     for (let i = 0; i < s.length;) {
@@ -124,7 +111,6 @@ window.BioModera = (function () {
     return { letras: letras.join(''), largos };
   }
   const colapsar = (s) => corridas(s).letras;
-
   const INDICE = new Map();
   PALABRAS.forEach((w) => {
     const c = corridas(w);
@@ -132,7 +118,6 @@ window.BioModera = (function () {
     INDICE.get(c.letras).push(c.largos);
   });
   const SEPARABLES_COL = new Set(Array.from(SEPARABLES).map(colapsar));
-
   function malo(t, estricto) {
     if (INOCENTES_PALABRA.has(t)) return false;
     const c = corridas(t);
@@ -141,7 +126,6 @@ window.BioModera = (function () {
     if (estricto && AMBIGUAS.has(t)) return false;
     return candidatas.some((largos) => c.largos.every((n, i) => n >= largos[i]));
   }
-
   const PLANAS = PALABRAS.filter((w) => w.length >= 4);
   function mascara(t) {
     const largo = t.length;
@@ -156,7 +140,6 @@ window.BioModera = (function () {
       return fijas >= 2 && fijas < largo;
     });
   }
-
   function ventanas(tokens, estricto) {
     for (let i = 0; i < tokens.length; i++) {
       let junto = '', todasCortas = true, alguna = false;
@@ -174,7 +157,6 @@ window.BioModera = (function () {
     }
     return false;
   }
-
   function pegado(tokens) {
     let plano = tokens.join('').replace(/[*#]/g, '');
     INOCENTES_DENTRO.forEach((w) => { plano = plano.split(w).join('|'); });
@@ -184,7 +166,6 @@ window.BioModera = (function () {
     if (FIN.some((r) => col.endsWith(colapsar(r)))) return true;
     return false;
   }
-
   function revisarVista(v, estricto) {
     const tokens = v.match(/[a-z]+(?:[*#]+[a-z]+)*/g) || [];
     for (const t of tokens) {
@@ -197,20 +178,17 @@ window.BioModera = (function () {
     if (estricto && pegado(tokens)) return true;
     return false;
   }
-
   function otrosAlfabetos(texto) {
     const crudo = String(texto || '').replace(INVISIBLES, '').normalize('NFKC').toLowerCase();
     if (crudo.includes('🖕')) return true;
     const limpio = crudo.replace(/[\u064b-\u065f\u0640]/g, '').replace(/[\s\p{P}\p{S}_\d]+/gu, '');
     return OTROS_ALFABETOS.some((p) => limpio.includes(p));
   }
-
   function esOfensivo(texto, estricto) {
     if (!texto) return false;
     if (otrosAlfabetos(texto)) return true;
     return vistas(texto).some((v) => revisarVista(v, !!estricto));
   }
-
   function revisarTexto(texto, campo) {
     const ofensivo = esOfensivo(texto, campo === 'nombre');
     if (!ofensivo) return { ok: true };
@@ -221,12 +199,10 @@ window.BioModera = (function () {
         : 'Tu mensaje contiene lenguaje inapropiado. Cámbialo para poder enviarlo.'
     };
   }
-
-  const TF_URL = 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4/dist/tf.min.js';
-  const NSFW_URL = 'https://cdn.jsdelivr.net/npm/nsfwjs@4/dist/browser/nsfwjs.min.js';
+  const TF_URL = 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js';
+  const NSFW_URL = 'https://cdn.jsdelivr.net/npm/nsfwjs@4.2.1/dist/browser/nsfwjs.min.js';
   const PERMITIR_SI_FALLA = true;
   let modeloPromesa = null;
-
   function cargarScript(src) {
     return new Promise((res, rej) => {
       const s = document.createElement('script');
@@ -234,15 +210,12 @@ window.BioModera = (function () {
       document.head.appendChild(s);
     });
   }
-
   function conTiempo(p, ms, texto) {
     return Promise.race([p, new Promise((_, no) => setTimeout(() => no(new Error(texto)), ms))]);
   }
-
   async function cargarConReintento(src) {
     try { await cargarScript(src); } catch (e) { await new Promise((ok) => setTimeout(ok, 800)); await cargarScript(src); }
   }
-
   function cargarModelo() {
     if (!modeloPromesa) {
       modeloPromesa = conTiempo((async () => {
@@ -254,7 +227,6 @@ window.BioModera = (function () {
     }
     return modeloPromesa;
   }
-
   async function analizarImagen(dataUrl) {
     const img = new Image();
     img.src = dataUrl;
@@ -268,7 +240,6 @@ window.BioModera = (function () {
     }
     return { ok: true };
   }
-
   async function revisarImagen(dataUrl) {
     aviso('Revisando la imagen…', 0);
     let r;
@@ -283,10 +254,8 @@ window.BioModera = (function () {
     ocultarAviso();
     return true;
   }
-
   let toast = null;
   let temporizador = null;
-
   function aviso(mensaje, ms) {
     if (!toast) {
       const st = document.createElement('style');
@@ -308,12 +277,9 @@ window.BioModera = (function () {
     toast.classList.add('show');
     if (ms !== 0) temporizador = setTimeout(ocultarAviso, ms || 4500);
   }
-
   function ocultarAviso() {
     if (toast) toast.classList.remove('show');
   }
-
   function precargar() { cargarModelo().catch(() => {}); }
-
   return { revisarTexto, esOfensivo, revisarImagen, aviso, ocultarAviso, precargar };
 })();

@@ -12,7 +12,6 @@
       "**/.*",
       "**/node_modules/**",
       "_headers",
-      "MAPA.md",
       "**/*.md",
       "firestore.rules",
       "firestore.indexes.json",
@@ -53,7 +52,7 @@
           },
           {
             "key": "Content-Security-Policy",
-            "value": "default-src 'self'; script-src 'self' 'inline-speculation-rules' https://www.gstatic.com https://apis.google.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; connect-src 'self' https://*.googleapis.com https://*.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://api.web3forms.com; frame-src https://bionyssa-bc317.firebaseapp.com https://accounts.google.com https://apis.google.com; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+            "value": "default-src 'self'; script-src 'self' 'inline-speculation-rules' https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/ https://cdn.jsdelivr.net/npm/nsfwjs@4.2.1/ https://www.gstatic.com https://apis.google.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; connect-src 'self' https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/ https://cdn.jsdelivr.net/npm/nsfwjs@4.2.1/ https://*.googleapis.com https://*.googleusercontent.com https://*.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://api.web3forms.com; frame-src https://bionyssa-bc317.firebaseapp.com https://accounts.google.com https://apis.google.com; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
           }
         ]
       },

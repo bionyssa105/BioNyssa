@@ -8,7 +8,6 @@
       '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="/paginas/registro.html" class="btn btn-primary" style="width:auto">Crear cuenta</a><a href="/paginas/login.html" class="btn btn-outline" style="width:auto">Iniciar sesión</a></div></div>';
     return;
   }
-
   const LLAVE = 'bionyssa_planta';
   const LLAVE_DIARIO = 'bionyssa_planta_diario';
   const MAX_FOTOS = 8;
@@ -42,7 +41,6 @@
     hoja: '<path d="M5 19C5 10 10 5 19 5c0 9-5 14-14 14Z"/><path d="m5 19 9-9"/>'
   };
   const ico = (nombre, tam) => '<svg width="' + (tam || 24) + '" height="' + (tam || 24) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONOS[nombre] + '</svg>';
-
   const INSIGNIAS = [
     ['r1', 'gota', 'Primer riego', (d) => d.riegos.length >= 1],
     ['r10', 'lluvia', '10 riegos', (d) => d.riegos.length >= 10],
@@ -74,7 +72,6 @@
   ];
   const BIO = ['Anota tu primer riego y empezamos.', '¡Tengo sed! Riégame cuando puedas.', 'Ya casi me toca el agua.', 'Todo bien por aquí.', '¡Gracias por el riego!'];
   let regando = false;
-
   const leeJ = (k, def) => { try { const v = JSON.parse(localStorage.getItem(k)); return v === null || v === undefined ? def : v; } catch (e) { return def; } };
   const lee = () => { const d = leeJ(LLAVE, null); return d && typeof d === 'object' ? d : null; };
   const guarda = (d) => { try { localStorage.setItem(LLAVE, JSON.stringify(d)); return true; } catch (e) { return false; } };
@@ -88,7 +85,6 @@
   const aviso = (t) => { if (window.BioToast) BioToast(t); };
   const diasDe = (d) => Math.max(0, dias(d.siembra, hoy()));
   const etapaDe = (n) => { let i = 0; ETAPAS.forEach((e, k) => { if (n >= e[1]) i = k; }); return i; };
-
   function mejorRacha(riegos) {
     const o = riegos.slice().sort();
     let mejor = 0, n = 0, prev = null;
@@ -107,7 +103,6 @@
     while (riegos.includes(fecha(dia))) { n++; dia.setDate(dia.getDate() - 1); }
     return n;
   }
-
   const hojas = (y, s) => '<g transform="translate(60 ' + y + ') scale(' + s + ')"><path class="pl-hoja" d="M0 0c-14 0-22-8-22-18 12 0 22 6 22 18z"/><path class="pl-hoja" d="M0-4c14 0 22-8 22-18-12 0-22 6-22 18z"/></g>';
   function dibujo(i) {
     let s = '<svg viewBox="0 0 120 120" class="pl-dib" aria-hidden="true"><ellipse cx="60" cy="104" rx="46" ry="9" class="pl-suelo"/>';
@@ -117,10 +112,8 @@
     else s += '<path class="pl-tallo" d="M60 100V38"/>' + hojas(80, 1.1) + hojas(58, 0.9) + '<circle cx="60" cy="34" r="6" class="pl-flor"/>';
     return s + '</svg>';
   }
-
   const PESTANAS = [['resumen', 'Resumen', [0]], ['cuidados', 'Cuidados', [1, 2]], ['calendario', 'Calendario', [3, 4]], ['diario', 'Diario', [5, 6]], ['insignias', 'Insignias', [7]]];
   let pestanaActiva = 'resumen'; // se recuerda mientras no recargues la página
-
   function muestraPestana(id) {
     vista.querySelectorAll('.pl-pestanas button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.p === id)));
     vista.querySelectorAll('.pl-panel').forEach((pn) => {
@@ -129,7 +122,6 @@
       if (activo) pn.querySelectorAll('.rv').forEach((t) => t.classList.add('visto'));
     });
   }
-
   function armaPestanas() {
     const tarjetas = Array.from(vista.children);
     if (tarjetas.length < 8) return; // aún no hay planta registrada: no hace falta
@@ -160,7 +152,6 @@
     });
     muestraPestana(pestanaActiva);
   }
-
   function formulario() {
     vista.innerHTML = '<div class="planta-card"><div class="pl-top">' + dibujo(0) + '<div><h2>Registra tu siembra</h2><p>Ponle nombre a tu planta y dinos cuándo enterraste la bolsa.</p></div></div>' +
       '<form class="planta-form" id="fPlanta"><input id="pNombre" maxlength="24" placeholder="Nombre (opcional)" aria-label="Nombre de la planta"><input id="pFecha" type="date" max="' + hoy() + '" value="' + hoy() + '" required aria-label="Fecha de siembra"><button class="btn btn-primary" type="submit">Empezar seguimiento</button></form></div>';
@@ -171,7 +162,6 @@
       aviso('Seguimiento iniciado');
     });
   }
-
   function calendario(riegos, siembra) {
     const base = new Date();
     base.setDate(base.getDate() - 27);
@@ -188,7 +178,6 @@
     }
     return html + '</div>';
   }
-
   function grafica(alturas) {
     if (alturas.length < 2) return '<p class="pl-vacio">' + (alturas.length ? 'Anota otra medida para ver cómo crece.' : 'Aún no hay medidas. Mide tu planta y anótala aquí.') + '</p>';
     const W = 300, H = 120, L = 28, B = 22, T = 10, R = 10;
@@ -203,7 +192,6 @@
       alturas.map((a, i) => '<circle class="pto" cx="' + x(i).toFixed(1) + '" cy="' + y(a.cm).toFixed(1) + '" r="4.5"/>').join('') +
       '<text x="' + L + '" y="' + (H - 6) + '">' + corta(alturas[0].f) + '</text><text x="' + (W - R) + '" y="' + (H - 6) + '" text-anchor="end">' + corta(alturas[alturas.length - 1].f) + '</text></svg>';
   }
-
   function tarjeta(d, nota) {
     d.riegos = Array.isArray(d.riegos) ? d.riegos.slice().sort() : [];
     d.alturas = Array.isArray(d.alturas) ? d.alturas : [];
@@ -211,7 +199,6 @@
     d.freq = [1, 2, 3, 5, 7].includes(d.freq) ? d.freq : 3;
     d.cuidados = d.cuidados && typeof d.cuidados === 'object' ? d.cuidados : {};
     const diario = leeDiario();
-
     const n = diasDe(d);
     const idx = etapaDe(n);
     const sig = ETAPAS[idx + 1];
@@ -222,10 +209,8 @@
     const falta = hace === null ? null : d.freq - hace;
     const estado = hace === null ? 'Aún sin riego' : ESTADOS[nivel];
     const texto = hace === null ? 'Anota tu primer riego' : falta > 1 ? 'Le toca en ' + falta + ' días' : falta === 1 ? 'Le toca mañana' : falta === 0 ? 'Le toca hoy' : 'Se pasó ' + (-falta) + (falta === -1 ? ' día' : ' días') + ' del riego';
-
     if (d.etapa !== undefined && idx > d.etapa) aviso('¡Tu planta pasó a ' + ETAPAS[idx][0] + '!');
     if (d.etapa !== idx) { d.etapa = idx; guarda(d); }
-
     const ganadas = INSIGNIAS.filter((b) => b[3](d, diario));
     const nuevas = ganadas.filter((b) => !d.logros[b[0]]);
     if (nuevas.length) {
@@ -233,7 +218,6 @@
       guarda(d);
       aviso('Insignia nueva: ' + nuevas[0][2]);
     }
-
     const ini = ETAPAS[idx][1];
     const pct = sig ? Math.max(0, Math.min(100, Math.round((n - ini) / (sig[1] - ini) * 100))) : 100;
     const cHoy = d.cuidados[hoy()] || [];
@@ -242,7 +226,6 @@
     const camino = ETAPAS.map((e, i) => '<li class="' + (i < idx ? 'hecha' : i === idx ? 'actual' : '') + '"><b aria-hidden="true"></b><div><strong>' + e[0] + '</strong><span>' + (i <= idx ? 'Desde el ' : 'Aprox. el ') + sumaDias(d.siembra, e[1]).split('-').reverse().slice(0, 2).join('/') + ' · día ' + (e[1] + 1) + '</span></div></li>').join('');
     const ultAlt = d.alturas.length ? d.alturas[d.alturas.length - 1] : null;
     const crecio = d.alturas.length > 1 ? (ultAlt.cm - d.alturas[0].cm).toFixed(1).replace(/\.0$/, '') : null;
-
     vista.innerHTML =
       '<div class="planta-card"><div class="pl-top">' + dibujo(idx) + '<div><span class="num">' + ETAPAS[idx][0] + '</span><div class="planta-dia">Día ' + (n + 1) + '</div><p>' + (d.nombre ? esc(d.nombre) + ' | ' : '') + 'sembrada el ' + d.siembra.split('-').reverse().join('/') + ' <button type="button" class="pl-editar" id="bNombre">' + (d.nombre ? 'Cambiar nombre' : 'Ponerle nombre') + '</button></p>' +
       '<form class="pl-nombre" id="fNombre" hidden><input id="pNom" maxlength="24" value="' + esc(d.nombre || '') + '" placeholder="Nombre de tu planta" aria-label="Nombre de tu planta"><button class="pl-mini" type="submit">Guardar</button></form></div></div>' +
@@ -256,31 +239,23 @@
       '<h3>Ahora toca</h3><ul class="tips">' + TIPS[idx].map((t) => '<li>' + t + '</li>').join('') + '</ul>' +
       '<div class="pl-dato"><b>¿Sabías que?</b><p>' + dato + '</p></div>' +
       '<div class="planta-acciones" style="margin-top:20px"><button class="btn btn-primary" id="bRiego"' + (regada ? ' disabled' : '') + '>' + (regada ? 'Ya la regaste hoy' : 'La regué hoy') + '</button><button class="btn btn-outline" id="bShare">Compartir</button></div></div>' +
-
       '<div class="planta-card"><div class="pl-fila"><h3 style="margin:0">Cuidados de hoy</h3><span class="pl-cuenta">' + cHoy.length + '/' + CUIDADOS.length + '</span></div>' +
       '<p class="sub" style="margin-top:8px">Marca lo que ya hiciste hoy. Si completas los tres ganas puntos.</p><div class="pl-cuidados" id="plCuid">' +
       CUIDADOS.map((c) => '<button type="button" data-c="' + c[0] + '" class="' + (cHoy.includes(c[0]) ? 'on' : '') + '" aria-pressed="' + cHoy.includes(c[0]) + '"><span aria-hidden="true">' + ico(c[1], 26) + '</span>' + c[2] + '</button>').join('') + '</div></div>' +
-
       '<div class="planta-card"><h3>Su camino</h3><ol class="pl-camino">' + camino + '</ol></div>' +
-
       '<div class="planta-card"><div class="pl-fila"><h3 style="margin:0">Calendario de riegos</h3>' +
       '<label class="pl-fila" style="gap:8px;font-size:.88rem">Regar cada <select id="pFreq" aria-label="Cada cuántos días regar">' + [1, 2, 3, 5, 7].map((v) => '<option value="' + v + '"' + (v === d.freq ? ' selected' : '') + '>' + v + (v === 1 ? ' día' : ' días') + '</option>').join('') + '</select></label></div>' +
       '<p class="sub" style="margin-top:8px">Toca un día para marcarlo o quitarlo si se te pasó anotarlo.</p>' + calendario(d.riegos, d.siembra) + '</div>' +
-
       '<div class="planta-card"><h3>Crecimiento</h3><div class="pl-fila"><input class="pl-campo" id="pAlt" type="number" inputmode="decimal" min="0" max="500" step="0.1" placeholder="Altura en cm" aria-label="Altura en centímetros" style="flex:1;min-height:0;width:auto"><button class="pl-mini" id="bAlt" type="button">Anotar</button></div>' + grafica(d.alturas) + '</div>' +
-
       '<div class="planta-card"><h3>Diario de tu planta</h3><textarea class="pl-campo" id="dNota" maxlength="200" placeholder="¿Qué notaste hoy? (hojas nuevas, plagas, clima…)" aria-label="Nota del diario"></textarea>' +
       '<img class="pl-foto-prev" id="dPrev" alt="Vista previa de la foto">' +
       '<div class="pl-fila" style="margin-top:10px"><label class="pl-mini claro" style="cursor:pointer">' + ico('camara', 16) + ' Foto<input id="dFoto" type="file" accept="image/*" hidden></label><button class="pl-mini" id="bNota" type="button">Guardar entrada</button></div>' +
       '<ul class="diario-lista" id="dLista">' + diario.map((e, i) => '<li class="' + (e.img ? '' : 'sin-foto') + '">' + (e.img ? '<img src="' + e.img + '" alt="Foto del ' + esc(e.f) + '">' : '') + '<div><time>' + e.f.split('-').reverse().join('/') + '</time><p>' + (e.t ? esc(e.t) : '<i>Solo foto</i>') + '</p></div><button type="button" data-i="' + i + '" aria-label="Borrar entrada">✕</button></li>').join('') + '</ul>' +
       (diario.length ? '' : '<p class="pl-vacio">Todavía no hay entradas. Guarda notas y fotos para ver cómo cambia.</p>') + '</div>' +
-
       '<div class="planta-card"><h3>Recordatorios</h3><p class="sub" style="margin-top:-4px">' + (!window.BioNotis || !BioNotis.soporta() ? 'Tu navegador no admite avisos.' : BioNotis.activo() ? 'Activados: te avisamos cuando le toca riego y si tu racha está por romperse.' : 'Te avisamos cuando le toca riego y si tu racha está por romperse.') + '</p>' + (window.BioNotis && BioNotis.soporta() ? '<button class="pl-mini' + (BioNotis.activo() ? ' claro' : '') + '" id="bNoti" type="button">' + (BioNotis.activo() ? 'Apagar avisos' : 'Activar avisos') + '</button>' : '') + '</div>' +
-
       '<div class="planta-card"><h3>Insignias <span style="font-weight:500;color:var(--ink-faint)">' + ganadas.length + '/' + INSIGNIAS.length + '</span></h3><div class="insignias">' +
       INSIGNIAS.map((b) => '<div class="insignia' + (ganadas.includes(b) ? ' on' : '') + '"><b aria-hidden="true">' + ico(b[1], 28) + '</b><span>' + b[2] + '</span></div>').join('') + '</div>' +
       '<div class="planta-acciones" style="margin-top:18px"><button class="btn btn-outline" id="bReset">Reiniciar todo</button></div></div>';
-
     armaPestanas();
     enlazar(d, diario, idx, n);
     if (regando) {
@@ -293,7 +268,6 @@
       }
     }
   }
-
   function enlazar(d, diario, idx, n) {
     const bn = $('bNoti');
     if (bn) bn.addEventListener('click', async () => { if (BioNotis.activo()) BioNotis.desactivar(); else await BioNotis.pedir(); pintar(); });
@@ -306,7 +280,6 @@
       pintar();
       if (window.BioNotis && BioNotis.soporta() && !BioNotis.preguntado() && Notification.permission === 'default') setTimeout(() => BioNotis.pedir().then(pintar), 900);
     });
-
     vista.querySelector('.cal').addEventListener('click', (e) => {
       const b = e.target.closest('button[data-f]');
       if (!b || b.disabled) return;
@@ -316,7 +289,6 @@
       if (navigator.vibrate) navigator.vibrate(10);
       pintar();
     });
-
     $('plCuid').addEventListener('click', (e) => {
       const b = e.target.closest('button[data-c]');
       if (!b) return;
@@ -338,7 +310,6 @@
       if (navigator.vibrate) navigator.vibrate(10);
       pintar();
     });
-
     $('bNombre').addEventListener('click', () => { const f = $('fNombre'); f.hidden = !f.hidden; if (!f.hidden) $('pNom').focus(); });
     $('fNombre').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -347,9 +318,7 @@
       aviso(d.nombre ? 'Ahora se llama ' + d.nombre : 'Nombre quitado');
       pintar();
     });
-
     $('pFreq').addEventListener('change', (e) => { d.freq = +e.target.value; guarda(d); pintar(); aviso('Te aviso cada ' + d.freq + (d.freq === 1 ? ' día' : ' días')); });
-
     $('bAlt').addEventListener('click', () => {
       const v = Math.round(parseFloat($('pAlt').value) * 10) / 10;
       if (!(v >= 0 && v <= 500)) { aviso('Pon una altura en centímetros'); return; }
@@ -359,7 +328,6 @@
       aviso('Medida anotada');
       pintar();
     });
-
     let foto = null;
     $('dFoto').addEventListener('change', async (e) => {
       const f = e.target.files && e.target.files[0];
@@ -389,7 +357,6 @@
       guardaDiario(lista);
       pintar();
     });
-
     $('bShare').addEventListener('click', async () => {
       const txt = 'Mi planta' + (d.nombre ? ' «' + d.nombre + '»' : '') + ' va en el día ' + (n + 1) + ' (' + ETAPAS[idx][0] + ') con ' + d.riegos.length + ' riegos. Nació de una bolsa BioNyssa.';
       try {
@@ -397,7 +364,6 @@
         else { await navigator.clipboard.writeText(txt); aviso('Texto copiado, pégalo en la comunidad'); }
       } catch (err) {}
     });
-
     const reset = $('bReset');
     reset.addEventListener('click', () => {
       if (!reset.dataset.ok) {
@@ -410,7 +376,6 @@
       pintar();
     });
   }
-
   function pintar() {
     const d = lee();
     if (d) tarjeta(d); else formulario();

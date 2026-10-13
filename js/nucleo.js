@@ -1,10 +1,8 @@
 window.BioComun = (function () {
   const CLAVE_TEMA = 'bionyssa_tema';
-
   function temaActual() {
     return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
   }
-
   function aplicarTema(tema) {
     if (tema === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
@@ -14,7 +12,6 @@ window.BioComun = (function () {
     try { localStorage.setItem(CLAVE_TEMA, tema); } catch (e) {}
     try { if (window.BioSesion && BioSesion.obtener()) localStorage.setItem('bionyssa_tema_cuenta', tema); } catch (e) {}
   }
-
   function temaDeCuenta() {
     try {
       if (!(window.BioSesion && BioSesion.obtener())) return;
@@ -26,28 +23,23 @@ window.BioComun = (function () {
       pintarIconosTema();
     } catch (e) {}
   }
-
   function alternarTema(e) {
     const raiz = document.documentElement;
     const siguiente = temaActual() === 'dark' ? 'light' : 'dark';
     const cambiar = () => { aplicarTema(siguiente); pintarIconosTema(); };
     const reducir = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     if (reducir) { cambiar(); return; }
-
     if (!document.startViewTransition) {
       raiz.classList.add('tema-suave');
       cambiar();
       setTimeout(() => raiz.classList.remove('tema-suave'), 500);
       return;
     }
-
     const btn = e && e.currentTarget;
     const r = btn ? btn.getBoundingClientRect() : { left: innerWidth - 40, top: 40, width: 0, height: 0 };
     const x = r.left + r.width / 2;
     const y = r.top + r.height / 2;
     const radio = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-
     raiz.classList.add('cambiando-tema');
     const t = document.startViewTransition(cambiar);
     t.ready.then(() => {
@@ -58,10 +50,8 @@ window.BioComun = (function () {
     }).catch(() => {});
     t.finished.finally(() => raiz.classList.remove('cambiando-tema'));
   }
-
   const ICONO_LUNA = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19.6 14.3c-1.2 3.6-4.6 5.9-8.4 5.6-4.4-.4-7.6-4.2-7.3-8.5.3-3.4 2.6-6.2 5.8-7.2-1 3.4.3 7.3 3.6 9.2 2 1.1 4.2 1.2 6.3.9z"/></g></svg>';
   const ICONO_SOL = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12.1 8c2.2 0 4 1.8 3.9 4.1-.1 2.2-1.9 3.9-4.1 3.9-2.1-.1-3.9-1.9-3.8-4.1.1-2.1 1.9-3.9 4-3.9z"/><path d="M12 2.9v2.3M12.2 18.9v2.4M2.8 12.2h2.4M18.9 11.9h2.3M5.6 5.7l1.6 1.5M16.8 16.9l1.7 1.6M18.5 5.5l-1.6 1.7M7.2 16.8l-1.7 1.7"/></g></svg>';
-
   function pintarIconosTema() {
     document.querySelectorAll('.theme-toggle').forEach((btn) => {
       const oscuro = temaActual() === 'dark';
@@ -70,7 +60,6 @@ window.BioComun = (function () {
       btn.setAttribute('title', oscuro ? 'Modo claro' : 'Modo oscuro');
     });
   }
-
   function enlazarBotonesTema() {
     document.querySelectorAll('.theme-toggle').forEach((btn) => {
       if (btn.dataset.bound) return;
@@ -79,7 +68,6 @@ window.BioComun = (function () {
     });
     pintarIconosTema();
   }
-
   function inyectarToggleEnTopbar() {
     document.querySelectorAll('.topbar-row').forEach((fila) => {
       if (fila.querySelector('.theme-toggle')) return;
@@ -91,7 +79,6 @@ window.BioComun = (function () {
       else fila.appendChild(btn);
     });
   }
-
   function inyectarNavEscritorio() {
     const enlaces = [
       ['/paginas/menu.html', 'Menú'],
@@ -126,13 +113,11 @@ window.BioComun = (function () {
       if (act && nav.scrollWidth > nav.clientWidth) nav.scrollLeft = act.offsetLeft - (nav.clientWidth - act.offsetWidth) / 2;
     });
   }
-
   function inyectarNavMovil() {
     if (document.querySelector('.nav-movil') || !document.querySelector('.topbar')) return;
     const limpio = (x) => String(x || '').split(/[?#]/)[0].split('/').pop().replace(/\.html?$/i, '').toLowerCase() || 'index';
     const actual = limpio(location.pathname);
     if (['index', 'login', 'registro', '404'].indexOf(actual) > -1) return;
-
     const trazo = (d, ancho) => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="' + (ancho || 1.7) + '" stroke-linecap="round" stroke-linejoin="round">' + d + '</g></svg>';
     const ICONOS = {
       menu: trazo('<path d="M4.2 11.1 12 4.3l7.8 6.8"/><path d="M6.1 9.8v9.6c3.3.5 8.5.5 11.8 0V9.8"/><path d="M10 19.3v-5h4v5"/>'),
@@ -146,7 +131,6 @@ window.BioComun = (function () {
       contacto: trazo('<path d="M4.1 6.4c5.3-.5 10.4-.4 15.8 0 .3 3.7.3 7.4 0 11.2-5.3.4-10.5.4-15.8 0-.3-3.7-.3-7.5 0-11.2z"/><path d="M4.6 7.6c2.7 2.1 5.2 3.9 7.5 5.4 2.5-1.5 5-3.2 7.5-5.4"/>'),
       inicio: trazo('<path d="M12 21c-4.4-2.6-7.2-5.6-7.2-9.4C4.8 8.6 7 6.5 9.6 6.5c1.1 0 2 .4 2.4 1 .4-.6 1.3-1 2.4-1 2.6 0 4.8 2.1 4.8 5.1 0 3.8-2.8 6.8-7.2 9.4z"/>')
     };
-
     const principales = [
       ['/paginas/menu.html', 'Menú', 'menu'],
       ['/paginas/guia.html', 'Guía', 'guia'],
@@ -162,7 +146,6 @@ window.BioComun = (function () {
     ];
     const esActual = (href) => limpio(href) === actual || (href === '/paginas/minijuegos.html' && actual.indexOf('juego-') === 0);
     const enMas = extra.some((e) => esActual(e[0]));
-
     const nav = document.createElement('nav');
     nav.className = 'nav-movil';
     nav.setAttribute('aria-label', 'Secciones');
@@ -170,7 +153,6 @@ window.BioComun = (function () {
       '<a href="' + l[0] + '"' + (esActual(l[0]) ? ' class="actual" aria-current="page"' : '') + '>' + ICONOS[l[2]] + '<span>' + l[1] + '</span></a>'
     ).join('') +
       '<button type="button" class="nav-mas' + (enMas ? ' actual' : '') + '" aria-expanded="false" aria-controls="hojaMas">' + ICONOS.mas + '<span>Más</span></button>';
-
     const hoja = document.createElement('div');
     hoja.className = 'hoja-mas';
     hoja.id = 'hojaMas';
@@ -178,11 +160,9 @@ window.BioComun = (function () {
     hoja.innerHTML = extra.map((l) =>
       '<a href="' + l[0] + '"' + (esActual(l[0]) ? ' class="actual" aria-current="page"' : '') + '>' + ICONOS[l[2]] + '<span>' + l[1] + '</span></a>'
     ).join('');
-
     document.body.appendChild(hoja);
     document.body.appendChild(nav);
     document.body.classList.add('con-nav');
-
     const boton = nav.querySelector('.nav-mas');
     const cerrar = () => { hoja.hidden = true; boton.setAttribute('aria-expanded', 'false'); };
     boton.addEventListener('click', (e) => {
@@ -194,10 +174,8 @@ window.BioComun = (function () {
     document.addEventListener('click', (e) => { if (!hoja.hidden && !hoja.contains(e.target)) cerrar(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrar(); });
   }
-
   const NOMBRES_SONIDO = ['correcto', 'incorrecto', 'ganar', 'perder'];
   const sonidos = {};
-
   function precargarSonidos() {
     NOMBRES_SONIDO.forEach((nombre) => {
       if (sonidos[nombre]) return;
@@ -209,7 +187,6 @@ window.BioComun = (function () {
       } catch (e) {}
     });
   }
-
   function reproducir(nombre) {
     try {
       if (!sonidos[nombre]) precargarSonidos();
@@ -220,7 +197,6 @@ window.BioComun = (function () {
       if (promesa && promesa.catch) promesa.catch(() => {});
     } catch (e) {}
   }
-
   function usuarioDesdeNombre(nombre) {
     if (!nombre) return '@usuario';
     const base = nombre
@@ -235,7 +211,6 @@ window.BioComun = (function () {
       .join('.');
     return '@' + (base || 'usuario');
   }
-
   const PALETA_AVATAR = ['av-1', 'av-2', 'av-3', 'av-4', 'av-5', 'av-6'];
   function colorAvatar(texto) {
     const s = (texto || '').toString();
@@ -243,7 +218,6 @@ window.BioComun = (function () {
     for (let i = 0; i < s.length; i++) hash = (hash * 31 + s.charCodeAt(i)) >>> 0;
     return PALETA_AVATAR[hash % PALETA_AVATAR.length];
   }
-
   function esInvitado() {
     try {
       const datos = localStorage.getItem('bionyssa_sesion');
@@ -252,7 +226,6 @@ window.BioComun = (function () {
       return true;
     }
   }
-
   let modalListo = false;
   function inyectarModalAuth() {
     if (modalListo) return;
@@ -282,18 +255,15 @@ window.BioComun = (function () {
       if (e.key === 'Escape') ocultarModalAuth();
     });
   }
-
   function mostrarModalAuth(mensaje) {
     inyectarModalAuth();
     if (mensaje) document.getElementById('modalAuthMsg').textContent = mensaje;
     document.getElementById('modalAuth').classList.add('show');
   }
-
   function ocultarModalAuth() {
     const overlay = document.getElementById('modalAuth');
     if (overlay) overlay.classList.remove('show');
   }
-
   let dialogoAbierto = null;
   function dialogo(opciones) {
     const o = Object.assign({ titulo: 'Aviso', mensaje: '', boton: 'Entendido', tipo: 'info' }, opciones || {});
@@ -326,7 +296,6 @@ window.BioComun = (function () {
       }
       const principal = boton(o.boton, 'btn-primary', true);
       if (o.cancelar) boton(o.cancelar, 'btn-outline', false);
-
       function alTeclado(e) {
         if (e.key === 'Escape') cerrar(false);
       }
@@ -345,7 +314,6 @@ window.BioComun = (function () {
       requestAnimationFrame(() => { overlay.classList.add('show'); principal.focus(); });
     });
   }
-
   document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('etapaJuego') || document.getElementById('tablero')) precargarSonidos();
     inyectarToggleEnTopbar();
@@ -355,7 +323,6 @@ window.BioComun = (function () {
     temaDeCuenta();
     document.addEventListener('bio-nube-listo', temaDeCuenta);
   });
-
   return {
     aplicarTema,
     alternarTema,
@@ -368,7 +335,6 @@ window.BioComun = (function () {
     dialogo,
   };
 })();
-;
 (() => {
   let temporizador;
   window.BioToast = (texto) => {
@@ -384,11 +350,9 @@ window.BioComun = (function () {
     clearTimeout(temporizador);
     temporizador = setTimeout(() => el.classList.remove('show'), 2400);
   };
-
   const cabecera = document.querySelector('.topbar, .home-header');
   const arriba = () => scrollTo({ top: 0, behavior: 'smooth' });
   let subir = null;
-
   if (!document.querySelector('.pantalla-juego')) {
     subir = document.createElement('button');
     subir.type = 'button';
@@ -398,7 +362,6 @@ window.BioComun = (function () {
     subir.addEventListener('click', arriba);
     document.body.appendChild(subir);
   }
-
   let esperando = false;
   function alDesplazar() {
     if (esperando) return;
@@ -412,16 +375,13 @@ window.BioComun = (function () {
   }
   addEventListener('scroll', alDesplazar, { passive: true });
   alDesplazar();
-
   document.querySelectorAll('a[href="#"].pie-subir').forEach((a) => {
     a.addEventListener('click', (e) => { e.preventDefault(); arriba(); });
   });
 })();
-;
 (() => {
   const suave = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (s, raiz) => (raiz || document).querySelector(s);
-
   function hojas(x, y, n) {
     if (suave) return;
     for (let i = 0; i < Math.min(n, 4); i++) {
@@ -435,22 +395,18 @@ window.BioComun = (function () {
     }
   }
   window.BioHojas = hojas;
-
   const hora = new Date().getHours();
   document.documentElement.setAttribute('data-hora', hora >= 7 && hora < 18 ? 'dia' : 'noche');
-
   function portada() {
     const fig = $('.home-figure');
     if (!fig) return;
     const svg = $('svg', fig);
     let riegos = 0;
-
     addEventListener('mousemove', (e) => {
       const estilo = document.documentElement.style;
       estilo.setProperty('--mx', (e.clientX / innerWidth - 0.5).toFixed(3));
       estilo.setProperty('--my', (e.clientY / innerHeight - 0.5).toFixed(3));
     }, { passive: true });
-
     function gotas() {
       const r = svg.getBoundingClientRect();
       const f = fig.getBoundingClientRect();
@@ -464,7 +420,6 @@ window.BioComun = (function () {
         }, i * 90);
       }
     }
-
     function flor() {
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       g.setAttribute('class', 'flor-hero');
@@ -476,7 +431,6 @@ window.BioComun = (function () {
       hojas(b.left + b.width / 2, b.top, 16);
       if (window.BioPuntos) BioPuntos.dar(3, 'floreció');
     }
-
     svg.addEventListener('click', () => {
       gotas();
       if (riegos < 5) {
@@ -486,7 +440,6 @@ window.BioComun = (function () {
       if (riegos === 5 && !$('.flor-hero', svg)) flor();
     });
   }
-
   function secreto() {
     if (suave) return;
     let letras = '';
@@ -506,14 +459,12 @@ window.BioComun = (function () {
       if (window.BioToast) BioToast('Encontraste el secreto');
     });
   }
-
   document.addEventListener('click', (e) => {
     if (e.target.closest('.btn-primary') && !e.target.closest('.regar')) hojas(e.clientX, e.clientY, 6);
   });
   portada();
   secreto();
 })();
-;
 (() => {
   const $ = (s, raiz) => (raiz || document).querySelector(s);
   const LLAVE = 'bionyssa_puntos';
@@ -524,18 +475,15 @@ window.BioComun = (function () {
     ['+5', 'Anotar un riego en Mi planta'],
     ['+3', 'Regar y hacer florecer la planta de la portada']
   ];
-
   const leer = () => { try { return JSON.parse(localStorage.getItem(LLAVE)) || { p: 0, dia: '' }; } catch (e) { return { p: 0, dia: '' }; } };
   const guardar = (d) => { try { localStorage.setItem(LLAVE, JSON.stringify(d)); } catch (e) {} };
   const nivel = (p) => NIVELES.reduce((mejor, n, k) => (p >= n[1] ? k : mejor), 0);
   const listaGana = () => '<ul class="gana-lista">' + GANA.map((g) => '<li><b>' + g[0] + '</b><span>' + g[1] + '</span></li>').join('') + '</ul>';
-
   function avance(p) {
     const i = nivel(p);
     const sig = NIVELES[i + 1];
     return { i, sig, pct: sig ? (p - NIVELES[i][1]) / (sig[1] - NIVELES[i][1]) * 100 : 100 };
   }
-
   function pintar() {
     const { p } = leer();
     const { i, sig, pct } = avance(p);
@@ -549,7 +497,6 @@ window.BioComun = (function () {
     if (txt) txt.textContent = sig ? 'Te faltan ' + (sig[1] - p) + ' puntos para ser ' + sig[0] + '.' : 'Llegaste al máximo. Eres un árbol.';
     document.querySelectorAll('.nivel-lista span').forEach((s, k) => s.classList.toggle('ok', k <= i));
   }
-
   window.BioPuntos = {
     dar(n, motivo) {
       const d = leer();
@@ -566,7 +513,6 @@ window.BioComun = (function () {
       if (window.BioToast) BioToast(ahora > antes ? '¡Subiste a ' + NIVELES[ahora][0] + '!' : '+' + n + ' pts' + (motivo ? ' | ' + motivo : ''));
     }
   };
-
   function chip() {
     const fila = $('.head-cta') || $('.topbar-row');
     if (!fila || $('.home-header')) return;
@@ -577,7 +523,6 @@ window.BioComun = (function () {
     const alInicio = fila.firstChild.classList && fila.classList.contains('head-cta');
     fila.insertBefore(c, alInicio ? fila.firstChild : $('.theme-toggle', fila));
   }
-
   function tarjetaMenu() {
     const rejilla = $('.menu-grid');
     if (!rejilla) return;
@@ -589,7 +534,6 @@ window.BioComun = (function () {
       '<p class="gana-nota">' + (sesion ? 'Tus puntos se guardan en tu cuenta.' : 'Como invitado, los puntos se quedan en este dispositivo. Crea una cuenta para no perderlos.') + '</p>';
     rejilla.parentNode.insertBefore(t, rejilla.nextSibling);
   }
-
   function ventana() {
     const c = $('.puntos-chip');
     if (!c) return;
@@ -603,7 +547,6 @@ window.BioComun = (function () {
     c.setAttribute('aria-haspopup', 'dialog');
     c.setAttribute('aria-expanded', 'false');
     c.title = 'Cómo funcionan los puntos';
-
     function llenar() {
       const { p } = leer();
       const { i, sig, pct } = avance(p);
@@ -624,7 +567,6 @@ window.BioComun = (function () {
       pop.hidden = true;
       c.setAttribute('aria-expanded', 'false');
     }
-
     c.addEventListener('click', (e) => {
       e.preventDefault();
       if (!pop.hidden) return cerrar();
@@ -639,7 +581,6 @@ window.BioComun = (function () {
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrar(); });
     addEventListener('resize', cerrar);
   }
-
   chip();
   const hoy = new Date().toDateString();
   const d0 = leer();
@@ -651,13 +592,11 @@ window.BioComun = (function () {
   tarjetaMenu();
   pintar();
   ventana();
-
   const guardarOriginal = Storage.prototype.setItem;
   Storage.prototype.setItem = function (k, v) {
     guardarOriginal.call(this, k, v);
     if (k === 'bionyssa_progreso') setTimeout(() => BioPuntos.dar(5, 'partida jugada'), 300);
   };
-
   document.addEventListener('click', (e) => {
     const b = e.target.closest('#bRiego');
     if (!b || b.disabled) return;
@@ -667,13 +606,11 @@ window.BioComun = (function () {
     }, 60);
   });
 })();
-;
 (() => {
   const $ = (s, raiz) => (raiz || document).querySelector(s);
   const fecha = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   const lee = (k, base) => { try { return JSON.parse(localStorage.getItem(k)) || base; } catch (e) { return base; } };
   const guarda = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
-
   const RETOS = [
     ['Lleva tu bolsa reutilizable', 'Sal con una bolsa de tela o la de BioNyssa y úsala en cada compra de hoy.'],
     ['Di "sin bolsa, gracias"', 'En una compra pequeña, carga las cosas en las manos o en tu mochila.'],
@@ -706,7 +643,6 @@ window.BioComun = (function () {
     ['Desenchufa y sal', 'Antes de salir de casa, desconecta lo que no hace falta.'],
     ['Elige lo que dure', 'Hoy, si compras algo, prefiere lo que se puede usar muchas veces.']
   ];
-
   function guia() {
     const caja = $('#acordeon');
     if (!caja) return;
@@ -718,7 +654,6 @@ window.BioComun = (function () {
     prog.innerHTML = '<p></p><div class="nivel-barra"><b></b></div>';
     caja.parentNode.insertBefore(prog, caja);
     const barra = $('b', prog);
-
     function pintar() {
       const n = hechos.filter(Boolean).length;
       $('p', prog).textContent = n + ' de ' + pasos.length + ' pasos hechos';
@@ -729,7 +664,6 @@ window.BioComun = (function () {
         if (b) b.textContent = hechos[i] ? 'Desmarcar paso' : 'Ya hice este paso';
       });
     }
-
     pasos.forEach((paso, i) => {
       const b = document.createElement('button');
       b.type = 'button';
@@ -749,7 +683,6 @@ window.BioComun = (function () {
     });
     setTimeout(() => { barra.style.width = '0'; pintar(); }, 50);
   }
-
   function retoDelDia() {
     const panel = $('.timeline-panel');
     if (!panel) return;
@@ -759,7 +692,6 @@ window.BioComun = (function () {
     const caja = document.createElement('div');
     caja.className = 'reto-dia';
     tarjeta.appendChild(caja);
-
     const LLAVE = 'bionyssa_retos';
     let datos = lee(LLAVE, null);
     if (!datos || !datos.dias) datos = { dias: [], pts: [] };
@@ -767,7 +699,6 @@ window.BioComun = (function () {
     const hoyTxt = fecha(hoy);
     const desde2026 = Math.round((Date.UTC(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()) - Date.UTC(2026, 0, 1)) / 864e5);
     const reto = RETOS[((desde2026 * 7) % RETOS.length + RETOS.length) % RETOS.length];
-
     function racha() {
       let n = 0;
       const d = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
@@ -775,7 +706,6 @@ window.BioComun = (function () {
       while (datos.dias.includes(fecha(d))) { n++; d.setDate(d.getDate() - 1); }
       return n;
     }
-
     function semana() {
       const LETRAS = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
       let html = '';
@@ -785,7 +715,6 @@ window.BioComun = (function () {
       }
       return html;
     }
-
     function pintar() {
       const hecho = datos.dias.includes(hoyTxt);
       const nr = racha();
@@ -794,7 +723,6 @@ window.BioComun = (function () {
         '<button type="button" class="btn ' + (hecho ? 'btn-outline' : 'btn-primary') + '" id="rdBtn">' + (hecho ? 'Hecho. Deshacer' : 'Lo hice') + '</button></div>' +
         '<div class="rd-pie"><div class="rd-semana" aria-label="Últimos 7 días">' + semana() + '</div><p class="rd-stats"><b>' + nr + '</b> ' + (nr === 1 ? 'día seguido' : 'días seguidos') + ' · <b>' + datos.dias.length + '</b> en total</p></div>' +
         '<small>Mañana habrá otro reto. Cada uno que completes por primera vez ese día suma 3 puntos.</small>';
-
       $('#rdBtn', caja).addEventListener('click', () => {
         const i = datos.dias.indexOf(hoyTxt);
         if (i > -1) datos.dias.splice(i, 1);
@@ -813,7 +741,6 @@ window.BioComun = (function () {
     }
     pintar();
   }
-
   function juegoDelDia() {
     const lista = $('.game-list');
     if (!lista) return;
@@ -824,15 +751,12 @@ window.BioComun = (function () {
     caja.innerHTML = '<div><h3>Juego del día</h3><p>' + j[1] + '. Juégalo y suma puntos.</p></div><a class="btn btn-primary" href="' + j[0] + '">Jugar</a>';
     lista.parentNode.insertBefore(caja, lista);
   }
-
   guia();
   retoDelDia();
   juegoDelDia();
 })();
-;
 const BioSesion = window.BioSesion = (function () {
   const CLAVE = 'bionyssa_sesion';
-
   function obtener() {
     try {
       const datos = localStorage.getItem(CLAVE);
@@ -841,7 +765,6 @@ const BioSesion = window.BioSesion = (function () {
       return null;
     }
   }
-
   function iniciar(nombre, correo, extra) {
     extra = extra || {};
     const usuario = extra.usuario || (window.BioComun ? BioComun.usuarioDesdeNombre(nombre) : '@usuario');
@@ -853,24 +776,20 @@ const BioSesion = window.BioSesion = (function () {
     localStorage.setItem(CLAVE, JSON.stringify(sesion));
     return sesion;
   }
-
   function cerrar() {
     localStorage.removeItem(CLAVE);
   }
-
   function entrarInvitado() {
     if (window.BioNube) BioNube.salir();
     localStorage.removeItem(CLAVE);
     if (window.BioAlmacen) BioAlmacen.limpiar('invitado');
   }
-
   function iniciales(nombre) {
     if (!nombre) return 'B';
     const partes = nombre.trim().split(/\s+/);
     const letras = partes.slice(0, 2).map((p) => p[0].toUpperCase());
     return letras.join('') || 'B';
   }
-
   function pintarSaludo(elementoId) {
     const el = document.getElementById(elementoId);
     if (!el) return;
@@ -880,10 +799,8 @@ const BioSesion = window.BioSesion = (function () {
       el.textContent = '¡Hola, ' + primerNombre + '!';
     }
   }
-
   return { obtener, iniciar, cerrar, entrarInvitado, iniciales, pintarSaludo };
 })();
-;
 (() => {
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     addEventListener('load', () => {
@@ -893,16 +810,13 @@ const BioSesion = window.BioSesion = (function () {
     });
   }
   if (/offline\.html$/.test(location.pathname)) return;
-
   let preguntando = false;
-
   async function sinRedReal() {
     try {
       await fetch('/manifest.webmanifest?_=' + Date.now(), { method: 'HEAD', cache: 'no-store', signal: AbortSignal.timeout(4000) });
       return false;
     } catch (e) { return true; }
   }
-
   async function preguntar() {
     if (!window.BioComun || !BioComun.dialogo) { preguntando = false; return; }
     const jugar = await BioComun.dialogo({
@@ -916,7 +830,6 @@ const BioSesion = window.BioSesion = (function () {
     try { sessionStorage.setItem('bio_volver', location.href); } catch (e) {}
     location.href = '/paginas/offline.html';
   }
-
   addEventListener('offline', () => {
     setTimeout(async () => {
       if (preguntando || !(await sinRedReal()) || preguntando) return;
@@ -925,7 +838,6 @@ const BioSesion = window.BioSesion = (function () {
     }, 3000);
   });
 })();
-;
 (() => {
   if (!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
   document.addEventListener('pointermove', (evento) => {

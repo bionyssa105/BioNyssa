@@ -1,4 +1,4 @@
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,8 +17,7 @@
 <link rel="apple-touch-icon" href="../assets/img/logo-app.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="../css/01-base.css">
 <link rel="stylesheet" href="../css/02-minijuegos-y-juegos.css">
 <link rel="stylesheet" href="../css/03-comun-parte-1.css">
@@ -30,7 +29,6 @@
 <body>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <div class="screen">
-
   <div class="topbar">
     <div class="wrap">
       <div class="topbar-row">
@@ -41,15 +39,12 @@
       </div>
     </div>
   </div>
-
   <main id="contenido" class="page-main">
     <div class="wrap">
-
       <header class="page-head">
         <h1>Minijuegos</h1>
         <p>La primera vez cada juego te explica cómo se juega. Si se te olvida, las instrucciones siempre están a la mano.</p>
       </header>
-
       <section class="arcade-hero" aria-label="Tu progreso">
         <p class="arcade-msg" id="arcadeMensaje">Todavía no juegas nada. Escoge uno y a salvar al planeta.</p>
         <div class="arcade-stats">
@@ -58,9 +53,7 @@
           <div><strong id="stRacha">0</strong><span>Mejor racha</span></div>
         </div>
       </section>
-
       <div class="game-list">
-
         <a href="juego-trivia.html" class="game-card g1">
           <div class="game-art" aria-hidden="true"><span class="game-num">01</span>
             <svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice">
@@ -80,7 +73,6 @@
             <div class="game-pie"><div class="game-best" data-mejor="trivia">Aún sin jugar</div><span class="game-go">Jugar<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
           </div>
         </a>
-
         <a href="juego-clasificar.html" class="game-card g2">
           <div class="game-art" aria-hidden="true"><span class="game-num">02</span>
             <svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice">
@@ -104,7 +96,6 @@
             <div class="game-pie"><div class="game-best" data-mejor="clasificar">Aún sin jugar</div><span class="game-go">Jugar<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
           </div>
         </a>
-
         <a href="juego-memorama.html" class="game-card g3">
           <div class="game-art" aria-hidden="true"><span class="game-num">03</span><span class="etiqueta-nuevo">Nuevo</span>
             <svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice">
@@ -133,9 +124,7 @@
             <div class="game-pie"><div class="game-best" data-mejor="memorama">Aún sin jugar</div><span class="game-go">Jugar<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
           </div>
         </a>
-
       </div>
-
       <aside class="dato-dia">
         <div class="dato-dia-cuerpo">
           <span class="kicker">¿Sabías que?</span>
@@ -143,10 +132,8 @@
         </div>
         <button type="button" class="dato-otro" id="otroDato">Otro dato</button>
       </aside>
-
     </div>
   </main>
-
 </div>
 <script src="../js/almacen-por-cuenta.js"></script>
 <script src="../js/nucleo.js"></script>

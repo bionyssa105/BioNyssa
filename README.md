@@ -61,7 +61,7 @@ js/               scripts: uno por página y los que usan todas
 assets/           imágenes, iconos y sonidos
 firestore.rules   reglas de la base de datos
 firebase.json     configuración de Hosting
-GUIA.md           qué hace cada CSS y JS
+DOCUMENTACION.md  qué hace cada archivo, página y script + seguridad
 ```
 
 ## Probarla en tu computadora
@@ -96,10 +96,3 @@ firebase deploy --only firestore:rules  # solo si cambiaste las reglas
 ## Contacto
 
 Para dudas o sugerencias, usa el formulario de la sección Contacto del sitio.
-
-## Documentación técnica y seguridad
-
-- `GUIA_DETALLADA.md`: inventario por página, JavaScript, CSS y configuración.
-- `SEGURIDAD.md`: controles observados, riesgos y pruebas recomendadas.
-
-La revisión es estática y no sustituye las pruebas de reglas con Firebase Emulator.

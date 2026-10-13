@@ -16,6 +16,12 @@ service cloud.firestore {
         && request.auth.token.email_verified == true
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
+    // El usuario (@handle) que viene en una publicación/comentario debe ser el de su perfil: evita hacerse pasar por otra persona.
+    function esSuUsuario(u) {
+      let p = get(/databases/$(database)/documents/perfiles/$(request.auth.uid));
+      return exists(/databases/$(database)/documents/perfiles/$(request.auth.uid))
+        && (u == p.data.get('clave', '') || u == p.data.get('usuarioCom', ''));
+    }
     function dePublicacion(id) {
       return get(/databases/$(database)/documents/publicaciones/$(id)).data;
     }
@@ -80,6 +86,7 @@ service cloud.firestore {
         && request.resource.data.keys().hasOnly(['uid', 'usuario', 'nombre', 'texto', 'foto', 'creado'])
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.usuario is string && request.resource.data.usuario.size() <= 40
+        && esSuUsuario(request.resource.data.usuario)
         && request.resource.data.nombre is string && request.resource.data.nombre.size() <= 80
         && request.resource.data.texto is string && request.resource.data.texto.size() <= 1000
         && (request.resource.data.get('foto', null) == null
@@ -94,6 +101,7 @@ service cloud.firestore {
       match /likes/{uid} {
         allow read: if true;
         allow create: if esDueno(uid)
+          && exists(/databases/$(database)/documents/publicaciones/$(id))
           && request.resource.data.keys().hasOnly(['uid', 'creado'])
           && request.resource.data.uid == uid;
         allow update: if false;
@@ -106,6 +114,7 @@ service cloud.firestore {
           && request.resource.data.keys().hasOnly(['uid', 'usuario', 'nombre', 'texto', 'creado'])
           && request.resource.data.uid == request.auth.uid
           && request.resource.data.usuario is string && request.resource.data.usuario.size() <= 40
+        && esSuUsuario(request.resource.data.usuario)
           && request.resource.data.nombre is string && request.resource.data.nombre.size() <= 80
           && request.resource.data.texto is string
           && request.resource.data.texto.size() > 0 && request.resource.data.texto.size() <= 300

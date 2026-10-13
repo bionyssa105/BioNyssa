@@ -6,7 +6,6 @@ window.BioNube = (function () {
   };
   var estado = { uid: null, idCuenta: null, activo: false };
   var sucios = {}, temporizador = null, activando = null, ultimaNube = {};
-
   function configurado() { return !!(window.BioFirebase && BioFirebase.configurado()); }
   function nucleo() { return BioFirebase.nucleo(); }
   function ses() { try { return window.BioSesion ? BioSesion.obtener() : null; } catch (e) { return null; } }
@@ -24,7 +23,6 @@ window.BioNube = (function () {
     h = String(h || '').replace(/^@/, '').toLowerCase().replace(/[^a-z0-9._]/g, '');
     return h.slice(0, 30) || 'usuario';
   }
-
   function parse(raw) { try { return JSON.parse(raw); } catch (e) { return undefined; } }
   function valido(o) {
     if (o === null) return true;
@@ -56,7 +54,6 @@ window.BioNube = (function () {
     var o = parse(raw);
     return o === undefined ? 's:' + raw : 'j:' + orden(o);
   }
-
   function mejor(a, b, menor) {
     if (a === null || a === undefined) return b === undefined ? null : b;
     if (b === null || b === undefined) return a;
@@ -90,17 +87,14 @@ window.BioNube = (function () {
     if (k.indexOf('bionyssa_tuto_') === 0) return fusionO;
     return null;
   }
-
   function leerMeta(id) { try { return JSON.parse(ls.getItem('bio_nt@' + id) || '{}') || {}; } catch (e) { return {}; } }
   function guardarMeta(id, m) { try { ls.setItem('bio_nt@' + id, JSON.stringify(m)); } catch (e) {} }
-
   function ponerLocal(id, clave, valor) {
     try {
       if (valor === null || valor === undefined) delete ls[clave + '@' + id];
       else ls[clave + '@' + id] = valor;
     } catch (e) {}
   }
-
   function fijarClaveLocal(id, clave) {
     try {
       var cs = JSON.parse(ls.getItem('bionyssa_cuentas') || '{}') || {};
@@ -110,7 +104,6 @@ window.BioNube = (function () {
       if (se && se.id === id) { se.usuario = clave; ls.setItem('bionyssa_sesion', JSON.stringify(se)); }
     } catch (e) {}
   }
-
   async function reclamar(n, handle, uid) {
     var ref = n.ff.doc(n.db, 'usuarios_unicos', 'h_' + handle);
     return n.ff.runTransaction(n.db, async function (tx) {
@@ -128,7 +121,6 @@ window.BioNube = (function () {
     }
     throw { code: 'bio/sin-usuario' };
   }
-
   async function asegurarPerfil(n, user, s) {
     var ff = n.ff, ref = ff.doc(n.db, 'perfiles', user.uid);
     var snap = await ff.getDoc(ref);
@@ -152,13 +144,11 @@ window.BioNube = (function () {
     if (clave !== s.usuario) fijarClaveLocal(s.id, clave);
     try { if (pf[s.usuario]) { delete pf[s.usuario]; ls.setItem('bionyssa_perfiles', JSON.stringify(pf)); } } catch (e) {}
   }
-
   async function reconciliar(n, user, s) {
     var ff = n.ff, ref = ff.doc(n.db, 'usuarios', user.uid);
     var snap = await ff.getDoc(ref);
     var nube = (snap.exists() && snap.data().datos) || {};
     var meta = leerMeta(s.id), fin = '@' + s.id, claves = {}, i, ahora = Date.now();
-
     for (i = 0; i < ls.length; i++) {
       var k = ls.key(i);
       if (k && k.indexOf('bionyssa_') === 0 && k.slice(-fin.length) === fin) {
@@ -167,7 +157,6 @@ window.BioNube = (function () {
       }
     }
     Object.keys(nube).forEach(function (c) { if (sincronizable(c)) claves[c] = 1; });
-
     var subir = {}, cambio = false;
     Object.keys(claves).forEach(function (c) {
       var loc = ls.getItem(c);
@@ -175,7 +164,6 @@ window.BioNube = (function () {
       var nubeRaw = hayNube ? decodificar(ent) : null;
       var tN = hayNube ? (ent.t || 0) : 0, tL = meta[c] || 0;
       var fus = fusionDe(c), res, t;
-
       if (fus) {
         if (loc === null && nubeRaw === null) return;
         res = fus(loc, nubeRaw);
@@ -188,7 +176,6 @@ window.BioNube = (function () {
       } else {
         res = nubeRaw; t = tN;
       }
-
       if (canon(res) !== canon(loc)) { ponerLocal(s.id, c, res); cambio = true; }
       meta[c] = t;
       var igualNube = hayNube && (res === null ? !!ent.b : (!ent.b && canon(res) === canon(nubeRaw)));
@@ -196,7 +183,6 @@ window.BioNube = (function () {
       ultimaNube[c] = { raw: res, t: t };
     });
     guardarMeta(s.id, meta);
-
     var data = { uid: user.uid, nombre: s.nombre || '', correo: String(s.correo || '').toLowerCase(), actualizado: ahora };
     var campos = ['uid', 'nombre', 'correo', 'actualizado'];
     if (!snap.exists()) { data.creado = ahora; campos.push('creado'); }
@@ -208,7 +194,6 @@ window.BioNube = (function () {
     if (hay.length || !snap.exists()) await ff.setDoc(ref, data, { mergeFields: campos });
     return cambio;
   }
-
   function transitorio(e) {
     var c = e && e.code ? String(e.code) : '';
     return c === 'unavailable' || c === 'deadline-exceeded' || c === 'resource-exhausted' || c === 'aborted' || c === 'internal' || c === 'cancelled' || c === 'unknown';
@@ -263,7 +248,6 @@ window.BioNube = (function () {
     clearTimeout(temporizador);
     temporizador = setTimeout(subirSucios, 700);
   }
-
   (function () {
     var proto = Storage.prototype, setPrev = proto.setItem, remPrev = proto.removeItem;
     function marcar(almacen, k) {
@@ -281,7 +265,6 @@ window.BioNube = (function () {
     addEventListener('pagehide', function () { clearTimeout(temporizador); subirSucios(); });
     document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') { clearTimeout(temporizador); subirSucios(); } });
   })();
-
   function fotoValida(f, max) {
     return typeof f === 'string' && f.length <= max && /^data:image\/[a-z]+;base64,/.test(f);
   }
@@ -315,7 +298,6 @@ window.BioNube = (function () {
       ls.setItem('bionyssa_publicaciones', JSON.stringify(quedan));
     } catch (e) {}
   }
-
   function recargarUnaVez() {
     try {
       var t = +sessionStorage.getItem('bio_nube_rec') || 0;
@@ -352,7 +334,6 @@ window.BioNube = (function () {
     } catch (e) {}
   }
   function desactivar() { estado.activo = false; estado.uid = null; estado.idCuenta = null; }
-
   function activar(opciones) {
     opciones = opciones || {};
     if (!configurado()) return Promise.resolve(null);
@@ -390,14 +371,12 @@ window.BioNube = (function () {
       return p;
     })().catch(function () { return null; });
   }
-
   async function requerir() {
     if (!ses()) throw { code: 'bio/sin-sesion' };
     var uid = estado.activo ? estado.uid : await activar({ sinRecargar: true, sinAviso: true });
     if (!uid) throw { code: 'bio/sin-nube' };
     return nucleo();
   }
-
   async function salir() {
     try {
       clearTimeout(temporizador);
@@ -408,7 +387,6 @@ window.BioNube = (function () {
       if (configurado()) { var n = await nucleo(); await n.fa.signOut(n.auth); }
     } catch (e) {}
   }
-
   var com = null;
   function iniciarComunidad() {
     com = { cbs: [], posts: [], likes: {}, coms: {}, porUid: {}, porClave: {}, cargada: false, error: null, tic: 0 };
@@ -473,7 +451,6 @@ window.BioNube = (function () {
     com.cbs.push(cb);
     if (com.cargada) com.avisar();
   }
-
   async function publicar(d) {
     if (typeof navigator !== 'undefined' && navigator.onLine === false) throw { code: 'unavailable' };
     var n = await requerir(), ff = n.ff, s = ses();
@@ -517,7 +494,6 @@ window.BioNube = (function () {
     }
     return ff.deleteDoc(ff.doc(n.db, 'publicaciones', postId));
   }
-
   async function guardarPerfil(c) {
     var n = await requerir(), ff = n.ff, db = n.db, uid = estado.uid;
     var ref = ff.doc(db, 'perfiles', uid);
@@ -538,9 +514,7 @@ window.BioNube = (function () {
       try { await ff.deleteDoc(ff.doc(db, 'usuarios_unicos', 'h_' + viejoH)); } catch (e) {}
     }
   }
-
   if (configurado() && ses()) setTimeout(function () { activar(); }, 0);
-
   return {
     configurado: configurado,
     activar: activar,

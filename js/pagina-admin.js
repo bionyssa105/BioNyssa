@@ -1,6 +1,5 @@
 (function () {
   var cuerpo = document.getElementById('admCuerpo'), sub = document.getElementById('admSub');
-
   function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
   function msg(html) { cuerpo.innerHTML = ''; var d = el('div', 'adm-msg'); d.innerHTML = html; cuerpo.appendChild(d); }
   function fecha(ms) {
@@ -15,23 +14,19 @@
     var h = Math.round(m / 60); if (h < 24) return 'hace ' + h + ' h';
     var d = Math.round(h / 24); return 'hace ' + d + (d === 1 ? ' día' : ' días');
   }
-
   function pintar(lista) {
     var ahora = Date.now(), DIA = 86400000;
     var hoy = lista.filter(function (u) { return ahora - u.ultimoAcceso < DIA; }).length;
     var sem = lista.filter(function (u) { return ahora - u.ultimoAcceso < 7 * DIA; }).length;
     cuerpo.innerHTML = '';
-
     var nums = el('div', 'adm-nums');
     [[lista.length, 'personas registradas'], [hoy, 'entraron en 24 h'], [sem, 'entraron en 7 días']].forEach(function (p) {
       var c = el('div', 'adm-num'); c.appendChild(el('b', '', p[0])); c.appendChild(el('span', '', p[1])); nums.appendChild(c);
     });
     cuerpo.appendChild(nums);
-
     var q = el('input', 'adm-buscar'); q.type = 'search'; q.placeholder = 'Buscar por nombre o correo'; q.setAttribute('aria-label', 'Buscar');
     cuerpo.appendChild(q);
     var caja = el('div', 'adm-lista'); cuerpo.appendChild(caja);
-
     function filas() {
       var t = q.value.trim().toLowerCase(); caja.innerHTML = '';
       var vis = lista.filter(function (u) { return !t || (u.nombre + ' ' + u.correo).toLowerCase().indexOf(t) > -1; });
@@ -49,7 +44,6 @@
     q.addEventListener('input', filas); filas();
     sub.textContent = 'Solo visible para el administrador. Se actualiza cada vez que abres esta página.';
   }
-
   if (!BioFirebase.configurado()) { msg('Firebase no está configurado.'); return; }
   BioFirebase.nucleo().then(function (n) {
     return n.auth.authStateReady().then(function () {

@@ -7,7 +7,6 @@ window.BioNotis = (function () {
   const fecha = (d) => d.getFullYear() + '-' + f2(d.getMonth() + 1) + '-' + f2(d.getDate());
   const dias = (a, b) => Math.round((new Date(b + 'T00:00') - new Date(a + 'T00:00')) / 864e5);
   const activo = () => soporta() && Notification.permission === 'granted' && !!leer().on;
-
   async function mostrar(titulo, cuerpo, tag) {
     const op = { body: cuerpo, icon: '/assets/img/logo-app.png', badge: '/assets/img/favicon.ico', tag: tag, data: { url: '/paginas/mi-planta.html' } };
     try {
@@ -16,7 +15,6 @@ window.BioNotis = (function () {
     } catch (e) {}
     try { new Notification(titulo, op); } catch (e) {}
   }
-
   async function activar() {
     if (!soporta()) return 'no';
     let p = Notification.permission;
@@ -26,7 +24,6 @@ window.BioNotis = (function () {
     return p;
   }
   function desactivar() { const o = leer(); o.on = false; guardar(o); }
-
   function pedir() {
     return new Promise((ok) => {
       if (!soporta()) { if (window.BioToast) BioToast('Tu navegador no admite avisos'); return ok('no'); }
@@ -51,7 +48,6 @@ window.BioNotis = (function () {
       });
     });
   }
-
   function revisar() {
     if (!activo()) return;
     let d; try { d = JSON.parse(localStorage.getItem('bionyssa_planta')); } catch (e) {}
@@ -72,7 +68,6 @@ window.BioNotis = (function () {
       mostrar('Tu racha de ' + n + ' días', 'Riega hoy a ' + nombre.toLowerCase() + ' para no perderla.', 'bio-racha');
     }
   }
-
   if (soporta()) { setTimeout(revisar, 3000); setInterval(revisar, 30 * 60 * 1000); }
   return { soporta: soporta, activo: activo, pedir: pedir, activar: activar, desactivar: desactivar, preguntado: () => !!leer().pregunto, revisar: revisar };
 })();

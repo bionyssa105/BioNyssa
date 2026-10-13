@@ -3,12 +3,10 @@
   const globo = document.getElementById('mascotaGlobo');
   const imagen = document.getElementById('mascotaImg');
   if (!mascota || !globo || !imagen) return;
-
   const tipeo = globo.querySelector('.g-tipeo');
   const fantasma = globo.querySelector('.g-fantasma');
   const lector = globo.querySelector('.g-lector');
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   const POSES = [
     ['/assets/img/bio-saluda.webp', 63],
     ['/assets/img/bio-lupa.webp', 55],
@@ -25,13 +23,11 @@
   ];
   let actual = 0;
   let temporizador = null;
-
   function hablar(texto) {
     clearTimeout(temporizador);
     fantasma.textContent = texto;
     lector.textContent = texto;
     if (reducido) { tipeo.textContent = texto; return; }
-
     let n = 0;
     mascota.classList.add('hablando');
     (function letra() {
@@ -41,13 +37,11 @@
       temporizador = setTimeout(letra, /[.,!?¡¿]/.test(texto[n - 1]) ? 150 : 28);
     })();
   }
-
   function terminar() {
     clearTimeout(temporizador);
     tipeo.textContent = fantasma.textContent;
     mascota.classList.remove('hablando');
   }
-
   mascota.addEventListener('click', () => {
     if (mascota.classList.contains('hablando')) return terminar();
     actual = (actual + 1) % DATOS.length;
@@ -60,10 +54,8 @@
     void mascota.offsetWidth;
     mascota.classList.add('salta');
   });
-
   setTimeout(() => hablar(DATOS[0]), 700);
 })();
-;
 (function () {
   var enlace = document.getElementById('entrarInvitado');
   if (!enlace) return;

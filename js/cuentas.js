@@ -2,7 +2,6 @@ window.BioCuentas = (function () {
   const LLAVE = 'bionyssa_cuentas';
   const limpio = (c) => String(c || '').trim().toLowerCase();
   const pausa = (ms, valor) => new Promise((ok) => setTimeout(() => ok(valor), ms));
-
   function todas() {
     try { return JSON.parse(localStorage.getItem(LLAVE)) || {}; } catch (e) { return {}; }
   }
@@ -37,24 +36,20 @@ window.BioCuentas = (function () {
   function pasarInvitado(id) {
     if (window.BioAlmacen && BioAlmacen.pasarInvitado) BioAlmacen.pasarInvitado(id);
   }
-
   async function registrar({ nombre, correo, clave }) {
     const c = limpio(correo);
     const yaExiste = { ok: false, existe: true, motivo: 'Ese correo ya tiene cuenta. Inicia sesión.' };
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c)) return { ok: false, motivo: 'Escribe un correo válido.' };
     if (porCorreo(c)) return yaExiste;
-
     const nube = await BioFirebase.sincronizar(c, clave, nombre);
     if (nube.codigo === 'existe') return yaExiste;
     if (!nube.ok) return { ok: false, motivo: 'No pudimos crear la cuenta. Revisa tu internet e inténtalo otra vez.' };
-
     const cuenta = crear(c, 'c_' + c, nombre, c, 'correo');
     abrirSesion(cuenta);
     pasarInvitado(cuenta.id);
     await conectarNube();
     return { ok: true, cuenta };
   }
-
   async function entrar(correo, clave) {
     const c = limpio(correo);
     let cuenta = porCorreo(c);
@@ -72,19 +67,16 @@ window.BioCuentas = (function () {
     await conectarNube();
     return { ok: true, cuenta };
   }
-
   function existeGoogle(d) {
     const correo = limpio(d.correo);
     return !!((correo && porCorreo(correo)) || todas()['g:' + d.uid]);
   }
-
   async function fotoABase64(url) {
     try {
       const r = await fetch(url, { mode: 'cors' });
       return await BioImg.cuadrada(await r.blob(), 256, 0.85);
     } catch (e) { return ''; }
   }
-
   async function conGoogle(d) {
     const correo = limpio(d.correo);
     let cuenta = (correo && porCorreo(correo)) || todas()['g:' + d.uid] || null;
@@ -106,6 +98,5 @@ window.BioCuentas = (function () {
     await conectarNube();
     return cuenta;
   }
-
   return { registrar, entrar, conGoogle, existeGoogle };
 })();

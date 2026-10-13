@@ -1,4 +1,4 @@
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,8 +17,7 @@
 <link rel="apple-touch-icon" href="../assets/img/logo-app.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="../css/01-base.css">
 <link rel="stylesheet" href="../css/02-minijuegos-y-juegos.css">
 <link rel="stylesheet" href="../css/03-comun-parte-1.css">
@@ -30,7 +29,6 @@
 <body>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <div class="screen pantalla-juego">
-
   <div class="topbar">
     <div class="wrap">
       <div class="topbar-row">
@@ -41,49 +39,40 @@
       </div>
     </div>
   </div>
-
   <main id="contenido" class="page-main">
     <div class="wrap">
-
       <header class="page-head">
         <h1>Memorama verde</h1>
         <p>Memoria y residuos</p>
       </header>
-
       <div class="game-hero">
         <div class="game-hero-mascot"><img loading="lazy" decoding="async" src="../assets/img/mascota.webp" alt="Mascota de BioNyssa" width="68" height="68"></div>
         <div class="game-hero-text">
           <p class="game-hero-tag">Voltea las cartas de dos en dos y encuentra los cinco residuos repetidos.</p>
         </div>
       </div>
-
       <p class="center mt-24">
         <button type="button" class="tuto-link" id="abrirTutorial">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.3c4.8 0 8.7 3.9 8.6 8.7-.1 4.7-3.9 8.7-8.7 8.6-4.7-.1-8.6-3.9-8.5-8.7.1-4.7 3.9-8.6 8.6-8.6z"/><path d="M9.6 9.6c.2-1.5 1.3-2.3 2.6-2.3 1.4 0 2.4.9 2.4 2.1 0 1.8-2.4 2-2.4 3.9M12.1 16.6v.1"/></g></svg>
           ¿Cómo se juega?
         </button>
       </p>
-
       <div class="mem-stats mt-24">
         <div><strong id="movs">0</strong><span>Movimientos</span></div>
         <div><strong id="tiempo">0:00</strong><span>Tiempo</span></div>
         <div><strong id="pares">0/5</strong><span>Pares</span></div>
       </div>
-
       <div class="quiz-stage stage-mem" id="etapaJuego">
         <div class="tablero" id="tablero" aria-label="Tablero del memorama"></div>
-
         <div class="dato" id="dato" aria-live="polite">
           <div class="dato-cuerpo">
             <strong id="datoTitulo"></strong>
             <span id="datoTexto"></span>
           </div>
         </div>
-
         <div class="quiz-track"><i id="barraProg"></i></div>
         <p class="quiz-progress" id="progreso">Toca una carta para empezar</p>
       </div>
-
       <div class="quiz-stage" id="etapaResultado" style="display:none;">
         <div class="result-panel">
           <div class="result-icon" id="iconoResultado"></div>
@@ -97,12 +86,9 @@
           </div>
         </div>
       </div>
-
     </div>
   </main>
-
 </div>
-
 <script src="../js/almacen-por-cuenta.js"></script>
 <script src="../js/nucleo.js"></script>
 <script src="../js/firebase-base.js"></script>

@@ -12,7 +12,6 @@
     'BioNyssa es una bolsa orgánica y biodegradable: en lugar de ir a la basura, se planta.'
   ];
   const partidasTexto = (n) => n + (n === 1 ? ' partida' : ' partidas');
-
   let partidas = 0, victorias = 0, racha = 0;
   ['trivia', 'clasificar', 'memorama'].forEach((id) => {
     const r = BioJuego.resumen(id);
@@ -20,14 +19,12 @@
     partidas += r.partidas;
     victorias += r.victorias;
     racha = Math.max(racha, r.racha || 0);
-
     const caja = document.querySelector('[data-mejor="' + id + '"]');
     if (!caja) return;
     caja.classList.add('hay');
     if (r.mejor === null) caja.textContent = 'Sin victorias · ' + partidasTexto(r.partidas);
     else caja.textContent = 'Mejor: ' + r.mejor + (id === 'memorama' ? ' mov.' : ' pts');
   });
-
   function contar(el, meta) {
     if (reducir || meta === 0) { el.textContent = meta; return; }
     const inicio = performance.now();
@@ -40,17 +37,14 @@
   contar($('stPartidas'), partidas);
   contar($('stVictorias'), victorias);
   contar($('stRacha'), racha);
-
   if (partidas > 0) {
     $('arcadeMensaje').textContent = victorias > 0
       ? 'Has ganado ' + victorias + ' de ' + partidasTexto(partidas) + '. ¡Sigue cuidando al planeta!'
       : 'Llevas ' + partidasTexto(partidas) + '. Con el siguiente intento se puede.';
   }
-
   const dato = $('datoDia');
   let actual = Math.floor(Math.random() * DATOS.length);
   dato.textContent = DATOS[actual];
-
   $('otroDato').addEventListener('click', () => {
     let nuevo;
     do { nuevo = Math.floor(Math.random() * DATOS.length); } while (nuevo === actual);
@@ -59,7 +53,6 @@
     dato.classList.add('cambia');
     setTimeout(() => { dato.textContent = DATOS[actual]; dato.classList.remove('cambia'); }, 180);
   });
-
   document.querySelectorAll('.game-card[data-desde]').forEach((tarjeta) => {
     const dias = (Date.now() - new Date(tarjeta.dataset.desde + 'T00:00:00').getTime()) / 864e5;
     const arte = tarjeta.querySelector('.game-art');

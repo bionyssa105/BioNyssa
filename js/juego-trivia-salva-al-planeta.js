@@ -21,7 +21,6 @@
     { texto: '¿Dejar abierta la llave del agua?', correcta: false,
       dato: 'Una llave abierta desperdicia litros de agua limpia en pocos minutos.' }
   ];
-
   const etapa = document.getElementById('etapaJuego');
   BioTutorial.iniciar({
     clave: 'bionyssa_tuto_trivia_v2',
@@ -36,7 +35,6 @@
     alBloquear: () => { etapa.classList.add('juego-bloqueado'); etapa.inert = true; },
     alLiberar: () => { etapa.classList.remove('juego-bloqueado'); etapa.inert = false; }
   });
-
   BioJuego.quiz({
     id: 'trivia',
     items: preguntas,

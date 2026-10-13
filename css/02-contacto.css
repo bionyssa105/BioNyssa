@@ -1,5 +1,7 @@
 .contacto-cols{ display:grid; gap:36px; margin-top:8px; }
-@media (min-width:900px){.contacto-cols{ grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:56px; align-items:start; } }
+@media (min-width:900px) {
+  .contacto-cols{ grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:56px; align-items:start; }
+}
 .c-tit{ font:700 1.3rem/1.2 var(--font-display); color:var(--ink); }
 #preguntas{ overflow-anchor:none; }
 .c-form{ padding:26px 26px 24px; border:1.5px solid var(--line-strong); border-radius:14px; background:var(--card); box-shadow:6px 6px 0 var(--sage-2); }
@@ -16,9 +18,13 @@
 .c-cuenta.casi{ color:var(--brick); }
 .c-trampa{ position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
 .c-form .btn{ width:auto; min-width:180px; border-radius:6px; padding:12px 28px; box-shadow:3px 3px 0 var(--line-strong); transition:transform .12s ease, box-shadow .12s ease, background-color .15s ease; }
-@media (hover:hover){.c-form .btn:hover{ transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--line-strong); } }
+@media (hover:hover) {
+  .c-form .btn:hover{ transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--line-strong); }
+}
 .c-form .btn:active{ transform:translate(2px,2px); box-shadow:0 0 0 var(--line-strong); }
 .c-estado{ margin-top:14px; min-height:1.4em; font-weight:600; color:var(--ink-soft); }
 .c-estado.ok{ color:var(--olive-deep); }
 .c-estado.mal{ color:var(--brick); }
-@media (prefers-reduced-motion:reduce){.c-form .btn{ transition:none; } }
+@media (prefers-reduced-motion:reduce) {
+  .c-form .btn{ transition:none; }
+}

@@ -6,7 +6,6 @@
   var ls = window.localStorage;
   var proto = Storage.prototype;
   var leer = proto.getItem, escribir = proto.setItem, quitar = proto.removeItem;
-
   function sesion() {
     try {
       var s = JSON.parse(leer.call(ls, 'bionyssa_sesion'));
@@ -18,16 +17,13 @@
     var s = sesion();
     return k + '@' + (s ? s.id : 'invitado');
   }
-
   proto.getItem = function (k) { return leer.call(this, clave(k, this)); };
   proto.setItem = function (k, v) { return escribir.call(this, clave(k, this), v); };
   proto.removeItem = function (k) { return quitar.call(this, clave(k, this)); };
-
   try {
     var cruda = leer.call(ls, 'bionyssa_sesion');
     if (cruda && !sesion()) quitar.call(ls, 'bionyssa_sesion');
   } catch (e) {}
-
   window.BioAlmacen = {
     pasarInvitado: function (id) {
       if (!id) return 0;
@@ -58,7 +54,6 @@
       borrar.forEach(function (k) { quitar.call(ls, k); });
     }
   };
-
   function leerArchivo(f) {
     return new Promise(function (ok, mal) {
       var r = new FileReader();
@@ -87,7 +82,6 @@
     y.drawImage(c, 0, 0);
     return d.toDataURL('image/jpeg', calidad);
   }
-
   window.BioImg = {
     comprimir: async function (origen, max, calidad) {
       var img = await preparar(origen);

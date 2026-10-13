@@ -2,7 +2,6 @@
   (function precargar() {
     const conexion = navigator.connection;
     if (conexion && (conexion.saveData || /(^|-)2g$/.test(conexion.effectiveType || ''))) return;
-
     if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) {
       const reglas = document.createElement('script');
       reglas.type = 'speculationrules';
@@ -12,7 +11,6 @@
       document.head.appendChild(reglas);
       return;
     }
-
     const hechos = new Set();
     function precargarEnlace(e) {
       const a = e.target.closest && e.target.closest('a[href]');
@@ -31,7 +29,6 @@
     document.addEventListener('pointerover', precargarEnlace, { passive: true });
     document.addEventListener('touchstart', precargarEnlace, { passive: true });
   })();
-
   (function barra() {
     const b = document.querySelector('.topbar');
     if (!b) return;
@@ -47,7 +44,6 @@
     }, { passive: true });
     revisar();
   })();
-
   document.querySelectorAll('.field-error, .edit-error, #error, #editError').forEach((el) => {
     new MutationObserver(() => {
       if (!el.textContent.trim()) return;
@@ -57,13 +53,11 @@
     }).observe(el, { childList: true, characterData: true, subtree: true });
   });
 })();
-;
 (() => {
   const ID = 'G-ZQGQ8DJREX';
   const local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   const noRastrear = navigator.doNotTrack === '1' || window.doNotTrack === '1';
   if (local || noRastrear || /\/admin\.html$/.test(location.pathname)) return;
-
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { window.dataLayer.push(arguments); };
   gtag('js', new Date());
@@ -72,7 +66,6 @@
     allow_google_signals: false,
     allow_ad_personalization_signals: false
   });
-
   function cargar() {
     const s = document.createElement('script');
     s.async = true;
@@ -82,7 +75,6 @@
   if (document.readyState === 'complete') setTimeout(cargar, 300);
   else addEventListener('load', () => setTimeout(cargar, 300));
 })();
-;
 (() => {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
   const items = document.querySelectorAll('.menu-card, .game-card, .section-card, .card, .nivel-card, .planta-card, .reto-dia, .imp-card');

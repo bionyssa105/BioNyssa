@@ -6,15 +6,12 @@ window.BIO_FIREBASE = {
   messagingSenderId: '1091663971591',
   appId: '1:1091663971591:web:3221e97fd883051bc031a2'
 };
-;
 window.BioFirebase = (function () {
   var base = 'https://www.gstatic.com/firebasejs/12.19.0/', listo = null, listoAuth = null;
-
   function configurado() {
     var c = window.BIO_FIREBASE || {};
     return !!(c.apiKey && c.appId) && !/^PEGA/.test(c.apiKey) && !/^PEGA/.test(c.appId);
   }
-
   function soloAuth() {
     if (!listoAuth) {
       listoAuth = Promise.all([
@@ -28,7 +25,6 @@ window.BioFirebase = (function () {
     }
     return listoAuth;
   }
-
   function nucleo() {
     if (!listo) {
       listo = Promise.all([soloAuth(), import(base + 'firebase-firestore.js')]).then(function (m) {
@@ -49,7 +45,6 @@ window.BioFirebase = (function () {
     var m = await soloAuth();
     return fn(m.auth, m.fa);
   }
-
   return {
     configurado: configurado,
     nucleo: nucleo,
@@ -61,7 +56,6 @@ window.BioFirebase = (function () {
     },
     verificarCodigo: function (codigo) { return usar(function (a, f) { return f.verifyPasswordResetCode(a, codigo); }); },
     confirmarReset: function (codigo, clave) { return usar(function (a, f) { return f.confirmPasswordReset(a, codigo, clave); }); },
-
     entrar: async function (correo, clave) {
       try {
         return await usar(async function (a, f) {
@@ -70,7 +64,6 @@ window.BioFirebase = (function () {
         });
       } catch (e) { return null; }
     },
-
     sincronizar: async function (correo, clave, nombre) {
       if (!configurado()) return { ok: false, codigo: 'bio/no-config' };
       try {

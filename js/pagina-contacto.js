@@ -5,11 +5,9 @@
   const CLAVE = '1541c48b-6908-4a8f-99ee-f124e7e59fa7';
   const ESPERA = 60000, TOPE = 12000;
   const conTope = (p) => Promise.race([p, new Promise((_, no) => setTimeout(no, TOPE))]).then(() => true, () => false);
-
   const aviso = (t, tipo) => { estado.textContent = t; estado.className = 'c-estado' + (tipo ? ' ' + tipo : ''); };
   const marcar = (el, mal) => el.classList.toggle('malo', !!mal);
   const ultimo = () => { try { return +localStorage.getItem('bio_contacto_t') || 0; } catch (e) { return 0; } };
-
   msg.addEventListener('input', () => {
     cuenta.textContent = msg.value.length + ' / 500';
     cuenta.classList.toggle('casi', msg.value.length >= 450);
@@ -17,12 +15,10 @@
   });
   nom.addEventListener('input', () => marcar(nom, false));
   cor.addEventListener('input', () => marcar(cor, false));
-
   async function guardar(nombre, correo, mensaje) {
     const nu = await BioFirebase.nucleo();
     await nu.ff.addDoc(nu.ff.collection(nu.db, 'mensajes'), { nombre, correo, mensaje, creado: Date.now() });
   }
-
   async function correo(nombre, correo, mensaje) {
     const r = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
@@ -32,7 +28,6 @@
     const d = await r.json();
     if (!d.success) throw new Error(d.message);
   }
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if ($('cWeb').value) return;
@@ -48,7 +43,6 @@
     }
     const resta = ESPERA - (Date.now() - ultimo());
     if (resta > 0) return aviso('Espera ' + Math.ceil(resta / 1000) + ' segundos para mandar otro.', 'mal');
-
     boton.disabled = true;
     aviso('Enviando...');
     const hayNube = !!(window.BioFirebase && BioFirebase.configurado());

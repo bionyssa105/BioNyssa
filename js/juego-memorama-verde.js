@@ -11,10 +11,8 @@
   const datoTexto = $('datoTexto');
   const etapaJuego = $('etapaJuego');
   const etapaRes = $('etapaResultado');
-
   const RESIDUOS = BioJuego.residuos;
   const TOTAL = RESIDUOS.length;
-
   let abiertas = [];
   let bloqueo = false;
   let movs = 0;
@@ -26,9 +24,7 @@
   const vibrar = (p) => { if (navigator.vibrate) navigator.vibrate(p); };
   const ocultaDato = () => { clearTimeout(tDato); dato.classList.remove('show'); };
   dato.addEventListener('click', ocultaDato);
-
   RESIDUOS.forEach((r) => { const i = new Image(); i.src = r.img; });
-
   function iniciarReloj() {
     if (reloj) return;
     reloj = setInterval(() => {
@@ -36,12 +32,10 @@
       elTiempo.textContent = BioJuego.formatoTiempo(seg);
     }, 1000);
   }
-
   function pararReloj() {
     clearInterval(reloj);
     reloj = null;
   }
-
   BioTutorial.iniciar({
     clave: 'bionyssa_tuto_memorama_v1',
     subtitulo: 'Memorama verde: encuentra los pares',
@@ -61,7 +55,6 @@
       if (empezo && hallados < TOTAL) iniciarReloj();
     }
   });
-
   function armar() {
     pararReloj();
     seg = 0; movs = 0; hallados = 0; abiertas = []; bloqueo = false; empezo = false;
@@ -72,7 +65,6 @@
     barra.style.width = '0%';
     ocultaDato();
     dato.classList.remove('ok');
-
     tablero.innerHTML = '';
     BioJuego.barajar(RESIDUOS.concat(RESIDUOS)).forEach((r, i) => {
       const carta = document.createElement('button');
@@ -89,30 +81,24 @@
       carta.addEventListener('click', () => voltear(carta));
       tablero.appendChild(carta);
     });
-
     etapaRes.style.display = 'none';
     etapaJuego.style.display = 'block';
   }
-
   function voltear(carta) {
     if (bloqueo || carta.classList.contains('volteada') || carta.classList.contains('hallada')) return;
     if (!empezo) { empezo = true; iniciarReloj(); progreso.textContent = 'Pares encontrados: 0 de ' + TOTAL; }
-
     carta.classList.add('volteada');
     carta.setAttribute('aria-label', carta.dataset.nombre);
     abiertas.push(carta);
-
     if (abiertas.length === 2) {
       movs += 1;
       elMov.textContent = movs;
       comparar();
     }
   }
-
   function comparar() {
     const a = abiertas[0];
     const b = abiertas[1];
-
     if (a.dataset.nombre === b.dataset.nombre) {
       a.classList.add('hallada');
       b.classList.add('hallada');
@@ -122,7 +108,6 @@
       progreso.textContent = 'Pares encontrados: ' + hallados + ' de ' + TOTAL;
       barra.style.width = (hallados / TOTAL * 100) + '%';
       if (window.BioComun) BioComun.reproducir('correcto');
-
       const r = RESIDUOS.find((x) => x.nombre === a.dataset.nombre);
       datoTitulo.textContent = r.nombre;
       datoTexto.textContent = r.dato;
@@ -131,11 +116,9 @@
       clearTimeout(tDato);
       tDato = setTimeout(ocultaDato, 2800);
       vibrar(14);
-
       if (hallados === TOTAL) setTimeout(terminar, 1000);
       return;
     }
-
     bloqueo = true;
     vibrar([30, 30, 30]);
     a.classList.add('error');
@@ -149,12 +132,10 @@
       bloqueo = false;
     }, 850);
   }
-
   function terminar() {
     pararReloj();
     const nEstrellas = movs <= 7 ? 3 : movs <= 10 ? 2 : 1;
     const guardado = BioJuego.registrar('memorama', { gano: true, valor: movs, menor: true });
-
     etapaJuego.style.display = 'none';
     etapaRes.style.display = 'block';
     etapaRes.scrollIntoView({ block: 'center', behavior: 'smooth' });
@@ -165,11 +146,9 @@
       '<div><strong>' + BioJuego.formatoTiempo(seg) + '</strong><span>Tiempo</span></div>' +
       '<div><strong>' + guardado.juego.mejor + '</strong><span>Mejor marca</span></div>';
     $('avisoRecord').hidden = !guardado.nuevoRecord;
-
     if (window.BioComun) BioComun.reproducir('ganar');
     BioJuego.confeti();
   }
-
   $('btnReintentar').addEventListener('click', armar);
   armar();
 })();

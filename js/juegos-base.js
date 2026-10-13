@@ -23,7 +23,6 @@ window.BioTutorial = (function () {
   const MINI_LATA = '<svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="5" width="14" height="22" rx="4"/><path d="M9 11h14M9 21h14"/></svg>';
   const MINI_DORSO = '<svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#fcfbf6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" opacity=".7"><path d="M16 29V15"/><path d="M16 16.5C15.6 11.8 12 9 6.4 9.2c.2 5 3.6 8 9.6 7.3Z"/><path d="M16.4 14.6C17 10 20.4 7.2 25.6 7.4c.1 4.8-3.1 7.6-9.2 7.2Z"/></svg>';
   const ICONO_SONIDO = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M17 9a4 4 0 0 1 0 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
-
   function iniciar(cfg) {
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
@@ -34,16 +33,13 @@ window.BioTutorial = (function () {
     tarjeta.className = 'modal-card tuto-card';
     overlay.appendChild(tarjeta);
     document.body.appendChild(overlay);
-
     let modo = 'guia';
     let paso = 0;
     let practicado = false;
-
     let temporizador = null;
     let corrida = 0;
     let punta = [0, 0];
     const frasesCfg = cfg.frases || {};
-
     const cabecera = (titulo, sub, momento) => {
       const pose = POSES[PINTA_POSE[momento]];
       const frase = frasesCfg[momento] || FRASES[momento];
@@ -56,7 +52,6 @@ window.BioTutorial = (function () {
         '</div></div>' +
         '<h3 id="tutoTitulo">' + titulo + '</h3><p class="tuto-sub">' + sub + '</p>';
     };
-
     function terminarDialogo() {
       clearTimeout(temporizador);
       const el = tarjeta.querySelector('.tuto-tipeo');
@@ -83,10 +78,8 @@ window.BioTutorial = (function () {
         }
       })();
     }
-
     const pausa = (ms) => new Promise((r) => setTimeout(r, ms));
     const tiempoTexto = (t) => t.length * 28 + (t.match(/[.,!?¡¿]/g) || []).length * 120 + 500;
-
     function decir(texto, pose) {
       const el = tarjeta.querySelector('.tuto-tipeo');
       if (!el) return Promise.resolve();
@@ -98,13 +91,11 @@ window.BioTutorial = (function () {
       hablar();
       return pausa(tiempoTexto(texto));
     }
-
     function posicion(el, fx, fy) {
       const t = tarjeta.getBoundingClientRect();
       const r = el.getBoundingClientRect();
       return [r.left - t.left - tarjeta.clientLeft + tarjeta.scrollLeft + r.width * fx, r.top - t.top - tarjeta.clientTop + tarjeta.scrollTop + r.height * fy];
     }
-
     async function ir(el, fx, fy) {
       const c = tarjeta.querySelector('.tuto-cursor');
       if (!c || !el) return;
@@ -115,7 +106,6 @@ window.BioTutorial = (function () {
       c.classList.add('ver');
       await pausa(950);
     }
-
     async function toca(el) {
       const c = tarjeta.querySelector('.tuto-cursor');
       if (!c || !el) return;
@@ -132,7 +122,6 @@ window.BioTutorial = (function () {
       setTimeout(() => el.classList.remove('tuto-toque'), 800);
       await pausa(300);
     }
-
     async function demo() {
       if (reducido) return;
       const mia = ++corrida;
@@ -146,17 +135,14 @@ window.BioTutorial = (function () {
       c.style.transform = 'translate(' + (tarjeta.clientWidth - 46) + 'px,70px)';
       void c.offsetWidth;
       c.style.transition = '';
-
       const inicial = tarjeta.querySelector('.tuto-tipeo');
       await pausa(inicial ? tiempoTexto(inicial.dataset.texto) : 1500);
       if (!vivo()) return;
-
       const mision = tarjeta.querySelector('.tuto-mision');
       if (mision) mision.classList.add('tuto-resalta');
       await decir(cfg.mision, 'saluda');
       if (mision) mision.classList.remove('tuto-resalta');
       if (!vivo()) return;
-
       if (cfg.opciones) {
         const tiles = tarjeta.querySelectorAll('.tuto-option');
         for (let i = 0; i < tiles.length; i++) {
@@ -189,7 +175,6 @@ window.BioTutorial = (function () {
           if (!vivo()) return;
         }
       }
-
       const lista = tarjeta.querySelectorAll('.tuto-rules li');
       const hablaReglas = decir(frasesCfg.reglas || FRASES.reglas, 'lupa');
       for (let i = 0; i < lista.length; i++) {
@@ -201,7 +186,6 @@ window.BioTutorial = (function () {
       }
       await hablaReglas;
       if (!vivo()) return;
-
       const boton = tarjeta.querySelector('.tuto-nav .btn-primary');
       const fin = decir('¡Eso es todo! Cuando quieras, toca «Entendido» y a jugar.', 'saluda');
       await ir(boton, 0.6, 0.55);
@@ -212,25 +196,19 @@ window.BioTutorial = (function () {
       await pausa(2200);
       if (vivo()) c.classList.remove('ver');
     }
-
     const listaReglas = cfg.reglas || REGLAS;
     const total = cfg.practica ? 3 : 2;
-
     const opciones = () => !cfg.opciones ? '' :
       '<div class="tuto-options">' + cfg.opciones.map((o) =>
         '<div class="tuto-option ' + o.tipo + '">' + o.titulo + '<span>' + o.desc + '</span></div>').join('') + '</div>';
-
     const reglas = () =>
       '<ul class="tuto-rules">' + listaReglas.map((r) =>
         '<li><span class="dot ' + r[0] + '"></span>' + r[1] + '</li>').join('') + '</ul>';
-
     const sonido = '<div class="tuto-sound-row">' + ICONO_SONIDO + (cfg.textoSonido || 'Cada acierto, error, victoria y derrota tienen su propio sonido.') + '</div>';
-
     function pintar() {
       const cerrar = modo === 'ayuda'
         ? '<button type="button" class="modal-close" aria-label="Cerrar" data-accion="cerrar">✕</button>' : '';
       let html = cerrar;
-
       if (modo === 'ayuda') {
         const miniCartas = (!cfg.opciones && !reducido)
           ? '<div class="tuto-demo" aria-hidden="true">' + [['a', MINI_HOJA], ['b', MINI_LATA], ['a', MINI_HOJA], ['b', MINI_LATA]].map((c) =>
@@ -243,7 +221,6 @@ window.BioTutorial = (function () {
         const puntos = Array.from({ length: total }, (_, i) => i).map((i) =>
           '<span class="tuto-punto' + (i === paso ? ' activo' : '') + (i < paso ? ' hecho' : '') + '"></span>').join('');
         html += '<div class="tuto-pasos" aria-label="Paso ' + (paso + 1) + ' de ' + total + '">' + puntos + '</div>';
-
         if (paso === 0) {
           html += cabecera('Bienvenido', cfg.subtitulo, 'bienvenida') +
             '<p class="tuto-mision">' + cfg.mision + '</p>' + opciones();
@@ -257,7 +234,6 @@ window.BioTutorial = (function () {
             '</button><button type="button" class="btn btn-no" data-resp="0">' + p.no + '</button></div>' +
             '<p class="tuto-feedback" id="tutoFeedback" aria-live="polite"></p>';
         }
-
         const atras = paso > 0
           ? '<button type="button" class="btn btn-outline" data-accion="atras">Atrás</button>' : '';
         const ultimo = paso === total - 1;
@@ -274,26 +250,22 @@ window.BioTutorial = (function () {
       const foco = tarjeta.querySelector('#tutoSig, .btn-primary');
       if (foco && !foco.disabled) foco.focus({ preventScroll: true });
     }
-
     function abrir(nuevoModo) {
       modo = nuevoModo; paso = 0; practicado = false;
       if (cfg.alBloquear) cfg.alBloquear();
       pintar();
       overlay.classList.add('show');
     }
-
     function cerrar() {
       corrida++;
       clearTimeout(temporizador);
       overlay.classList.remove('show');
       if (cfg.alLiberar) cfg.alLiberar();
     }
-
     function terminarGuia() {
       try { localStorage.setItem(cfg.clave, '1'); } catch (e) {}
       cerrar();
     }
-
     tarjeta.addEventListener('click', (e) => {
       if (e.target.closest('.tuto-globo, .tuto-bio')) terminarDialogo();
       const b = e.target.closest('button');
@@ -315,19 +287,15 @@ window.BioTutorial = (function () {
         sig.disabled = false; sig.focus({ preventScroll: true });
       }
     });
-
     overlay.addEventListener('click', (e) => { if (e.target === overlay && modo === 'ayuda') cerrar(); });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && overlay.classList.contains('show') && modo === 'ayuda') cerrar();
     });
-
     const botonAyuda = document.getElementById('abrirTutorial');
     if (botonAyuda) botonAyuda.addEventListener('click', () => abrir('ayuda'));
-
     let yaVisto = false;
     try { yaVisto = !!(cfg.clave && localStorage.getItem(cfg.clave)); } catch (e) {}
     if (cfg.siempre || !yaVisto) abrir('guia');
-
     const subirVisto = () => { if (cfg.clave && window.BioNube && BioNube.activo()) BioNube.asegurar(cfg.clave); };
     if (yaVisto) subirVisto();
     document.addEventListener('bio-nube-listo', () => {
@@ -338,28 +306,22 @@ window.BioTutorial = (function () {
       subirVisto();
     });
   }
-
   return { iniciar: iniciar };
 })();
-
 window.BioJuego = (function () {
   const CLAVE = 'bionyssa_progreso';
   const REDUCIR = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-
   function leerTodo() {
     try { return JSON.parse(localStorage.getItem(CLAVE)) || {}; } catch (e) { return {}; }
   }
-
   function resumen(juego) {
     return leerTodo()[juego] || null;
   }
-
   function registrar(juego, datos) {
     const todo = leerTodo();
     const j = todo[juego] || { partidas: 0, victorias: 0, mejor: null, racha: 0 };
     j.partidas += 1;
     if (datos.gano) j.victorias += 1;
-
     let nuevoRecord = false;
     if (datos.gano && typeof datos.valor === 'number') {
       const habiaMarca = j.mejor !== null;
@@ -367,12 +329,10 @@ window.BioJuego = (function () {
       if (mejora) { j.mejor = datos.valor; nuevoRecord = habiaMarca; }
     }
     if (datos.racha && datos.racha > j.racha) j.racha = datos.racha;
-
     todo[juego] = j;
     try { localStorage.setItem(CLAVE, JSON.stringify(todo)); } catch (e) {}
     return { nuevoRecord: nuevoRecord, juego: j };
   }
-
   function barajar(lista) {
     const a = lista.slice();
     for (let i = a.length - 1; i > 0; i--) {
@@ -381,17 +341,14 @@ window.BioJuego = (function () {
     }
     return a;
   }
-
   function elegir(lista) {
     return lista[Math.floor(Math.random() * lista.length)];
   }
-
   function reiniciarAnimacion(el, clase) {
     el.classList.remove(clase);
     void el.offsetWidth;
     el.classList.add(clase);
   }
-
   function flotante(caja, texto, tipo) {
     if (!caja) return;
     const s = document.createElement('span');
@@ -400,14 +357,12 @@ window.BioJuego = (function () {
     caja.appendChild(s);
     setTimeout(() => s.remove(), 1000);
   }
-
   function verDato(caja) {
     const r = caja.getBoundingClientRect();
     if (r.bottom > window.innerHeight - 8) {
       caja.scrollIntoView({ block: 'end', behavior: REDUCIR ? 'auto' : 'smooth' });
     }
   }
-
   function confeti() {
     if (REDUCIR) return;
     const colores = ['#93a84a', '#5b6439', '#b07a22', '#b87036', '#e0d6b8', '#7d9440'];
@@ -431,7 +386,6 @@ window.BioJuego = (function () {
     document.body.appendChild(caja);
     setTimeout(() => caja.remove(), 3200);
   }
-
   function estrellas(n, max) {
     max = max || 3;
     let html = '';
@@ -441,13 +395,11 @@ window.BioJuego = (function () {
     }
     return '<div class="estrellas" role="img" aria-label="' + n + ' de ' + max + ' estrellas">' + html + '</div>';
   }
-
   function formatoTiempo(seg) {
     const m = Math.floor(seg / 60);
     const s = seg % 60;
     return m + ':' + (s < 10 ? '0' : '') + s;
   }
-
   const RESIDUOS = [
     { img: '/assets/img/Botella.webp', nombre: 'Botella de plástico', reciclable: true,
       dato: 'El PET se recicla y puede volver como un envase nuevo o como fibra para ropa.' },
@@ -460,11 +412,9 @@ window.BioJuego = (function () {
     { img: '/assets/img/Bolsa.webp', nombre: 'Bolsa de plástico', reciclable: false,
       dato: 'Casi nunca se acepta en el reciclaje común. Reutilízala o cámbiala por una bolsa de tela.' }
   ];
-
   const ESPERA = 2300;
   const ANIMO_BIEN = ['¡Eso es!', 'Muy bien, sigue así.', 'Un punto para el planeta.', '¡Buen ojo!', 'El aire se siente mejor.'];
   const ANIMO_MAL = ['Casi. Todavía puedes remontar.', 'Ahora ya lo sabes.', 'Ese se escapó. ¡Va el siguiente!', 'Tranquilo, aprende del dato.'];
-
   function quiz(cfg) {
     const $ = (id) => document.getElementById(id);
     const el = {
@@ -481,10 +431,8 @@ window.BioJuego = (function () {
     };
     const total = cfg.items.length;
     const tagInicial = el.tag ? el.tag.textContent : '';
-
     let cola, indice, contaminacion, racha, mejorRacha, aciertos, puntos;
     let pausa, temporizador, pendiente;
-
     function nuevo() {
       clearTimeout(temporizador);
       cola = barajar(cfg.items);
@@ -497,7 +445,6 @@ window.BioJuego = (function () {
       pintarChips(false);
       mostrar();
     }
-
     function pintarMedidor() {
       el.barra.style.width = contaminacion + '%';
       el.valor.textContent = contaminacion + '%';
@@ -507,7 +454,6 @@ window.BioJuego = (function () {
       el.barra.parentElement.classList.toggle('peligro', contaminacion >= 80);
       if (el.planeta) el.planeta.style.setProperty('--smog', (contaminacion / 100 * 0.65).toFixed(2));
     }
-
     function pintarChips(animar) {
       el.chipRacha.textContent = 'Racha ' + racha;
       el.chipRacha.classList.toggle('caliente', racha >= 3);
@@ -517,7 +463,6 @@ window.BioJuego = (function () {
         if (racha > 0) reiniciarAnimacion(el.chipRacha, 'sube');
       }
     }
-
     function mostrar() {
       const item = cola[indice];
       cfg.pintar(item, el);
@@ -533,7 +478,6 @@ window.BioJuego = (function () {
       reiniciarAnimacion(el.tarjeta, 'entra');
       pausa = false;
     }
-
     function reaccionar(acerto) {
       if (el.hero) {
         el.hero.classList.remove('feliz', 'triste');
@@ -542,16 +486,13 @@ window.BioJuego = (function () {
       }
       if (el.tag) el.tag.textContent = elegir(acerto ? ANIMO_BIEN : ANIMO_MAL);
     }
-
     function responder(respuesta) {
       if (pausa || el.juego.classList.contains('juego-bloqueado')) return;
       pausa = true;
       const item = cola[indice];
       const acerto = respuesta === item.correcta;
-
       if (window.BioComun) BioComun.reproducir(acerto ? 'correcto' : 'incorrecto');
       if (navigator.vibrate) navigator.vibrate(acerto ? 12 : [35, 40, 35]);
-
       contaminacion = Math.max(0, Math.min(100, contaminacion + (acerto ? -10 : 10)));
       if (acerto) {
         racha += 1;
@@ -565,7 +506,6 @@ window.BioJuego = (function () {
       pintarChips(true);
       flotante(el.medidorCaja, acerto ? '−10%' : '+10%', acerto ? 'ok' : 'mal');
       reaccionar(acerto);
-
       const btnCorrecto = item.correcta ? el.btnSi : el.btnNo;
       const btnElegido = respuesta ? el.btnSi : el.btnNo;
       el.btnSi.disabled = true;
@@ -575,15 +515,12 @@ window.BioJuego = (function () {
       reiniciarAnimacion(el.juego, acerto ? 'flash-ok' : 'flash-mal');
       if (!acerto) reiniciarAnimacion(el.tarjeta, 'sacude');
       el.barraProg.style.width = ((indice + 1) / total * 100) + '%';
-
       if (contaminacion === 100) pendiente = 'limite';
       else if (contaminacion === 0) pendiente = 'cero';
       else if (indice + 1 >= total) pendiente = 'fin';
       else pendiente = null;
-
       mostrarDato(item, acerto);
     }
-
     function mostrarDato(item, acerto) {
       el.datoTitulo.textContent = (acerto ? '¡Correcto! ' : 'Incorrecto. ') + (item.correcta ? cfg.explica.si : cfg.explica.no);
       el.datoTexto.textContent = item.dato;
@@ -596,7 +533,6 @@ window.BioJuego = (function () {
       clearTimeout(temporizador);
       temporizador = setTimeout(avanzar, ESPERA);
     }
-
     function avanzar() {
       clearTimeout(temporizador);
       if (!el.dato.classList.contains('show')) return;
@@ -605,7 +541,6 @@ window.BioJuego = (function () {
       indice += 1;
       mostrar();
     }
-
     function finalizar() {
       let gano, mensaje;
       if (pendiente === 'limite') {
@@ -619,7 +554,6 @@ window.BioJuego = (function () {
       }
       const nEstrellas = !gano ? 0 : contaminacion <= 20 ? 3 : contaminacion <= 40 ? 2 : 1;
       const respondidas = indice + 1;
-
       el.juego.style.display = 'none';
       el.resultado.style.display = 'block';
       el.resultado.scrollIntoView({ block: 'center', behavior: REDUCIR ? 'auto' : 'smooth' });
@@ -630,14 +564,11 @@ window.BioJuego = (function () {
         '<div><strong>' + aciertos + '/' + respondidas + '</strong><span>Aciertos</span></div>' +
         '<div><strong>' + mejorRacha + '</strong><span>Mejor racha</span></div>' +
         '<div><strong>' + puntos + '</strong><span>Puntos</span></div>';
-
       const guardado = registrar(cfg.id, { gano: gano, valor: puntos, racha: mejorRacha });
       if (el.aviso) el.aviso.hidden = !(gano && guardado.nuevoRecord);
-
       if (window.BioComun) BioComun.reproducir(gano ? 'ganar' : 'perder');
       if (gano) confeti();
     }
-
     (function () {
       const t = el.tarjeta, UMBRAL = 70;
       let x0 = null, dx = 0;
@@ -666,13 +597,11 @@ window.BioJuego = (function () {
       t.addEventListener('pointerup', soltar);
       t.addEventListener('pointercancel', () => { x0 = null; dx = 0; volver(); });
     })();
-
     el.btnSi.addEventListener('click', () => responder(true));
     el.btnNo.addEventListener('click', () => responder(false));
     el.datoSig.addEventListener('click', avanzar);
     el.dato.addEventListener('click', avanzar);
     el.reintentar.addEventListener('click', nuevo);
-
     document.addEventListener('keydown', (e) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (document.querySelector('.modal-overlay.show')) return;
@@ -684,10 +613,8 @@ window.BioJuego = (function () {
       if (e.key === 'ArrowLeft') { e.preventDefault(); responder(true); }
       else if (e.key === 'ArrowRight') { e.preventDefault(); responder(false); }
     });
-
     nuevo();
   }
-
   return {
     residuos: RESIDUOS,
     quiz: quiz,

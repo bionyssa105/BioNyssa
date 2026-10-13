@@ -2,14 +2,12 @@
   const $ = (id) => document.getElementById(id);
   const rango = $('impBolsas');
   if (!rango) return;
-
   const G = 6;
   const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const num = (n) => n.toLocaleString('es-MX');
   const peso = (g) => g >= 1000 ? (g / 1000).toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' kg' : g + ' g';
   const lee = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
   const guarda = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
-
   function animar(el, fin, fmt, ms) {
     const ini = +el.dataset.v || 0;
     el.dataset.v = fin;
@@ -21,18 +19,15 @@
       if (k < 1) requestAnimationFrame(paso);
     })(t0);
   }
-
   const PLAZO = 'bionyssa_impacto_plazo';
   let anios = [1, 5, 10].includes(+lee(PLAZO)) ? +lee(PLAZO) : 1;
   const botones = [...document.querySelectorAll('.imp-plazo button')];
-
   function frase(kg, n) {
     if (n <= 24) return 'Poquito, pero cuenta: cada bolsa que sale de circulación es una menos tirada por ahí.';
     if (kg < 10) return 'Son ' + num(n) + ' bolsas que dejan de ir a la basura. Ya se nota.';
     if (kg < 50) return 'Ya hablamos de varios kilos de plástico. No está nada mal para un cambio tan sencillo.';
     return 'Son muchísimos kilos de plástico. Con un hábito así, tu casa sería de las que más ayudan.';
   }
-
   function pintar() {
     const mes = +rango.value;
     const total = mes * 12 * anios;
@@ -57,7 +52,6 @@
     pintar();
   }));
   pintar();
-
   const ciclo = document.querySelector('.imp-ciclo');
   if (ciclo) {
     [...ciclo.children].forEach((li, i) => li.style.setProperty('--i', i));
@@ -67,7 +61,6 @@
       }, { threshold: 0.35 }).observe(ciclo);
     } else ciclo.classList.add('ve');
   }
-
   const SEMB = 'bionyssa_sembradas';
   const METAS = [1, 5, 20, 50];
   const FRASES = [
@@ -77,13 +70,11 @@
     [50, 'Eso ya es un huerto completo.']
   ];
   const sembradas = () => +lee(SEMB) || 0;
-
   function mostrar(n) {
     $('impSembradas').textContent = n;
     const f = FRASES.filter((x) => n >= x[0]).pop();
     $('impMsg').textContent = f ? f[1] : 'Se guarda en este dispositivo y, si tienes sesión iniciada, también en tu cuenta.';
     $('impMetas').innerHTML = METAS.map((m) => '<li class="' + (n >= m ? 'listo' : '') + '"><b>' + m + '</b><span>' + (m === 1 ? 'bolsa' : 'bolsas') + '</span></li>').join('');
-
     const sig = METAS.find((m) => m > n);
     const antes = METAS.filter((m) => m <= n).pop() || 0;
     const barra = $('impMetaRelleno');
@@ -101,23 +92,19 @@
     $('impMetaTxt').textContent = texto;
   }
   mostrar(sembradas());
-
   const nube = () => (window.BioFirebase && BioFirebase.configurado()) ? BioFirebase.nucleo() : Promise.reject();
-
   function sumarGlobal() {
     nube().then((nu) => {
       if (!nu.auth.currentUser) return;
       return nu.ff.setDoc(nu.ff.doc(nu.db, 'global', 'impacto'), { sembradas: nu.ff.increment(1) }, { merge: true });
     }).catch(() => {});
   }
-
   $('impSumar').addEventListener('click', () => {
     const n = sembradas() + 1;
     guarda(SEMB, n);
     mostrar(n);
     sumarGlobal();
   });
-
   $('impCero').addEventListener('click', async () => {
     if (!sembradas()) return;
     let seguir = true;
@@ -132,7 +119,6 @@
     }
     if (seguir) { guarda(SEMB, 0); mostrar(0); }
   });
-
   nube().then((nu) => {
     const ref = nu.ff.doc(nu.db, 'global', 'impacto');
     nu.ff.onSnapshot(ref, (s) => animar($('impGlobalNum'), s.exists() ? +s.data().sembradas || 0 : 0, (n) => n, 900), () => {});
