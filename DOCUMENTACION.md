@@ -4,16 +4,31 @@ Este archivo explica **qué hace cada archivo**, cada página y cada script. Est
 
 ---
 
+
+## Archivos JS
+
+En `js/` hay 7 archivos:
+
+- `tema.js`: va en el `<head>`. Pone el tema claro u oscuro antes de que pinte la página y manda al menú si ya hay sesión (solo en las páginas con `data-entrada` en `<html>`).
+- `nucleo.js`: lo que usan casi todas las páginas: almacén por cuenta, sesión y funciones comunes, filtro de groserías, cuentas, conexión con Firebase, sincronización con la nube y avisos.
+- `cuenta.js`: acceso con Google, ver contraseña, login, registro y recuperar contraseña.
+- `jugar.js`: base de los juegos, memorama, clasificar, trivia, lista de minijuegos y el juego sin conexión.
+- `paginas.js`: el código de guía, contacto, impacto, menú, mi planta, admin y comunidad.
+- `arranque.js`: lo que va al final de cada página (precarga de enlaces, barra de arriba) y la mascota de la portada.
+- `sw.js`: el service worker (modo sin conexión).
+
+Dentro de cada archivo, cada bloque empieza con un comentario con su nombre (`// menu`, `// comunidad`...). Cada `<body>` tiene `data-pagina="nombre"` y cada bloque solo se ejecuta en las páginas donde hace falta: mira la condición `if (...)` debajo del comentario. Donde más abajo dice "Script: `nombre`" se refiere al bloque con ese nombre.
+
 ## 1. Cómo funciona todo en una frase
 
 BioNyssa es un sitio **estático** (HTML + CSS + JavaScript, sin frameworks) que se publica en **Firebase Hosting**. Las cuentas usan **Firebase Authentication**, los datos de cada persona se guardan en **Firestore** y también en `localStorage` (para que funcione rápido y sin conexión). Un **service worker** (`js/sw.js`) hace que las páginas ya visitadas abran sin internet.
 
 **Orden en que se cargan las cosas en una página típica:**
-1. `tema-inicial.js` pone el tema claro/oscuro antes de pintar (evita el parpadeo).
-2. `almacen-por-cuenta.js` separa el `localStorage` por cuenta.
-3. `nucleo.js` crea menú, puntos, sesión, diálogos y tema.
-4. `firebase-base.js` + `nube-firestore.js` conectan con Firebase.
-5. El script propio de la página (`pagina-*.js` o `juego-*.js`).
+1. `tema.js` pone el tema claro/oscuro antes de pintar (evita el parpadeo).
+2. `almacen.js` separa el `localStorage` por cuenta.
+3. `principal.js` crea menú, puntos, sesión, diálogos y tema.
+4. `conexion.js` + `nube.js` conectan con Firebase.
+5. El script propio de la página (`js/<página>.js`).
 6. `cierre.js` (precarga de páginas, barra, analítica y animación de aparición).
 
 ---
@@ -45,13 +60,13 @@ Todas comparten la misma cabecera (fuentes, estilos, `lang="es"`) y el mismo ord
 
 | Página | Qué muestra y qué scripts/estilos usa |
 |---|---|
-| `index.html` | Portada con título "Un desecho que nace", mascota (`#mascota`) y botones. Estilos: `01-base`, `02-inicio-y-menu`, `03`, `05`. Scripts: `ir-al-menu` (si ya hay sesión te manda al menú), `pagina-inicio`. |
-| `paginas/menu.html` | Centro del sitio. Saludo, tarjetas a todas las secciones, reto del día, juego del día, nivel y puntos. Banner para invitados (`#botonBannerInvitado`). Script: `pagina-menu-saludo`. |
-| `paginas/guia.html` | Guía de uso en 5 pasos desplegables (acordeón). Script: `pagina-guia-acordeon`. |
-| `paginas/informacion.html` | "Nuestra historia": origen, proceso en 4 pasos, materiales ecológicos, certificaciones y línea de tiempo. Solo contenido; estilo `02-historia`. |
-| `paginas/mi-planta.html` | Contenedor vacío donde `pagina-mi-planta.js` dibuja el seguimiento de la planta (pestañas Resumen, Cuidados, Calendario, Diario, Insignias). Incluye "Cómo usar" y "Las 4 etapas". |
-| `paginas/impacto.html` | Calculadora de impacto (`#impBolsas`, `#impSumar`, `#impCero`), contadores "Tu cuenta" y "Entre todos", camino de la bolsa y comparación con una bolsa común. Script: `pagina-impacto-calculadora`. |
-| `paginas/minijuegos.html` | Lista de los 3 juegos con ilustración animada, récord y partidas. Script: `pagina-minijuegos-lista` (+ `juegos-base`). |
+| `index.html` | Portada con título "Un desecho que nace", mascota (`#mascota`) y botones. Estilos: `base`, `inicio`, `03`, `05`. Scripts: `ir-al-menu` (si ya hay sesión te manda al menú), `inicio`. |
+| `paginas/menu.html` | Centro del sitio. Saludo, tarjetas a todas las secciones, reto del día, juego del día, nivel y puntos. Banner para invitados (`#botonBannerInvitado`). Script: `menu`. |
+| `paginas/guia.html` | Guía de uso en 5 pasos desplegables (acordeón). Script: `guia`. |
+| `paginas/informacion.html` | "Nuestra historia": origen, proceso en 4 pasos, materiales ecológicos, certificaciones y línea de tiempo. Solo contenido; estilo `historia`. |
+| `paginas/mi-planta.html` | Contenedor vacío donde `mi-planta.js` dibuja el seguimiento de la planta (pestañas Resumen, Cuidados, Calendario, Diario, Insignias). Incluye "Cómo usar" y "Las 4 etapas". |
+| `paginas/impacto.html` | Calculadora de impacto (`#impBolsas`, `#impSumar`, `#impCero`), contadores "Tu cuenta" y "Entre todos", camino de la bolsa y comparación con una bolsa común. Script: `impacto`. |
+| `paginas/minijuegos.html` | Lista de los 3 juegos con ilustración animada, récord y partidas. Script: `minijuegos` (+ `juegos`). |
 | `paginas/juego-trivia.html` | Juego "Salva al planeta" (sí/no, la contaminación sube o baja 10 %). Botones `#btnSi`, `#btnNo`, tutorial `#abrirTutorial`, dato siguiente `#datoSig`, reintentar `#btnReintentar`. |
 | `paginas/juego-clasificar.html` | Juego "Limpia el planeta" (clasificar residuos). Mismos ids de botones. |
 | `paginas/juego-memorama.html` | "Memorama verde" (encontrar parejas). |
@@ -71,21 +86,21 @@ El número del nombre es el orden en que cargan (los que cargan después pueden 
 
 | Archivo | Para qué sirve |
 |---|---|
-| `01-base.css` | Base: reinicio de estilos, tipografías, colores del tema claro (variables `--ink`, `--olive`, etc.), botones y contenedores. |
-| `02-inicio-y-menu.css` | Portada (`index`), menú y 404. |
-| `02-guia-y-mi-planta.css` | Acordeón de la guía y tarjetas de Mi planta (también lo usa Contacto para sus preguntas). |
-| `02-impacto.css` | Calculadora, contadores, camino de la bolsa y comparación. |
-| `02-historia.css` | Página "Nuestra historia". |
-| `02-login-y-registro.css` | Login, registro y recuperar (formularios, panel izquierdo). |
-| `02-contacto.css` | Formulario de contacto y contador de caracteres. |
-| `02-minijuegos-y-juegos.css` | Tarjetas de minijuegos y pantallas de los 3 juegos. |
-| `02-comunidad.css` | Comunidad: publicaciones, comentarios, perfil. |
-| `03-comun-parte-1.css` | Estilos comunes: **tema oscuro** (variables), barra superior, tarjetas, modales, toasts, niveles. |
-| `04-comunidad-columnas-laterales.css` | Columnas laterales de Comunidad (tendencias, perfil, sugerencias). |
-| `05-comun-parte-2.css` | Más estilos comunes: animaciones, diálogos, accesibilidad, ajustes por tema. |
-| `06-barra-y-adaptacion-a-pantallas.css` | Barra superior flotante y adaptación a pantallas (escritorio horizontal / celular vertical). |
-| `07-comunidad-red-social.css` | Apariencia de red social de Comunidad. |
-| `09-ajustes-juegos-y-planta.css` | Ajustes finales de juegos y Mi planta (pestañas, animaciones de portadas). |
+| `base.css` | Base: reinicio de estilos, tipografías, colores del tema claro (variables `--texto`, `--oliva`, etc.), botones y contenedores. |
+| `inicio.css` | Portada (`index`), menú y 404. |
+| `guia.css` | Acordeón de la guía y tarjetas de Mi planta (también lo usa Contacto para sus preguntas). |
+| `impacto.css` | Calculadora, contadores, camino de la bolsa y comparación. |
+| `historia.css` | Página "Nuestra historia". |
+| `acceso.css` | Login, registro y recuperar (formularios, panel izquierdo). |
+| `contacto.css` | Formulario de contacto y contador de caracteres. |
+| `juegos.css` | Tarjetas de minijuegos y pantallas de los 3 juegos. |
+| `comunidad.css` | Comunidad: publicaciones, comentarios, perfil. |
+| `comun.css` | Estilos comunes: **tema oscuro** (variables), barra superior, tarjetas, modales, toasts, niveles. |
+| `comunidad-lateral.css` | Columnas laterales de Comunidad (tendencias, perfil, sugerencias). |
+| `tema.css` | Más estilos comunes: animaciones, diálogos, accesibilidad, ajustes por tema. |
+| `barra.css` | Barra superior flotante y adaptación a pantallas (escritorio horizontal / celular vertical). |
+| `red.css` | Apariencia de red social de Comunidad. |
+| `planta.css` | Ajustes finales de juegos y Mi planta (pestañas, animaciones de portadas). |
 
 ---
 
@@ -93,14 +108,14 @@ El número del nombre es el orden en que cargan (los que cargan después pueden 
 
 ### 5.1 Base que usan casi todas las páginas
 
-**`tema-inicial.js`** (5 líneas). Lee `bionyssa_tema` y pone `data-theme` en `<html>` antes de que se pinte la página.
+**`tema.js`** (5 líneas). Lee `bionyssa_tema` y pone `data-theme` en `<html>` antes de que se pinte la página.
 
-**`almacen-por-cuenta.js`**. Cambia `localStorage.getItem/setItem/removeItem` para que toda clave que empiece con `bionyssa_` se guarde como `clave@<idDeCuenta>` (o `@invitado`). Así cada cuenta tiene sus propios datos en el mismo navegador. Las claves compartidas (`bionyssa_tema`, `_sesion`, `_cuentas`, `_publicaciones`, `_perfiles`) no se separan. Exporta:
+**`almacen.js`**. Cambia `localStorage.getItem/setItem/removeItem` para que toda clave que empiece con `bionyssa_` se guarde como `clave@<idDeCuenta>` (o `@invitado`). Así cada cuenta tiene sus propios datos en el mismo navegador. Las claves compartidas (`bionyssa_tema`, `_sesion`, `_cuentas`, `_publicaciones`, `_perfiles`) no se separan. Exporta:
 - `BioAlmacen.pasarInvitado(id)`: pasa lo que hizo el invitado a la cuenta recién creada.
 - `BioAlmacen.limpiar(id)`: borra los datos locales de una cuenta.
 - `BioImg.comprimir(origen, max, calidad)` y `BioImg.cuadrada(origen, lado, calidad)`: reducen y recortan imágenes a JPEG (para fotos de publicaciones y perfil).
 
-**`nucleo.js`** (el más grande). Exporta cinco objetos:
+**`principal.js`** (el más grande). Exporta cinco objetos:
 - `BioComun`: tema claro/oscuro (`alternarTema`, botones de tema), **menú superior** de escritorio y celular (`inyectarNavEscritorio`, `inyectarNavMovil`), sonidos (`reproducir`), generar `@usuario` desde un nombre (`usuarioDesdeNombre`), color de avatar, `esInvitado`, **ventana "Crear mi cuenta"** (`mostrarModalAuth`), **diálogos** (`dialogo({titulo, mensaje, boton, cancelar, tipo})` devuelve una promesa; usa `textContent`, no es vulnerable a HTML), detección de falta de red real (redirige a `offline.html`).
 - `BioToast(texto)`: avisos pequeños.
 - `BioHojas`: hojas decorativas animadas.
@@ -108,10 +123,21 @@ El número del nombre es el orden en que cargan (los que cargan después pueden 
 - `BioSesion`: `obtener`, `iniciar`, `cerrar`, `entrarInvitado`, `iniciales`, `pintarSaludo`. La sesión local vive en `bionyssa_sesion`.
 También contiene el **reto del día** y el **juego del día** del menú, la racha semanal y el botón de "subir".
 
-**`firebase-base.js`**. Guarda la configuración pública de Firebase (`BIO_FIREBASE`) y carga el SDK desde `gstatic.com` solo cuando hace falta. Exporta `BioFirebase`: `configurado`, `nucleo()` (app + auth + Firestore con caché local), `auth()`, `enviarReset`, `verificarCodigo`, `confirmarReset`, `entrar` y `sincronizar` (inicia sesión o crea la cuenta en Firebase).
+**`conexion.js`**. Guarda la configuración pública de Firebase (`BIO_FIREBASE`) y carga el SDK desde `gstatic.com` solo cuando hace falta. Exporta `BioFirebase`: `configurado`, `principal()` (app + auth + Firestore con caché local), `auth()`, `enviarReset`, `verificarCodigo`, `confirmarReset`, `entrar` y `sincronizar` (inicia sesión o crea la cuenta en Firebase).
 
-**`nube-firestore.js`** (`BioNube`). Sincroniza todo lo local con Firestore **por cuenta**:
-- Colecciones que usa: `usuarios` (datos privados: puntos, progreso, planta…), `perfiles` (perfil público), `usuarios_unicos` (reserva de @usuarios únicos), `publicaciones` (+ subcolecciones `likes` y `comentarios`), `accesos` (visitas, solo admin).
+**`nube.js`** (`BioNube`). Sincroniza todo lo local con Firestore **por cuenta**:
+- Colecciones que usa: `usuarios` (datos privados; cada dato en su propia subcolección, ver abajo), `perfiles` (perfil público), `usuarios_unicos` (reserva de @usuarios únicos), `publicaciones` (+ subcolecciones `likes` y `comentarios`), `accesos` (visitas, solo admin).
+- Cómo se guarda cada dato privado (todo cuelga de `usuarios/{uid}/…`, un documento por cosa):
+  - `plantas/{idPlanta}`: una planta (siembra, riegos, alturas, cuidados, insignias). Puede haber varias por cuenta.
+  - `plantas/{idPlanta}/diario/{id}`: una entrada del diario de esa planta.
+  - `progreso/{juego}`: partidas, victorias, mejor marca y racha de `trivia`, `clasificar` y `memorama`.
+  - `sin_conexion/record`, `puntos/actual`, `retos/actual`, `guia/pasos`, `impacto/plazo`, `impacto/sembradas`.
+  - `comunidad/guardadas`, `comunidad/etiquetas`: publicaciones guardadas y etiquetas propias.
+  - `ajustes/avisos`, `ajustes/tema`, `ajustes/tutorial_*`: avisos de riego, tema y tutoriales vistos.
+  - `sync/{nombre}`: hora del último cambio de cada dato; decide si manda el navegador o la nube.
+- Los datos que antes estaban juntos en `usuarios/{uid}.datos` se pasan solos a esta estructura la primera vez que la persona entra, y después ese campo se borra.
+- Para no hacer lenta la navegación, la comparación con la nube se hace al entrar y luego cada 5 minutos (no en cada página).
+- En `localStorage` las plantas viven en `bionyssa_plantas` y cada diario en `bionyssa_diario_<idPlanta>` (los maneja `BioPlantas`, en `almacen.js`).
 - Fusión inteligente de datos locales y de la nube (`fusionProgreso`, `fusionPuntos`, `fusionMax`…) para no perder récords.
 - Funciones de comunidad: `publicar`, `meGusta`, `comentar`, `borrarComentario`, `borrarPublicacion`, `guardarPerfil`, `comunidad` (escucha en vivo hasta 200 publicaciones y los perfiles).
 - `migrarLegacy` sube publicaciones antiguas guardadas solo en el navegador.
@@ -120,11 +146,11 @@ También contiene el **reto del día** y el **juego del día** del menú, la rac
 
 **`cuentas.js`** (`BioCuentas`). Registro e inicio de sesión: `registrar`, `entrar`, `conGoogle`, `existeGoogle`. Guarda un resumen de cuentas en `bionyssa_cuentas` (nombre, correo, @usuario; **nunca la contraseña**; la contraseña solo viaja a Firebase Authentication).
 
-**`acceso-google.js`**. Botones "Continuar con Google" (`[data-google]`): abre ventana de Google, o redirección si el navegador bloquea ventanas. En *login* si la cuenta no existe la descarta y te manda a registrarte.
+**`google.js`**. Botones "Continuar con Google" (`[data-google]`): abre ventana de Google, o redirección si el navegador bloquea ventanas. En *login* si la cuenta no existe la descarta y te manda a registrarte.
 
-**`moderacion-de-contenido.js`** (`BioModera`). Filtro de groserías en español, inglés y otros alfabetos, que detecta espacios, letras repetidas, números por letras y texto pegado (`revisarTexto`, `esOfensivo`). También revisa **imágenes** con TensorFlow.js + NSFWJS cargados desde jsDelivr (versiones fijas) y bloquea contenido sexual. ⚠️ Es un filtro del lado del navegador: sirve para guiar a las personas, pero no impide que alguien con conocimientos escriba directo a Firestore (ver sección 6).
+**`filtro.js`** (`BioModera`). Filtro de groserías en español, inglés y otros alfabetos, que detecta espacios, letras repetidas, números por letras y texto pegado (`revisarTexto`, `esOfensivo`). También revisa **imágenes** con TensorFlow.js + NSFWJS cargados desde jsDelivr (versiones fijas) y bloquea contenido sexual.  Es un filtro del lado del navegador: sirve para guiar a las personas, pero no impide que alguien con conocimientos escriba directo a Firestore (ver sección 6).
 
-**`notificaciones.js`** (`BioNotis`). Recordatorios de riego de Mi planta (pide permiso, guarda preferencia en `bionyssa_notis`, avisa cuando ya tocó regar).
+**`avisos.js`** (`BioNotis`). Recordatorios de riego de Mi planta (pide permiso, guarda preferencia en `bionyssa_notis`, avisa cuando ya tocó regar).
 
 **`ver-clave.js`**. Botón del ojito para mostrar/ocultar contraseñas.
 
@@ -138,30 +164,30 @@ También contiene el **reto del día** y el **juego del día** del menú, la rac
 
 | Script | Qué hace |
 |---|---|
-| `pagina-inicio.js` | Mascota Bio de la portada: saluda y habla (`hablar`, `terminar`). |
-| `pagina-login.js` | Envía `#formLogin` a `BioCuentas.entrar`; enlace "olvidé mi contraseña" hacia `recuperar.html?c=correo`. |
-| `pagina-registro.js` | Valida nombre, correo, contraseñas iguales y **mínimo 8 caracteres**; revisa el nombre con `BioModera`; llama a `BioCuentas.registrar`. |
-| `pagina-recuperar.js` | Flujo de recuperar contraseña con Firebase: enviar correo (con enfriamiento y reenviar), validar el código del enlace, guardar la nueva contraseña (mínimo 8). |
-| `pagina-menu-saludo.js` | Saludo con tu nombre en el menú, botón de cerrar sesión y banner para invitados. |
-| `pagina-guia-acordeon.js` | Abre/cierra los pasos de la guía (y las preguntas de contacto) con una pequeña onda. |
-| `pagina-mi-planta.js` | Seguimiento de la planta: fecha de siembra, nombre, "La regué hoy", cuidados diarios (sol, plagas, hojas secas), etapas (semilla, germinando, brote, planta), rachas, alturas, calendario, diario, gráfica e insignias. Datos en `bionyssa_planta` y `bionyssa_planta_diario`. Todo texto del usuario pasa por `esc()` antes de pintarse. |
-| `pagina-impacto-calculadora.js` | Calculadora de bolsas/plantas/gramos de plástico; contador propio (`bionyssa_sembradas`) y global (`global/impacto` en Firestore, solo suma con sesión). |
-| `pagina-minijuegos-lista.js` | Récords, partidas y etiqueta "Nuevo" (desaparece a los 7 días) en las tarjetas de juegos. |
-| `pagina-contacto.js` | Valida el formulario, limita a 1 envío por minuto, guarda el mensaje en Firestore (`mensajes`) **y** lo manda por correo con Web3Forms. Ignora el envío si el campo trampa `#cWeb` trae texto. |
-| `pagina-comunidad.js` (`BioHilo`) | Toda la red social: crear publicación con texto/foto/#etiquetas, likes, comentarios, guardadas, pestañas, buscador de publicaciones y personas, tendencias, perfil editable. El texto se escapa con `escapeHtml()` y las fotos solo se aceptan si son `data:image/...;base64` (`fotoSegura`). |
-| `pagina-admin.js` | Panel de administrador. Comprueba sesión, correo verificado y que exista `admins/<uid>`; luego lista `accesos`. Todo se pinta con `textContent`. |
+| `inicio.js` | Mascota Bio de la portada: saluda y habla (`hablar`, `terminar`). |
+| `login.js` | Envía `#formLogin` a `BioCuentas.entrar`; enlace "olvidé mi contraseña" hacia `recuperar.html?c=correo`. |
+| `registro.js` | Valida nombre, correo, contraseñas iguales y **mínimo 8 caracteres**; revisa el nombre con `BioModera`; llama a `BioCuentas.registrar`. |
+| `recuperar.js` | Flujo de recuperar contraseña con Firebase: enviar correo (con enfriamiento y reenviar), validar el código del enlace, guardar la nueva contraseña (mínimo 8). |
+| `menu.js` | Saludo con tu nombre en el menú, botón de cerrar sesión y banner para invitados. |
+| `guia.js` | Abre/cierra los pasos de la guía (y las preguntas de contacto) con una pequeña onda. |
+| `mi-planta.js` | Seguimiento de la planta: fecha de siembra, nombre, "La regué hoy", cuidados diarios (sol, plagas, hojas secas), etapas (semilla, germinando, brote, planta), rachas, alturas, calendario, diario, gráfica e insignias. Datos en `bionyssa_planta` y `bionyssa_planta_diario`. Todo texto del usuario pasa por `esc()` antes de pintarse. |
+| `impacto.js` | Calculadora de bolsas/plantas/gramos de plástico; contador propio (`bionyssa_sembradas`) y global (`global/impacto` en Firestore, solo suma con sesión). |
+| `minijuegos.js` | Récords, partidas y etiqueta "Nuevo" (desaparece a los 7 días) en las tarjetas de juegos. |
+| `contacto.js` | Valida el formulario, limita a 1 envío por minuto, guarda el mensaje en Firestore (`mensajes`) **y** lo manda por correo con Web3Forms. Ignora el envío si el campo trampa `#cWeb` trae texto. |
+| `comunidad.js` (`BioHilo`) | Toda la red social: crear publicación con texto/foto/#etiquetas, likes, comentarios, guardadas, pestañas, buscador de publicaciones y personas, tendencias, perfil editable. El texto se escapa con `escapeHtml()` y las fotos solo se aceptan si son `data:image/...;base64` (`fotoSegura`). |
+| `admin.js` | Panel de administrador. Comprueba sesión, correo verificado y que exista `admins/<uid>`; luego lista `accesos`. Todo se pinta con `textContent`. |
 
 ### 5.3 Juegos
 
-**`juegos-base.js`** (`BioTutorial`, `BioJuego`). Lo común a los tres juegos: tutorial con mascota, reglas, quiz genérico, barajar, confeti, estrellas, formato de tiempo, medidor de contaminación, guardado de récords y puntos (`bionyssa_progreso`), sonidos.
+**`juegos.js`** (`BioTutorial`, `BioJuego`). Lo común a los tres juegos: tutorial con mascota, reglas, quiz genérico, barajar, confeti, estrellas, formato de tiempo, medidor de contaminación, guardado de récords y puntos (`bionyssa_progreso`), sonidos.
 
-**`juego-trivia-salva-al-planeta.js`**. Preguntas de sí/no: cada acierto baja la contaminación 10 %, cada error la sube 10 %; ≤60 % o 0 % ganas, 100 % pierdes.
+**`trivia.js`**. Preguntas de sí/no: cada acierto baja la contaminación 10 %, cada error la sube 10 %; ≤60 % o 0 % ganas, 100 % pierdes.
 
-**`juego-clasificar-residuos.js`**. Clasificar residuos en el bote correcto (usa las imágenes de `assets/img`).
+**`clasificar.js`**. Clasificar residuos en el bote correcto (usa las imágenes de `assets/img`).
 
-**`juego-memorama-verde.js`**. Memorama de parejas con reloj y conteo de movimientos; da de 1 a 3 estrellas.
+**`memorama.js`**. Memorama de parejas con reloj y conteo de movimientos; da de 1 a 3 estrellas.
 
-**`juego-sin-conexion.js`**. "Lluvia de reciclaje" de `offline.html`; vuelve solo cuando regresa la red (`hayRed`, `conRedReal`, `salir`). Récord en `bionyssa_sin_red_record`.
+**`sin-conexion.js`**. "Lluvia de reciclaje" de `offline.html`; vuelve solo cuando regresa la red (`hayRed`, `conRedReal`, `salir`). Récord en `bionyssa_sin_red_record`.
 
 ---
 

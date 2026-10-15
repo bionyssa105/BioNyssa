@@ -6,6 +6,21 @@ BioNyssa es una página web sobre una bolsa orgánica y biodegradable que no se 
 
 Sitio: https://bionyssa-bc317.web.app/
 
+
+## Archivos JS
+
+En `js/` hay 7 archivos:
+
+- `tema.js`: va en el `<head>`. Pone el tema claro u oscuro antes de que pinte la página y manda al menú si ya hay sesión (solo en las páginas con `data-entrada` en `<html>`).
+- `nucleo.js`: lo que usan casi todas las páginas: almacén por cuenta, sesión y funciones comunes, filtro de groserías, cuentas, conexión con Firebase, sincronización con la nube y avisos.
+- `cuenta.js`: acceso con Google, ver contraseña, login, registro y recuperar contraseña.
+- `jugar.js`: base de los juegos, memorama, clasificar, trivia, lista de minijuegos y el juego sin conexión.
+- `paginas.js`: el código de guía, contacto, impacto, menú, mi planta, admin y comunidad.
+- `arranque.js`: lo que va al final de cada página (precarga de enlaces, barra de arriba) y la mascota de la portada.
+- `sw.js`: el service worker (modo sin conexión).
+
+Dentro de cada archivo, cada bloque empieza con un comentario con su nombre (`// menu`, `// comunidad`...). Cada `<body>` tiene `data-pagina="nombre"` y cada bloque solo se ejecuta en las páginas donde hace falta: mira la condición `if (...)` debajo del comentario. Donde más abajo dice "Script: `nombre`" se refiere al bloque con ese nombre.
+
 ## Qué busca la página
 
 - Enseñar a usar la bolsa: dónde plantarla, cómo regarla y qué esperar.
@@ -25,7 +40,7 @@ Sitio: https://bionyssa-bc317.web.app/
 
 **Información (Nuestra historia).** Cuenta cómo nació BioNyssa, el proceso de creación en cuatro pasos (materiales, tejido, confección y control de calidad), los materiales ecológicos que usa y una línea de tiempo.
 
-**Mi planta.** Para llevar el seguimiento de tu planta. Registras la fecha de siembra y le puedes poner nombre. Cada vez que la riegas tocas "La regué hoy", y marcas los cuidados del día (sol, plagas, hojas secas) para ganar puntos. Te muestra en qué etapa va (semilla, germinando, brote y planta), cuánto falta para la siguiente y qué le toca hacer. Bio te avisa cómo se siente. Se guarda en tu cuenta.
+**Mi planta.** Para llevar el seguimiento de tu planta. Registras la fecha de siembra y le puedes poner nombre; puedes agregar varias plantas y cada una lleva su propio seguimiento y diario. Cada vez que la riegas tocas "La regué hoy", y marcas los cuidados del día (sol, plagas, hojas secas) para ganar puntos. Te muestra en qué etapa va (semilla, germinando, brote y planta), cuánto falta para la siguiente y qué le toca hacer. Bio te avisa cómo se siente. Se guarda en tu cuenta.
 
 **Nuestro impacto.** Una calculadora: eliges cuántas bolsas usas al mes y a cuántos años, y te dice cuántas bolsas dejan de acabar en la basura, cuántas plantas serían posibles y cuántos gramos de plástico no se quedan en el ambiente. Es una estimación, no una medición exacta. También tiene un contador de las bolsas que sembraste tú y otro con las de todos (este suma solo si tienes sesión iniciada), el camino de una bolsa y una comparación entre una bolsa común y BioNyssa.
 

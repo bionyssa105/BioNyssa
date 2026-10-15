@@ -25,6 +25,32 @@ service cloud.firestore {
     function dePublicacion(id) {
       return get(/databases/$(database)/documents/publicaciones/$(id)).data;
     }
+    // Ayudas para revisar documentos de usuarios/{uid}/... (d = datos que llegan, c = nombre del campo)
+    function idOk(id) {
+      return id.matches('^[A-Za-z0-9_]{1,40}$');
+    }
+    function txt(d, c, max) {
+      return !(c in d) || (d[c] is string && d[c].size() <= max);
+    }
+    function num(d, c) {
+      return !(c in d) || d[c] is number;
+    }
+    function numONulo(d, c) {
+      return !(c in d) || d[c] == null || d[c] is number;
+    }
+    function lista(d, c, max) {
+      return !(c in d) || (d[c] is list && d[c].size() <= max);
+    }
+    function mapa(d, c, max) {
+      return !(c in d) || (d[c] is map && d[c].size() <= max);
+    }
+    function imagenOk(d, c, max) {
+      return !(c in d) || d[c] == null
+        || (d[c] is string && d[c].size() <= max && d[c].matches('^data:image/[a-z]+;base64,.*'));
+    }
+    function valorOk(d) {
+      return !('valor' in d) || !(d.valor is string) || d.valor.size() <= 200;
+    }
 
     match /admins/{uid} {
       allow read: if esDueno(uid);
@@ -40,6 +66,148 @@ service cloud.firestore {
         && (!('correo' in request.resource.data) || (request.resource.data.correo is string && request.resource.data.correo.size() <= 120))
         && (!('datos' in request.resource.data) || (request.resource.data.datos is map && request.resource.data.datos.size() <= 60));
       allow delete: if false;
+
+      // ---- Todo lo de cada persona va aparte, en su propia carpeta y su propio documento ----
+
+      // Hora del último cambio de cada dato (sirve para saber si manda el navegador o la nube)
+      match /sync/{nombre} {
+        allow read, delete: if esDueno(uid);
+        allow create, update: if esDueno(uid)
+          && nombre.matches('^[A-Za-z0-9_]{1,60}$')
+          && request.resource.data.keys().hasOnly(['t', 'borrado'])
+          && request.resource.data.t is number
+          && request.resource.data.borrado is bool;
+      }
+
+      // Una planta de Mi planta (puede haber varias)
+      match /plantas/{plantaId} {
+        allow read, delete: if esDueno(uid);
+        allow create, update: if esDueno(uid)
+          && idOk(plantaId)
+          && request.resource.data.keys().hasOnly(['id', 'nombre', 'siembra', 'riegos', 'freq', 'alturas', 'logros', 'cuidados', 'cuidadosPts', 'etapa', 'creado', 'actualizado'])
+          && request.resource.data.get('id', plantaId) == plantaId
+          && txt(request.resource.data, 'nombre', 40)
+          && request.resource.data.siembra is string && request.resource.data.siembra.size() <= 10
+          && lista(request.resource.data, 'riegos', 4000)
+          && num(request.resource.data, 'freq')
+          && lista(request.resource.data, 'alturas', 60)
+          && mapa(request.resource.data, 'logros', 40)
+          && mapa(request.resource.data, 'cuidados', 120)
+          && lista(request.resource.data, 'cuidadosPts', 120)
+          && num(request.resource.data, 'etapa')
+          && num(request.resource.data, 'creado')
+          && num(request.resource.data, 'actualizado');
+
+        // Una entrada del diario de esa planta
+        match /diario/{entradaId} {
+          allow read, delete: if esDueno(uid);
+          allow create, update: if esDueno(uid)
+            && idOk(plantaId) && idOk(entradaId)
+            && request.resource.data.keys().hasOnly(['id', 'f', 't', 'img', 'creado', 'actualizado'])
+            && txt(request.resource.data, 'f', 10)
+            && txt(request.resource.data, 't', 400)
+            && imagenOk(request.resource.data, 'img', 300000)
+            && num(request.resource.data, 'creado')
+            && num(request.resource.data, 'actualizado');
+        }
+      }
+
+      // Progreso de cada minijuego (trivia, clasificar, memorama)
+      match /progreso/{juego} {
+        allow read, delete: if esDueno(uid);
+        allow create, update: if esDueno(uid)
+          && idOk(juego)
+          && request.resource.data.keys().hasOnly(['partidas', 'victorias', 'mejor', 'racha', 'actualizado'])
+          && num(request.resource.data, 'partidas')
+          && num(request.resource.data, 'victorias')
+          && numONulo(request.resource.data, 'mejor')
+          && num(request.resource.data, 'racha')
+          && num(request.resource.data, 'actualizado');
+      }
+
+      // Récord del juego que sale cuando no hay internet
+      match /sin_conexion/{doc} {
+        allow read, delete: if esDueno(uid);
+        allow create, update: if esDueno(uid)
+          && doc == 'record'
+          && request.resource.data.keys().hasOnly(['mejor', 'valor', 'j', 'actualizado'])
+          && numONulo(request.resource.data, 'mejor')
+          && valorOk(request.resource.data)
+          && num(request.resource.data, 'j')
+          && num(request.resource.data, 'actualizado');
+      }
+
+      // Puntos y nivel
+      match /puntos/{doc} {
+        allow read, delete: if esDueno(uid);
+        allow create, update: if esDueno(uid)
+          && doc == 'actual'
+          && request.resource.data.keys().hasOnly(['p', 'dia', 'actualizado'])
+          && num(request.resource.data, 'p')
+          && txt(request.resource.data, 'dia', 12)
+          && num(request.resource.data, 'actualizado');
+      }
+
+      // Reto del día
+      match /retos/{doc} {
+        allow read, delete: if esDueno(uid);
+        allow create, update: if esDueno(uid)
+          && doc == 'actual'
+          && request.resource.data.keys().hasOnly(['dias', 'pts', 'actualizado'])
+          && lista(request.resource.data, 'dias', 400)
+          && lista(request.resource.data, 'pts', 400)
+          && num(request.resource.data, 'actualizado');
+      }
+
+      // Pasos de la guía de uso que ya hiciste
+      match /guia/{doc} {
+        allow read, delete: if esDueno(uid);
+        allow create, update: if esDueno(uid)
+          && doc == 'pasos'
+          && request.resource.data.keys().hasOnly(['hechos', 'valor', 'j', 'actualizado'])
+          && lista(request.resource.data, 'hechos', 40)
+          && valorOk(request.resource.data)
+          && num(request.resource.data, 'j')
+          && num(request.resource.data, 'actualizado');
+      }
+
+      // Calculadora de impacto (plazo elegido y bolsas sembradas)
+      match /impacto/{doc} {
+        allow read, delete: if esDueno(uid);
+        allow create, update: if esDueno(uid)
+          && (doc == 'plazo' || doc == 'sembradas')
+          && request.resource.data.keys().hasOnly(['anios', 'total', 'valor', 'j', 'actualizado'])
+          && num(request.resource.data, 'anios')
+          && num(request.resource.data, 'total')
+          && valorOk(request.resource.data)
+          && num(request.resource.data, 'j')
+          && num(request.resource.data, 'actualizado');
+      }
+
+      // Comunidad: publicaciones guardadas y etiquetas propias
+      match /comunidad/{doc} {
+        allow read, delete: if esDueno(uid);
+        allow create, update: if esDueno(uid)
+          && (doc == 'guardadas' || doc == 'etiquetas')
+          && request.resource.data.keys().hasOnly(['ids', 'lista', 'valor', 'j', 'actualizado'])
+          && lista(request.resource.data, 'ids', 2000)
+          && lista(request.resource.data, 'lista', 50)
+          && valorOk(request.resource.data)
+          && num(request.resource.data, 'j')
+          && num(request.resource.data, 'actualizado');
+      }
+
+      // Ajustes: avisos, tema y tutoriales ya vistos
+      match /ajustes/{doc} {
+        allow read, delete: if esDueno(uid);
+        allow create, update: if esDueno(uid)
+          && doc.matches('^[A-Za-z0-9_]{1,60}$')
+          && request.resource.data.keys().hasOnly(['visto', 'valor', 'on', 'pregunto', 'ult', 'j', 'actualizado'])
+          && valorOk(request.resource.data)
+          && mapa(request.resource.data, 'ult', 10)
+          && num(request.resource.data, 'j')
+          && num(request.resource.data, 'actualizado');
+      }
     }
 
     match /perfiles/{uid} {

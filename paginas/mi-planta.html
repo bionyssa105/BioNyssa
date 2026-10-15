@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#fffffd">
+<meta name="theme-color" content="#ffffff">
 <meta name="description" content="Lleva el seguimiento de tu planta: fecha de siembra, riegos y etapas.">
 <title>Mi planta | BioNyssa</title>
 <meta property="og:type" content="website">
@@ -17,16 +17,16 @@
 <link rel="apple-touch-icon" href="../assets/img/logo-app.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../css/01-base.css">
-<link rel="stylesheet" href="../css/02-guia-y-mi-planta.css">
-<link rel="stylesheet" href="../css/03-comun-parte-1.css">
-<link rel="stylesheet" href="../css/05-comun-parte-2.css">
-<link rel="stylesheet" href="../css/06-barra-y-adaptacion-a-pantallas.css">
-<link rel="stylesheet" href="../css/09-ajustes-juegos-y-planta.css">
-<script src="../js/tema-inicial.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Open+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/guia.css">
+<link rel="stylesheet" href="../css/comun.css">
+<link rel="stylesheet" href="../css/tema.css">
+<link rel="stylesheet" href="../css/barra.css">
+<link rel="stylesheet" href="../css/planta.css">
+<script src="../js/tema.js"></script>
 </head>
-<body class="pagina-planta">
+<body class="pagina-planta" data-pagina="mi-planta">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <div class="screen">
   <div class="topbar">
@@ -43,14 +43,17 @@
     <div class="wrap">
       <header class="page-head">
         <h1>Mi planta</h1>
-        <p>Anota cuándo sembraste tu bolsa y lleva la cuenta de riegos y etapas. Se guarda en tu cuenta.</p>
+        <p>Anota cuándo sembraste tu bolsa y lleva la cuenta de riegos y etapas. Puedes agregar varias plantas y cada una se guarda por separado en tu cuenta.</p>
       </header>
       <div class="planta-layout">
-        <div id="plantaVista"></div>
+        <div class="planta-principal">
+          <div id="plantaSelector"></div>
+          <div id="plantaVista"></div>
+        </div>
         <aside class="como-planta">
           <h2>Cómo usar Mi planta</h2>
           <ol class="como-lista">
-            <li><b>1</b><div><strong>Registra tu siembra</strong><p>Pon la fecha en que enterraste la bolsa y, si quieres, ponle nombre a tu planta.</p></div></li>
+            <li><b>1</b><div><strong>Registra tu siembra</strong><p>Pon la fecha en que enterraste la bolsa y, si quieres, ponle nombre a tu planta. Si sembraste más de una, usa «Agregar planta».</p></div></li>
             <li><b>2</b><div><strong>Riega y cuídala</strong><p>Cada vez que la riegues toca «La regué hoy». Marca también sus cuidados del día (sol, plagas y hojas secas) para ganar puntos.</p></div></li>
             <li><b>3</b><div><strong>Sigue sus etapas</strong><p>Aquí ves en qué etapa va, cuánto falta para la siguiente, su camino con fechas y qué le toca hacer ahora. Bio te avisa cómo se siente.</p></div></li>
             <li><b>4</b><div><strong>Compártela</strong><p>Cuando brote, cuéntalo en la <a href="comunidad.html">comunidad</a>.</p></div></li>
@@ -61,12 +64,8 @@
     </div>
   </main>
 </div>
-<script src="../js/almacen-por-cuenta.js"></script>
 <script src="../js/nucleo.js"></script>
-<script src="../js/firebase-base.js"></script>
-<script src="../js/nube-firestore.js"></script>
-<script src="../js/notificaciones.js"></script>
-<script src="../js/pagina-mi-planta.js"></script>
-<script src="../js/cierre.js"></script>
+<script src="../js/paginas.js"></script>
+<script src="../js/arranque.js"></script>
 </body>
 </html>
