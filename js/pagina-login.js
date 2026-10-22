@@ -14,8 +14,14 @@ document.getElementById('formLogin').addEventListener('submit', async (e) => {
     return;
   }
   boton.disabled = true;
-  const r = await BioCuentas.entrar(correo, clave);
-  boton.disabled = false;
+  let r;
+  try {
+    r = await BioCuentas.entrar(correo, clave);
+  } catch (err) {
+    r = { ok: false, motivo: 'Algo falló al iniciar sesión. Inténtalo otra vez.' };
+  } finally {
+    boton.disabled = false;
+  }
   if (!r.ok) {
     error.textContent = r.motivo;
     return;

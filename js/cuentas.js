@@ -33,6 +33,17 @@ window.BioCuentas = (function () {
     if (!(window.BioNube && BioNube.configurado())) return;
     await Promise.race([BioNube.activar({ sinRecargar: true, sinAviso: true }), pausa(1200)]);
   }
+  function motivoDe(codigo, accion) {
+    const textos = {
+      'auth/network-request-failed': 'No hay conexión con el servidor. Revisa tu internet e inténtalo otra vez.',
+      'auth/too-many-requests': 'Demasiados intentos. Espera unos minutos e inténtalo otra vez.',
+      'auth/operation-not-allowed': 'El acceso con correo no está activado en Firebase (Authentication > Sign-in method).',
+      'auth/weak-password': 'La contraseña es muy débil. Usa al menos 8 caracteres.',
+      'auth/invalid-email': 'Ese correo no es válido.',
+      'auth/unauthorized-domain': 'Este dominio no está autorizado en Firebase (Authentication > Settings > Authorized domains).'
+    };
+    return (textos[codigo] || 'No pudimos ' + accion + '. Inténtalo otra vez.') + ' [' + codigo + ']';
+  }
   function pasarInvitado(id) {
     if (window.BioAlmacen && BioAlmacen.pasarInvitado) BioAlmacen.pasarInvitado(id);
   }
@@ -43,7 +54,7 @@ window.BioCuentas = (function () {
     if (porCorreo(c)) return yaExiste;
     const nube = await BioFirebase.sincronizar(c, clave, nombre);
     if (nube.codigo === 'existe') return yaExiste;
-    if (!nube.ok) return { ok: false, motivo: 'No pudimos crear la cuenta. Revisa tu internet e inténtalo otra vez.' };
+    if (!nube.ok) return { ok: false, motivo: motivoDe(nube.codigo || 'error', 'crear la cuenta') };
     const cuenta = crear(c, 'c_' + c, nombre, c, 'correo');
     abrirSesion(cuenta);
     pasarInvitado(cuenta.id);
@@ -57,6 +68,7 @@ window.BioCuentas = (function () {
       return { ok: false, motivo: 'Esa cuenta entra con Google. Usa el botón de Google.' };
     }
     const nube = await BioFirebase.entrar(c, clave);
+    if (nube && nube.error) return { ok: false, motivo: motivoDe(nube.error, 'iniciar sesión') };
     if (!nube) {
       return cuenta
         ? { ok: false, motivo: 'La contraseña no es correcta.' }

@@ -565,7 +565,7 @@ window.BioNube = (function () {
     } catch (e) {}
     desactivar(); activando = null; ultimaNube = {};
     try {
-      if (configurado()) { var n = await nucleo(); await n.fa.signOut(n.auth); }
+      if (configurado()) { var au = await BioFirebase.auth(); await au.fa.signOut(au.auth); }
     } catch (e) {}
   }
   var com = null;

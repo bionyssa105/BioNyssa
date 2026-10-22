@@ -14,8 +14,14 @@ document.getElementById('formRegistro').addEventListener('submit', async (e) => 
   if (clave !== clave2) return fallo('Las contraseñas no coinciden.');
   if (clave.length < 8) return fallo('La contraseña debe tener al menos 8 caracteres.');
   boton.disabled = true;
-  const r = await BioCuentas.registrar({ nombre, correo, clave });
-  boton.disabled = false;
+  let r;
+  try {
+    r = await BioCuentas.registrar({ nombre, correo, clave });
+  } catch (err) {
+    r = { ok: false, motivo: 'Algo falló al crear la cuenta. Inténtalo otra vez.' };
+  } finally {
+    boton.disabled = false;
+  }
   if (!r.ok) return fallo(r.motivo);
   location.href = '/paginas/menu.html';
 });

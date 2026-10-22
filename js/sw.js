@@ -1,6 +1,6 @@
 // si cambio algo de los archivos, subir el número de versión o no se actualiza
-const V = 'bio-sin-red-v19';
-const E = 'bio-estaticos-v25';
+const V = 'bio-sin-red-v22';
+const E = 'bio-estaticos-v28';
 const F = 'bio-firebase-v1';
 const BASE = self.registration.scope;
 const LISTA = [

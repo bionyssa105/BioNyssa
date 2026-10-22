@@ -62,7 +62,11 @@ window.BioFirebase = (function () {
           var r = await f.signInWithEmailAndPassword(a, correo, clave);
           return { nombre: r.user.displayName || '' };
         });
-      } catch (e) { return null; }
+      } catch (e) {
+        var sinCuenta = ['auth/invalid-credential', 'auth/invalid-login-credentials', 'auth/user-not-found', 'auth/wrong-password', 'auth/invalid-email'];
+        if (e && sinCuenta.indexOf(e.code) > -1) return null;
+        return { error: (e && e.code) || 'error' };
+      }
     },
     sincronizar: async function (correo, clave, nombre) {
       if (!configurado()) return { ok: false, codigo: 'bio/no-config' };

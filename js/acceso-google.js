@@ -8,7 +8,9 @@
     'auth/operation-not-allowed': 'Falta activar Google. En Firebase ve a Authentication > Sign-in method y habilita Google.',
     'auth/network-request-failed': 'No hay conexión. Revisa tu internet e inténtalo de nuevo.',
     'auth/invalid-api-key': 'La apiKey de js/firebase-base.js no es válida.',
-    'auth/web-storage-unsupported': 'Tu navegador está bloqueando el almacenamiento. Actívalo o abre la página en Chrome o Safari.'
+    'auth/web-storage-unsupported': 'Tu navegador está bloqueando el almacenamiento. Actívalo o abre la página en Chrome o Safari.',
+    'auth/internal-error': 'Google no respondió bien. Espera un momento e inténtalo otra vez.',
+    'auth/popup-blocked': 'El navegador bloqueó la ventana de Google. Permite las ventanas emergentes para este sitio.'
   };
   let fb = null;
   function bloquear(si) {
@@ -25,7 +27,7 @@
     if (e && ignorar.includes(e.code)) return;
     BioComun.dialogo({
       titulo: 'No se pudo entrar con Google',
-      mensaje: mensajes[e && e.code] || 'Inténtalo de nuevo en un momento.',
+      mensaje: (mensajes[e && e.code] || 'Inténtalo de nuevo en un momento.') + (e && e.code ? ' [' + e.code + ']' : ''),
       tipo: 'error'
     });
   }
@@ -56,6 +58,7 @@
   }
   function porRedireccion(m) {
     bloquear(true);
+    try { sessionStorage.setItem('bio_google_redir', '1'); } catch (x) {}
     return m.fa.signInWithRedirect(m.auth, new m.fa.GoogleAuthProvider()).catch(fallo);
   }
   async function entrar() {
@@ -80,9 +83,16 @@
   }
   botones.forEach((b) => b.addEventListener('click', entrar));
   if (!BioFirebase.configurado()) return;
-  BioFirebase.auth()
-    .then((m) => { fb = m; return m.fa.getRedirectResult(m.auth); })
-    .then((r) => { if (r && r.user) { bloquear(true); return terminar(r); } })
-    .catch((e) => { if (e && e.code) fallo(e); });
+  let volviendoDeGoogle = false;
+  try {
+    volviendoDeGoogle = sessionStorage.getItem('bio_google_redir') === '1';
+    sessionStorage.removeItem('bio_google_redir');
+  } catch (e) {}
+  if (volviendoDeGoogle) {
+    BioFirebase.auth()
+      .then((m) => { fb = m; return m.fa.getRedirectResult(m.auth); })
+      .then((r) => { if (r && r.user) { bloquear(true); return terminar(r); } })
+      .catch((e) => { if (e && e.code) fallo(e); });
+  }
   setTimeout(() => BioFirebase.nucleo().catch(() => {}), 1500);
 })();
