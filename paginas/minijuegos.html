@@ -17,16 +17,16 @@
 <link rel="apple-touch-icon" href="../assets/img/logo-app.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Open+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../css/base.css">
-<link rel="stylesheet" href="../css/juegos.css">
-<link rel="stylesheet" href="../css/comun.css">
-<link rel="stylesheet" href="../css/tema.css">
-<link rel="stylesheet" href="../css/barra.css">
-<link rel="stylesheet" href="../css/planta.css">
-<script src="../js/tema.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../css/01-base.css">
+<link rel="stylesheet" href="../css/02-minijuegos-y-juegos.css">
+<link rel="stylesheet" href="../css/03-comun-parte-1.css">
+<link rel="stylesheet" href="../css/05-comun-parte-2.css">
+<link rel="stylesheet" href="../css/06-barra-y-adaptacion-a-pantallas.css">
+<link rel="stylesheet" href="../css/09-ajustes-juegos-y-planta.css">
+<script src="../js/tema-inicial.js"></script>
 </head>
-<body data-pagina="minijuegos">
+<body>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <div class="screen">
   <div class="topbar">
@@ -64,7 +64,7 @@
                 <path class="v-tierra" d="M196 140c10-4 22 0 26 8 3 7-3 12-10 12h-22c-5-8-3-16 6-20Z"/>
               </g>
               <path class="v-papel" d="M40 34h84a14 14 0 0 1 14 14v30a14 14 0 0 1-14 14H82l-16 16v-16H40a14 14 0 0 1-14-14V48a14 14 0 0 1 14-14Z"/>
-              <text x="82" y="78" text-anchor="middle" style="font:800 34px var(--fuente-titulo);fill:var(--oliva-oscuro)">?</text>
+              <text x="82" y="78" text-anchor="middle" style="font:800 34px var(--font-display);fill:var(--olive-deep)">?</text>
             </svg></div>
           <div class="game-body">
             <span class="kicker">Trivia ecológica · 10 preguntas</span>
@@ -102,7 +102,7 @@
               <path class="v-suelo" d="M30 146h260"/>
               <g transform="rotate(-9 86 84)">
                 <g>
-                  <rect class="v-tierra" x="52" y="34" width="68" height="94" rx="10" style="fill:var(--boton)"/>
+                  <rect class="v-tierra" x="52" y="34" width="68" height="94" rx="10" style="fill:var(--btn-bg)"/>
                   <g class="v-claro" transform="translate(68 62) scale(1.05)"><path d="M16 29V15"/><path d="M16 16.5C15.6 11.8 12 9 6.4 9.2c.2 5 3.6 8 9.6 7.3Z"/><path d="M16.4 14.6C17 10 20.4 7.2 25.6 7.4c.1 4.8-3.1 7.6-9.2 7.2Z"/></g>
                 </g>
               </g>
@@ -112,7 +112,7 @@
                 <rect class="v-mar" x="162" y="40" width="12" height="11" rx="3" style="fill:#c0d09b"/>
               </g>
               <g transform="rotate(11 246 84)">
-                <rect class="v-ocre" x="210" y="30" width="72" height="100" rx="10" style="fill:var(--verde-suave)"/>
+                <rect class="v-ocre" x="210" y="30" width="72" height="100" rx="10" style="fill:var(--brote-soft)"/>
                 <rect class="v-mar" x="234" y="52" width="24" height="44" rx="8" style="fill:#c0d09b"/>
                 <rect class="v-mar" x="240" y="44" width="12" height="11" rx="3" style="fill:#c0d09b"/>
               </g>
@@ -135,8 +135,13 @@
     </div>
   </main>
 </div>
+<script src="../js/almacen-por-cuenta.js"></script>
 <script src="../js/nucleo.js"></script>
-<script src="../js/jugar.js"></script>
-<script src="../js/arranque.js"></script>
+<script src="../js/firebase-base.js"></script>
+<script src="../js/nube-firestore.js"></script>
+<script src="../js/notificaciones.js"></script>
+<script src="../js/juegos-base.js"></script>
+<script src="../js/pagina-minijuegos-lista.js"></script>
+<script src="../js/cierre.js"></script>
 </body>
 </html>

@@ -304,6 +304,21 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    match /pedidos/{id} {
+      allow read: if esAdmin();
+      allow create: if request.resource.data.keys().hasOnly(['nombre', 'correo', 'telefono', 'notas', 'items', 'total', 'uid', 'creado'])
+        && request.resource.data.nombre is string && request.resource.data.nombre.size() >= 2 && request.resource.data.nombre.size() <= 80
+        && request.resource.data.correo is string && request.resource.data.correo.size() <= 120 && request.resource.data.correo.matches('^[^@ ]+@[^@ ]+\\.[^@ ]{2,}$')
+        && request.resource.data.telefono is string && request.resource.data.telefono.size() <= 20
+        && request.resource.data.notas is string && request.resource.data.notas.size() <= 300
+        && request.resource.data.items is list && request.resource.data.items.size() >= 1 && request.resource.data.items.size() <= 24
+        && (!('total' in request.resource.data) || (request.resource.data.total is number && request.resource.data.total > 0 && request.resource.data.total <= 200000))
+        && (!('uid' in request.resource.data) || (entro() && request.resource.data.uid == request.auth.uid))
+        && request.resource.data.creado is number
+        && request.resource.data.creado <= request.time.toMillis() + 86400000;
+      allow update, delete: if false;
+    }
+
     match /global/{doc} {
       allow read: if true;
       allow create: if doc == 'impacto' && entro()

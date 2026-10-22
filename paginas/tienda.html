@@ -1,0 +1,73 @@
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fffffd">
+<meta name="description" content="Compra bolsas BioNyssa con semillas: individuales o en paquetes de 20 y 50.">
+<title>Tienda | BioNyssa</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BioNyssa">
+<meta property="og:locale" content="es_MX">
+<meta property="og:title" content="Tienda | BioNyssa">
+<meta property="og:description" content="La bolsa que no termina en la basura: la plantas y se vuelve planta.">
+<meta property="og:image" content="https://bionyssa.netlify.app/assets/img/logo-app.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+<link rel="icon" type="image/png" href="../assets/img/logo-app.png">
+<link rel="apple-touch-icon" href="../assets/img/logo-app.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../css/01-base.css">
+<link rel="stylesheet" href="../css/02-login-y-registro.css">
+<link rel="stylesheet" href="../css/02-contacto.css">
+<link rel="stylesheet" href="../css/02-tienda.css">
+<link rel="stylesheet" href="../css/03-comun-parte-1.css">
+<link rel="stylesheet" href="../css/05-comun-parte-2.css">
+<link rel="stylesheet" href="../css/06-barra-y-adaptacion-a-pantallas.css">
+<script src="../js/tema-inicial.js"></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="screen">
+  <div class="topbar">
+    <div class="wrap">
+      <div class="topbar-row">
+        <a href="menu.html" class="back-btn" aria-label="Volver al menú">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><g stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15.8 4.9c-2.9 2.3-5.2 4.6-6.9 7.2 1.9 2.7 4.3 4.9 7 6.9"/></g></svg>
+        </a>
+        <a href="../index.html" class="mark" aria-label="BioNyssa, ir al inicio"><span class="mark-icon" aria-hidden="true"></span><span class="mark-word">BioNyssa</span></a>
+      </div>
+    </div>
+  </div>
+  <main id="contenido" class="page-main">
+    <div class="wrap">
+      <header class="page-head"><h1>Tienda</h1><p>Elige tu bolsa, el material y las semillas que quieres sembrar.</p></header>
+      <div class="tienda-grid" id="tProductos"></div>
+      <section class="pedido" aria-labelledby="tPedido">
+        <h2 id="tPedido" class="c-tit">Tu pedido <span id="tCuenta"></span></h2>
+        <div class="pedido-cols">
+          <div class="pedido-lista" id="tLista" aria-live="polite"></div>
+          <form id="formPedido" class="c-form" novalidate>
+            <h3 class="c-tit">Tus datos</h3>
+            <div class="field-group"><label class="field-label" for="tNombre">Tu nombre</label><div class="field-input-wrap sin-icono"><input type="text" id="tNombre" maxlength="80" autocomplete="name" placeholder="Como te llamas"></div></div>
+            <div class="field-group"><label class="field-label" for="tCorreo">Tu correo</label><div class="field-input-wrap sin-icono"><input type="email" id="tCorreo" maxlength="120" autocomplete="email" placeholder="tucorreo@ejemplo.com"></div></div>
+            <div class="field-group"><label class="field-label" for="tTel">Teléfono (opcional)</label><div class="field-input-wrap sin-icono"><input type="tel" id="tTel" maxlength="20" autocomplete="tel" placeholder="10 dígitos"></div></div>
+            <div class="field-group"><label class="field-label" for="tNotas">Dirección o notas de entrega</label><textarea id="tNotas" rows="3" maxlength="300" placeholder="Calle, colonia, ciudad o lo que quieras avisarnos"></textarea><span class="c-cuenta" id="tNotasCuenta" aria-live="off">0 / 300</span></div>
+            <input type="text" id="tWeb" tabindex="-1" autocomplete="off" class="c-trampa" aria-hidden="true">
+            <button type="submit" class="btn btn-primary" id="tEnviar" disabled>Hacer pedido</button>
+            <p class="c-estado" id="tEstado" role="status" aria-live="polite"></p>
+            <p class="pedido-nota">Aquí no se paga: te escribimos al correo para confirmar tu pedido, el pago y la entrega.</p>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+<script src="../js/almacen-por-cuenta.js"></script>
+<script src="../js/nucleo.js"></script>
+<script src="../js/firebase-base.js"></script>
+<script src="../js/pagina-tienda.js"></script>
+<script src="../js/cierre.js"></script>
+</body>
+</html>

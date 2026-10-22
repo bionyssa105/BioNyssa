@@ -1,0 +1,48 @@
+.tienda-grid{ display:grid; gap:28px; margin-top:8px; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); }
+.prod{ display:flex; flex-direction:column; border:1.5px solid var(--line-strong); border-radius:14px; background:var(--card); box-shadow:6px 6px 0 var(--sage-2); overflow:hidden; }
+.prod-img{ margin:0; padding:20px 18px 8px; background:var(--sage); border-bottom:1.5px solid var(--line-strong); }
+.prod-img svg{ display:block; width:100%; max-width:230px; height:auto; margin:0 auto; }
+.prod-body{ display:grid; gap:14px; padding:18px 20px 20px; }
+.prod-nombre{ font:700 1.3rem/1.2 var(--font-display); color:var(--ink); }
+.prod-precio{ margin-top:-8px; font:700 1.55rem/1 var(--font-display); color:var(--olive-deep); }
+.prod-precio small{ font:600 .8rem var(--font-body); color:var(--ink-faint); margin-left:4px; }
+.prod-desc{ color:var(--ink-soft); }
+.opc{ border:0; padding:0; margin:0; min-width:0; }
+.opc legend{ padding:0; margin-bottom:8px; font-weight:600; font-size:.9rem; color:var(--ink-soft); }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{ position:relative; }
+.chip input{ position:absolute; opacity:0; pointer-events:none; }
+.chip span{ display:inline-block; padding:8px 14px; border:1.5px solid var(--line-strong); border-radius:6px; font-weight:600; font-size:.92rem; color:var(--ink); cursor:pointer; transition:background-color .15s ease, border-color .15s ease; }
+.chip input:checked + span{ background:var(--btn-bg); border-color:var(--btn-bg); color:var(--btn-ink); }
+.chip input:focus-visible + span{ outline:2px solid var(--brote); outline-offset:2px; }
+@media (hover:hover) { .chip input:not(:checked) + span:hover{ border-color:var(--olive); background:var(--bone-2); } }
+.opc-ayuda{ margin-top:8px; font-size:.88rem; color:var(--ink-faint); min-height:1.3em; }
+.prod-pie{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
+.cant{ display:inline-flex; align-items:center; border:1.5px solid var(--line-strong); border-radius:6px; }
+.cant button{ width:36px; height:38px; border:0; background:transparent; color:var(--ink); font:600 1.2rem var(--font-body); cursor:pointer; }
+.cant button:hover:not(:disabled){ background:var(--bone-2); }
+.cant button:disabled{ opacity:.35; cursor:default; }
+.cant output{ min-width:34px; text-align:center; font-weight:700; }
+.tienda-btn{ min-width:0; padding:10px 20px; border-radius:6px; box-shadow:3px 3px 0 var(--line-strong); transition:transform .12s ease, box-shadow .12s ease, background-color .15s ease; }
+@media (hover:hover) { .tienda-btn:hover{ transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--line-strong); } }
+.tienda-btn:active{ transform:translate(2px,2px); box-shadow:0 0 0 var(--line-strong); }
+.pedido{ margin-top:56px; padding-bottom:40px; }
+.pedido .c-tit span{ font:600 1rem var(--font-body); color:var(--ink-faint); }
+.pedido-cols{ display:grid; gap:28px; margin-top:16px; }
+@media (min-width:900px) { .pedido-cols{ grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:48px; align-items:start; } }
+.pedido-lista{ padding:8px 22px 20px; border:1.5px solid var(--line-strong); border-radius:14px; background:var(--card); }
+.pedido-vacio{ padding:18px 0 6px; color:var(--ink-faint); }
+.linea{ display:grid; grid-template-columns:1fr auto; gap:6px 14px; align-items:center; padding:16px 0; border-bottom:1px solid var(--line); }
+.linea b{ font-family:var(--font-display); font-size:1.05rem; }
+.linea-det{ display:block; font-size:.88rem; color:var(--ink-faint); }
+.linea-sub{ font-weight:700; text-align:right; }
+.linea-acc{ grid-column:1 / -1; display:flex; align-items:center; justify-content:space-between; }
+.linea-quitar{ border:0; background:none; padding:4px 0; color:var(--brick); font:600 .88rem var(--font-body); cursor:pointer; text-decoration:underline; }
+.pedido-total{ display:flex; justify-content:space-between; margin-top:16px; font:700 1.25rem var(--font-display); }
+.pedido-nota{ margin-top:12px; font-size:.88rem; color:var(--ink-faint); }
+#tNotas{ min-height:96px; }
+.c-form .btn:disabled{ opacity:.45; cursor:default; box-shadow:3px 3px 0 var(--line); transform:none; }
+@media (prefers-reduced-motion:reduce) { .tienda-btn, .chip span{ transition:none; } }
+.prod-body h2, .prod-body p{ margin:0; }
+.prod-precio{ margin-top:-6px; }
+.prod-precio.por-definir{ font:600 1.05rem/1.2 var(--font-body); color:var(--ink-faint); }

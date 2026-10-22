@@ -7,27 +7,27 @@
 <title>Sin conexión | BioNyssa</title>
 <link rel="icon" href="../assets/img/favicon.ico">
 <style>
-:root{--bg:#f6f8f1;--tarjeta:#fcfbf6;--texto:#222214;--soft:#5c5343;--oliva:#3d4726;--verde:#93a84a;--naranja:#b87036;--linea:#d8cfb8}
-@media (prefers-color-scheme:dark){:root{--bg:#1d2114;--tarjeta:#262b1b;--texto:#f7f6f0;--soft:#c9c4a6;--oliva:#a7bb5c;--linea:#3a4128}}
+:root{--bg:#f6f8f1;--card:#fcfbf6;--ink:#222214;--soft:#5c5343;--olive:#3d4726;--brote:#93a84a;--brick:#b87036;--line:#d8cfb8}
+@media (prefers-color-scheme:dark){:root{--bg:#1d2114;--card:#262b1b;--ink:#f7f6f0;--soft:#c9c4a6;--olive:#a7bb5c;--line:#3a4128}}
 *{box-sizing:border-box}
-body{margin:0;min-height:100dvh;display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px 14px calc(16px + env(safe-area-inset-bottom));background:var(--bg);color:var(--texto);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{margin:0;min-height:100dvh;display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px 14px calc(16px + env(safe-area-inset-bottom));background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 h1{margin:0;font:800 1.5rem/1.15 Georgia,serif;text-align:center}
 p{margin:0;color:var(--soft);text-align:center;font-size:.95rem}
-.tag{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--oliva);color:var(--bg);padding:4px 12px;border-radius:99px}
+.tag{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--olive);color:var(--bg);padding:4px 12px;border-radius:99px}
 .hud{display:flex;gap:10px;width:100%;max-width:360px}
-.hud div{flex:1;background:var(--tarjeta);border:1px solid var(--linea);border-radius:12px;padding:6px;text-align:center}
+.hud div{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px;text-align:center}
 .hud b{display:block;font-size:1.25rem}.hud span{font-size:.72rem;color:var(--soft)}
 .caja{position:relative;width:100%;max-width:360px}
-canvas{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--linea);touch-action:none;background:#dfe6bd}
+canvas{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line);touch-action:none;background:#dfe6bd}
 .vel{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center;background:rgba(32,40,18,.82);border-radius:16px;color:#f9f7f1}
 .vel[hidden],.aviso[hidden]{display:none}
 .vel h2{margin:0;font:800 1.6rem/1.1 Georgia,serif}.vel p{color:#e6e4c9}
-button,.btn{font:700 1rem system-ui,sans-serif;border:0;border-radius:10px;padding:12px 22px;background:var(--verde);color:#1d2a0c;cursor:pointer;text-decoration:none}
-.aviso{width:100%;max-width:360px;background:var(--tarjeta);border:1.5px solid var(--verde);border-radius:12px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.9rem}
+button,.btn{font:700 1rem system-ui,sans-serif;border:0;border-radius:10px;padding:12px 22px;background:var(--brote);color:#1d2a0c;cursor:pointer;text-decoration:none}
+.aviso{width:100%;max-width:360px;background:var(--card);border:1.5px solid var(--brote);border-radius:12px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.9rem}
 .aviso button{padding:8px 14px;font-size:.9rem}
 </style>
 </head>
-<body data-pagina="offline">
+<body>
 <span class="tag">Exclusivo sin conexión</span>
 <h1>Sin internet, pero con ganas de reciclar</h1>
 <p>Atrapa lo reciclable. Esquiva las pilas: van a un punto de acopio, no a tu canasta.</p>
@@ -48,7 +48,7 @@ button,.btn{font:700 1rem system-ui,sans-serif;border:0;border-radius:10px;paddi
     <button type="button" id="jugar">Jugar</button>
   </div>
 </div>
-<script src="../js/nucleo.js"></script>
-<script src="../js/jugar.js"></script>
+<script src="../js/almacen-por-cuenta.js"></script>
+<script src="../js/juego-sin-conexion.js"></script>
 </body>
 </html>

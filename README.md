@@ -6,21 +6,6 @@ BioNyssa es una página web sobre una bolsa orgánica y biodegradable que no se 
 
 Sitio: https://bionyssa-bc317.web.app/
 
-
-## Archivos JS
-
-En `js/` hay 7 archivos:
-
-- `tema.js`: va en el `<head>`. Pone el tema claro u oscuro antes de que pinte la página y manda al menú si ya hay sesión (solo en las páginas con `data-entrada` en `<html>`).
-- `nucleo.js`: lo que usan casi todas las páginas: almacén por cuenta, sesión y funciones comunes, filtro de groserías, cuentas, conexión con Firebase, sincronización con la nube y avisos.
-- `cuenta.js`: acceso con Google, ver contraseña, login, registro y recuperar contraseña.
-- `jugar.js`: base de los juegos, memorama, clasificar, trivia, lista de minijuegos y el juego sin conexión.
-- `paginas.js`: el código de guía, contacto, impacto, menú, mi planta, admin y comunidad.
-- `arranque.js`: lo que va al final de cada página (precarga de enlaces, barra de arriba) y la mascota de la portada.
-- `sw.js`: el service worker (modo sin conexión).
-
-Dentro de cada archivo, cada bloque empieza con un comentario con su nombre (`// menu`, `// comunidad`...). Cada `<body>` tiene `data-pagina="nombre"` y cada bloque solo se ejecuta en las páginas donde hace falta: mira la condición `if (...)` debajo del comentario. Donde más abajo dice "Script: `nombre`" se refiere al bloque con ese nombre.
-
 ## Qué busca la página
 
 - Enseñar a usar la bolsa: dónde plantarla, cómo regarla y qué esperar.
@@ -34,7 +19,7 @@ Dentro de cada archivo, cada bloque empieza con un comentario con su nombre (`//
 
 **Inicio.** Presenta la bolsa, con botones para iniciar sesión, crear cuenta o explorar como invitado. Ahí saluda Bio, la mascota.
 
-**Menú.** Es el centro del sitio: desde ahí se llega a todas las secciones. Si estás de invitado te invita a crear cuenta, y si te registras conservas los puntos que llevas.
+**Menú.** Es el centro del sitio: ocho tarjetas de distintos tamaños, acomodadas de forma simétrica, llevan a Guía de uso, Información, Comunidad, Minijuegos, Mi planta, Nuestro impacto, Contacto y Tienda. Arriba hay una barra con las mismas secciones que marca en cuál estás (en celular pasa a una barra de abajo). Si estás de invitado te invita a crear cuenta, y si te registras conservas los puntos que llevas.
 
 **Guía de uso.** Cinco pasos, de la tierra a la planta: dónde plantarla o desecharla, cómo plantarla, cómo lograr una buena germinación, cómo mantener el retoño y recomendaciones. Cada paso se abre para ver sus consejos.
 
@@ -50,6 +35,8 @@ Dentro de cada archivo, cada bloque empieza con un comentario con su nombre (`//
 - Memorama verde: encontrar las parejas.
 
 **Comunidad.** Una red social pequeña para contar cómo va tu bolsa. Se puede publicar texto y una foto (hasta 1000 caracteres), comentar, dar like y guardar publicaciones. Hay pestañas de Recientes, Populares y Guardadas, buscador, tendencias y perfil editable (foto, nombre, usuario y descripción). Los textos y las fotos pasan por un filtro de groserías. Sin cuenta solo se puede mirar.
+
+**Tienda.** Bolsa individual y paquetes de 20 y 50. Eliges material (papel o plástico) y semillas, armas el carrito y mandas el pedido con tu nombre y correo. El pedido se guarda en Firestore y también llega por correo. Los precios están "por definir" hasta que se pongan en la lista `PRODUCTOS` de `js/pagina-tienda.js`.
 
 **Contacto.** Preguntas frecuentes y un formulario (hasta 500 caracteres) cuyo mensaje nos llega por correo.
 
@@ -89,6 +76,8 @@ Abre la carpeta en VS Code y corre `index.html` con la extensión Live Server. C
 
 ## Publicar cambios
 
+Primero git, luego Firebase. Las reglas solo se suben si tocaste `firestore.rules`.
+
 ```bash
 git add .
 git commit -m "lo que cambiaste"
@@ -100,12 +89,15 @@ firebase deploy --only hosting          # páginas, estilos y scripts
 firebase deploy --only firestore:rules  # solo si cambiaste las reglas
 ```
 
+Hosting no publica `firestore.rules`, los `.md` ni los archivos que empiezan con punto (está en `firebase.json`).
+
 ## Cosas que conviene saber
 
 - Si cambias archivos y en el celular se siguen viendo los viejos, sube el número de versión (`V` y `E`) al inicio de `js/sw.js` antes de publicar.
 - El administrador no está escrito en el código. Es un documento `admins/<uid>` que se crea a mano en Firestore desde la consola de Firebase.
 - Las claves de Firebase y de Web3Forms que se ven en el código son públicas por diseño; los datos se protegen con `firestore.rules`.
 - No subas archivos `.env`, llaves privadas ni cuentas de servicio de Firebase.
+- Para poner precios en la tienda, cambia `null` por el número en `PRODUCTOS` (por ejemplo `precio: 25`).
 - Las colecciones nuevas necesitan su regla en `firestore.rules`; si no, la página no podrá leerlas ni escribirlas.
 
 ## Contacto
