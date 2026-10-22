@@ -27,7 +27,7 @@
     if (e && ignorar.includes(e.code)) return;
     BioComun.dialogo({
       titulo: 'No se pudo entrar con Google',
-      mensaje: (mensajes[e && e.code] || 'Inténtalo de nuevo en un momento.') + (e && e.code ? ' [' + e.code + ']' : ''),
+      mensaje: (mensajes[e && e.code] || 'Intenta refrescando la pagina.') + (e && e.code ? ' [' + e.code + ']' : ''),
       tipo: 'error'
     });
   }
