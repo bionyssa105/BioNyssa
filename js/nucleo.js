@@ -82,14 +82,14 @@ window.BioComun = (function () {
   function inyectarNavEscritorio() {
     const enlaces = [
       ['/paginas/menu.html', 'Menú'],
-      ['/paginas/guia.html', 'Guía de uso'],
       ['/paginas/informacion.html', 'Información'],
+      ['/paginas/guia.html', 'Guía de uso'],
       ['/paginas/comunidad.html', 'Comunidad'],
-      ['/paginas/minijuegos.html', 'Minijuegos'],
       ['/paginas/mi-planta.html', 'Mi planta'],
+      ['/paginas/minijuegos.html', 'Minijuegos'],
       ['/paginas/impacto.html', 'Impacto'],
-      ['/paginas/tienda.html', 'Tienda'],
-      ['/paginas/contacto.html', 'Contacto']
+      ['/paginas/contacto.html', 'Contacto'],
+      ['/paginas/tienda.html', 'Tienda']
     ];
     const limpio = (x) => String(x || '').split(/[?#]/)[0].split('/').pop().replace(/\.html?$/i, '').toLowerCase() || 'index';
     const paginaActual = limpio(location.pathname);
